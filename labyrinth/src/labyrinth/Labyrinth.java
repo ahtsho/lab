@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Labyrinth {
 	ArrayList<Cell> celle;
+	
 	Cell entrance;
 	Cell exit;
 	int dimension;
