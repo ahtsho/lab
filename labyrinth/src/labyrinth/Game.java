@@ -9,37 +9,41 @@ public class Game {
 		System.out.println("Welcome to the MAZE!!!");
 		System.out.println("Press N to move North, S to move south, W to move West, E to move Est");
 		System.out.println("Press Q to quit the game.");
-
-		Cell first = new Cell(true, true, false, false, 'A');
-		Cell c2 = new Cell(true, false, false, true, 'B');
-		Cell c3 = new Cell(true, false, true, true, 'C');
-		Cell last = new Cell(false, false, true, true, 'D');
+//
+//		Cell first = new Cell(true, true, false, false, 'A');
+//		Cell c2 = new Cell(true, false, false, true, 'B');
+//		Cell c3 = new Cell(true, false, true, true, 'C');
+//		Cell last = new Cell(false, false, true, true, 'D');
 		Player p = new Player();
 		p.name = "F";
-		p.position = first;
+//		p.position = first;
+//
+//		ArrayList<Cell> labs = new ArrayList<Cell>();
+//		labs.add(first);
+//		labs.add(c2);
+//		labs.add(c3);
+//		labs.add(last);
 
-		ArrayList<Cell> labs = new ArrayList<Cell>();
-		labs.add(first);
-		labs.add(c2);
-		labs.add(c3);
-		labs.add(last);
-
-		Labyrinth labirintoSemplice = new Labyrinth(labs, first, last, p);
-		// labirintoSemplice.showCoords();
-		labirintoSemplice.draw();
+		//Labyrinth lab = new Labyrinth(labs, first, last, p);
+		int level = 2;
+		Labyrinth lab = Levels.getLabyrinth(level,p);
+		// lab.showCoords();
+		lab.draw();
 		String read;
 		Scanner scanIn = new Scanner(System.in);
 		
 		while (true) {
+			System.out.println();
 			System.out.println("Move: ");
 			read = scanIn.nextLine();
 			if (read.startsWith("N") | read.startsWith("S")
 					| read.startsWith("W") | read.startsWith("E")) {
 				
-				if(labirintoSemplice.move(p, read.charAt(0))){
-					labirintoSemplice.draw();
+				if(lab.move(p, read.charAt(0))){
+					lab.draw();
 				} else {
-					labirintoSemplice.draw();
+					lab.draw();
+					System.out.println();
 					System.out.println("You won!");
 					break;
 				}

@@ -67,7 +67,7 @@ public class Labyrinth {
 				System.out.print(" ");
 			}
 			if (c.pareteSud) {
-				System.out.print("     ");
+				System.out.print("-----");
 			} else {
 				System.out.print("     ");
 			}
@@ -80,7 +80,7 @@ public class Labyrinth {
 			System.out.print(" ");
 		}
 		if (c.pareteSud) {
-			System.out.print("     ");
+			System.out.print("-----");
 		} else {
 			System.out.print("     ");
 		}
