@@ -5,22 +5,34 @@ import core.Labyrinth;
 
 public class Console {
 	
-	public static String HORIZONTAL_WALL = "=====";
-	public static String NO_HORIZONTAL_WALL = "-.-.-";
-	public static String HORIZONTAL_SPACE = "-----";
-	
-	public static String CORNER = "+";
-	public static String NO_CORNER = "*";
-	
-	public static String VERTICAL_WALL = "|";
-	public static String NO_VERTICAL_WALL = "x";	
-	
-	private Labyrinth lab;
-	
-	public Console(Labyrinth l){
-		lab = l;
+			
+	public static void printWelcomeMsg(){
+		System.out.println("**************************************************************************");
+		System.out.println("*                            _   _   ____   ___    ___                   *");
+		System.out.println("*                           | \\ / | |    |    /   |                      *");
+		System.out.println("*            WELCOME TO THE |     | |----|   /    |---                   *");
+		System.out.println("*                           |     | |    |  /____ |____                  *");
+		System.out.println("*                                                                        *");
+		System.out.println("**************************************************************************");
 	}
 	
+
+	public static String HORIZONTAL_WALL = "=====";
+	public static String NO_HORIZONTAL_WALL = "     ";
+	public static String HORIZONTAL_SPACE = "     ";
+
+	public static String CORNER = "+";
+	public static String NO_CORNER = ".";
+
+	public static String VERTICAL_WALL = "|";
+	public static String NO_VERTICAL_WALL = " ";
+
+	private Labyrinth lab;
+
+	public Console(Labyrinth l) {
+		lab = l;
+	}
+
 	public void draw() {
 		for (int row = 0; row < lab.getLabyrinthDimension() - 1; row++) {
 			drawFirstThird(row);
@@ -34,16 +46,11 @@ public class Console {
 	private void drawFirstThird(int r) {
 		int f = 0;
 		Cell c = null;
-		Cell succ = null;
 		for (int col = 0; col < lab.getLabyrinthDimension() - 1; col++) {
 
 			f = (int) (r * lab.getLabyrinthDimension() + col);
 			c = lab.getCells().get(f);
-			if (f < lab.getCells().size() - 1) {
-				succ = lab.getCells().get(f);
-			}
 
-			// parti sopra 1/3
 			if (c.isWest()) {
 				System.out.print(Console.CORNER);
 			} else {
@@ -55,7 +62,8 @@ public class Console {
 				System.out.print(Console.NO_HORIZONTAL_WALL);
 			}
 		}
-		f = (int) (r * lab.getLabyrinthDimension()+ lab.getLabyrinthDimension() - 1);
+		f = (int) (r * lab.getLabyrinthDimension()
+				+ lab.getLabyrinthDimension() - 1);
 		c = lab.getCells().get(f);
 		if (c.isWest()) {
 			System.out.print(Console.CORNER);
@@ -83,11 +91,10 @@ public class Console {
 
 			f = (int) (r * lab.getLabyrinthDimension() + col);
 			c = lab.getCells().get(f);
-			// parti in mezzo 2/3
 			if (c.isWest()) {
 				if (lab.getPlayer().getPosition().equals(c)) {
-					System.out.print(Console.VERTICAL_WALL + "  " + lab.getPlayer().getName()
-							+ "  ");
+					System.out.print(Console.VERTICAL_WALL + "  "
+							+ lab.getPlayer().getName() + "  ");
 				} else {
 					System.out.print(Console.VERTICAL_WALL
 							+ Console.HORIZONTAL_SPACE);
@@ -103,20 +110,21 @@ public class Console {
 			}
 
 		}
-		f = (int) (r * lab.getLabyrinthDimension() + lab.getLabyrinthDimension() - 1);
+		f = (int) (r * lab.getLabyrinthDimension()
+				+ lab.getLabyrinthDimension() - 1);
 		c = lab.getCells().get(f);
 		if (c.isWest()) {
 			if (lab.getPlayer().getPosition().equals(c)) {
-				System.out.print(Console.VERTICAL_WALL + "  " + lab.getPlayer().getName()
-						+ "  ");
+				System.out.print(Console.VERTICAL_WALL + "  "
+						+ lab.getPlayer().getName() + "  ");
 			} else {
 				System.out.print(Console.VERTICAL_WALL
 						+ Console.HORIZONTAL_SPACE);
 			}
 		} else {
 			if (lab.getPlayer().getPosition().equals(c)) {
-				System.out.print(Console.NO_VERTICAL_WALL + "  " + lab.getPlayer().getName()
-						+ "  ");
+				System.out.print(Console.NO_VERTICAL_WALL + "  "
+						+ lab.getPlayer().getName() + "  ");
 			} else {
 				System.out.print(Console.NO_VERTICAL_WALL
 						+ Console.HORIZONTAL_SPACE);
@@ -130,19 +138,14 @@ public class Console {
 		}
 		System.out.println();
 	}
-	
+
 	private void drawThirdThird(int r) {
 		int f = 0;
 		Cell c = null;
 
 		for (int col = 0; col < lab.getLabyrinthDimension() - 1; col++) {
-			Cell succ = null;
 			f = (int) (r * lab.getLabyrinthDimension() + col);
 			c = lab.getCells().get(f);
-
-			if (f < lab.getCells().size() - 1) {
-				succ = lab.getCells().get(f);
-			}
 
 			if (c.isWest()) {
 				System.out.print(Console.CORNER);
@@ -155,7 +158,8 @@ public class Console {
 				System.out.print(Console.NO_HORIZONTAL_WALL);
 			}
 		}
-		f = (int) (r * lab.getLabyrinthDimension() + lab.getLabyrinthDimension() - 1);
+		f = (int) (r * lab.getLabyrinthDimension()
+				+ lab.getLabyrinthDimension() - 1);
 		c = lab.getCells().get(f);
 		if (c.isWest()) {
 			System.out.print(Console.CORNER);
@@ -174,5 +178,9 @@ public class Console {
 		}
 	}
 
-	
+	public static void printGameInstructions() {
+		System.out.println("Press R to start, Press Q to quit");
+		System.out.println();		
+	}
+
 }
