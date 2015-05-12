@@ -3,6 +3,10 @@ package core;
 import java.util.ArrayList;
 
 public class Labyrinth {
+	public static final char NORTH = 'N';
+	public static final char SOUTH = 'S';
+	public static final char WEST = 'W';
+	public static final char EAST = 'E';
 	ArrayList<Cell> cells;
 
 	Cell entrance;
@@ -95,25 +99,25 @@ public class Labyrinth {
 	}
 
 	public boolean move(Player player, char direnction) {
-		if (direnction == 'N') {
+		if (direnction == NORTH) {
 			if (player.position.north) {
 				System.out.println("Ouch!!!");
 			} else {
 				return endGame(getNorth(player.position));
 			}
-		} else if (direnction == 'S') {
+		} else if (direnction == SOUTH) {
 			if (player.position.south) {
 				System.out.println("Ouch!!!");
 			} else {
 				return endGame(getSouth(player.position));
 			}
-		} else if (direnction == 'E') {
+		} else if (direnction == EAST) {
 			if (player.position.east) {
 				System.out.println("Ouch!!!");
 			} else {
 				return endGame(getEst(player.position));
 			}
-		} else if (direnction == 'W') {
+		} else if (direnction == WEST) {
 			if (player.position.west) {
 				System.out.println("Ouch!!!");
 			} else {

@@ -178,9 +178,23 @@ public class Console {
 		}
 	}
 
+	public static void printGameStartInstructions() {
+		System.out.println("Press Y to start the game");
+	}
 	public static void printGameInstructions() {
-		System.out.println("Press R to start, Press Q to quit");
+		System.out.println("Press N:north, S:south, W:west, E:east"); 
+		System.out.println("Press Q to quit the game");
 		System.out.println();		
 	}
+
+	public static char adaptDirection(char c) {
+		if(c=='n'|c=='N') return Labyrinth.NORTH;
+		if(c=='s'|c=='S') return Labyrinth.SOUTH;
+		if(c=='w'|c=='W') return Labyrinth.WEST;
+		if(c=='e'|c=='E') return Labyrinth.EAST;
+		return 0;
+	}
+	
+	
 
 }
