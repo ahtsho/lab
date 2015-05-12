@@ -5,20 +5,65 @@ import java.util.ArrayList;
 import view.Console;
 
 public class Labyrinth {
-	ArrayList<Cell> celle;
-	
+	ArrayList<Cell> cells;
+
 	Cell entrance;
 	Cell exit;
 	int dimension;
 	Player player;
 
 	Labyrinth(ArrayList<Cell> cs, Cell c1, Cell c2, Player p) {
-		celle = cs;
+		cells = cs;
 		entrance = c1;
 		exit = c2;
-		dimension = (int) Math.sqrt(celle.size());
+		dimension = (int) Math.sqrt(cells.size());
 		player = p;
 		disposeCells();
+	}
+
+	
+	public ArrayList<Cell> getCells() {
+		return cells;
+	}
+
+
+	public void setCells(ArrayList<Cell> cells) {
+		this.cells = cells;
+	}
+
+
+	public Cell getEntrance() {
+		return entrance;
+	}
+
+
+	public void setEntrance(Cell entrance) {
+		this.entrance = entrance;
+	}
+
+
+	public Cell getExit() {
+		return exit;
+	}
+
+
+	public void setExit(Cell exit) {
+		this.exit = exit;
+	}
+
+
+	public Player getPlayer() {
+		return player;
+	}
+
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+
+	public int getLabyrinthDimension() {
+		return this.dimension;
 	}
 
 	private int getIndexFromCoords(int r, int c) {
@@ -28,15 +73,15 @@ public class Labyrinth {
 	private void disposeCells() {
 		for (int row = 0; row < dimension; row++) {
 			for (int col = 0; col < dimension; col++) {
-				celle.get((int) (row * dimension + col)).row = row;
-				celle.get((int) (row * dimension + col)).col = col;
+				cells.get((int) (row * dimension + col)).row = row;
+				cells.get((int) (row * dimension + col)).col = col;
 			}
 		}
 	}
 
 	public void showCoords() {
-		for (int i = 0; i < celle.size(); i++) {
-			System.out.println(celle.get(i).row + "," + celle.get(i).col);
+		for (int i = 0; i < cells.size(); i++) {
+			System.out.println(cells.get(i).row + "," + cells.get(i).col);
 		}
 	}
 
@@ -57,10 +102,10 @@ public class Labyrinth {
 		for (int col = 0; col < dimension - 1; col++) {
 			Cell succ = null;
 			f = (int) (r * dimension + col);
-			c = celle.get(f);
+			c = cells.get(f);
 
-			if (f < celle.size() - 1) {
-				succ = celle.get(f);
+			if (f < cells.size() - 1) {
+				succ = cells.get(f);
 			}
 
 			if (c.west) {
@@ -75,7 +120,7 @@ public class Labyrinth {
 			}
 		}
 		f = (int) (r * dimension + dimension - 1);
-		c = celle.get(f);
+		c = cells.get(f);
 		if (c.west) {
 			System.out.print(Console.CORNER);
 		} else {
@@ -86,7 +131,7 @@ public class Labyrinth {
 		} else {
 			System.out.print(Console.NO_HORIZONTAL_WALL);
 		}
-		if (c.pareteEst) {
+		if (c.east) {
 			System.out.print(Console.CORNER);
 		} else {
 			System.out.print(Console.NO_CORNER);
@@ -99,40 +144,48 @@ public class Labyrinth {
 		for (int col = 0; col < dimension - 1; col++) {
 
 			f = (int) (r * dimension + col);
-			c = celle.get(f);
+			c = cells.get(f);
 			// parti in mezzo 2/3
 			if (c.west) {
 				if (player.position.equals(c)) {
-					System.out.print(Console.VERTICAL_WALL+"  " + player.name + "  ");
+					System.out.print(Console.VERTICAL_WALL + "  " + player.name
+							+ "  ");
 				} else {
-					System.out.print(Console.VERTICAL_WALL+Console.HORIZONTAL_SPACE);
+					System.out.print(Console.VERTICAL_WALL
+							+ Console.HORIZONTAL_SPACE);
 				}
 			} else {
 				if (player.position.equals(c)) {
-					System.out.print(Console.NO_VERTICAL_WALL+"  " + player.name + "  ");
+					System.out.print(Console.NO_VERTICAL_WALL + "  "
+							+ player.name + "  ");
 				} else {
-					System.out.print(Console.NO_VERTICAL_WALL+Console.HORIZONTAL_SPACE);
+					System.out.print(Console.NO_VERTICAL_WALL
+							+ Console.HORIZONTAL_SPACE);
 				}
 			}
 
 		}
 		f = (int) (r * dimension + dimension - 1);
-		c = celle.get(f);
+		c = cells.get(f);
 		if (c.west) {
 			if (player.position.equals(c)) {
-				System.out.print(Console.VERTICAL_WALL+"  " + player.name + "  ");
+				System.out.print(Console.VERTICAL_WALL + "  " + player.name
+						+ "  ");
 			} else {
-				System.out.print(Console.VERTICAL_WALL+Console.HORIZONTAL_SPACE);
+				System.out.print(Console.VERTICAL_WALL
+						+ Console.HORIZONTAL_SPACE);
 			}
 		} else {
 			if (player.position.equals(c)) {
-				System.out.print(Console.NO_VERTICAL_WALL+"  " + player.name + "  ");
+				System.out.print(Console.NO_VERTICAL_WALL + "  " + player.name
+						+ "  ");
 			} else {
-				System.out.print(Console.NO_VERTICAL_WALL+Console.HORIZONTAL_SPACE);
+				System.out.print(Console.NO_VERTICAL_WALL
+						+ Console.HORIZONTAL_SPACE);
 			}
 		}
 
-		if (c.pareteEst) {
+		if (c.east) {
 			System.out.print(Console.VERTICAL_WALL);
 		} else {
 			System.out.print(Console.NO_VERTICAL_WALL);
@@ -147,9 +200,9 @@ public class Labyrinth {
 		for (int col = 0; col < dimension - 1; col++) {
 
 			f = (int) (r * dimension + col);
-			c = celle.get(f);
-			if (f < celle.size() - 1) {
-				succ = celle.get(f);
+			c = cells.get(f);
+			if (f < cells.size() - 1) {
+				succ = cells.get(f);
 			}
 
 			// parti sopra 1/3
@@ -165,7 +218,7 @@ public class Labyrinth {
 			}
 		}
 		f = (int) (r * dimension + dimension - 1);
-		c = celle.get(f);
+		c = cells.get(f);
 		if (c.west) {
 			System.out.print(Console.CORNER);
 		} else {
@@ -176,7 +229,7 @@ public class Labyrinth {
 		} else {
 			System.out.print(Console.NO_HORIZONTAL_WALL);
 		}
-		if (c.pareteEst) {
+		if (c.east) {
 			System.out.print(Console.CORNER);
 		} else {
 			System.out.print(Console.NO_CORNER);
@@ -186,7 +239,7 @@ public class Labyrinth {
 	}
 
 	private boolean endGame(Cell destination) {
-		if(destination!=null){
+		if (destination != null) {
 			player.position = destination;
 		}
 		if (destination == exit) {
@@ -194,7 +247,6 @@ public class Labyrinth {
 		}
 		return true;
 	}
-
 
 	public boolean move(Player player, char direnction) {
 		if (direnction == 'N') {
@@ -210,7 +262,7 @@ public class Labyrinth {
 				return endGame(getSouth(player.position));
 			}
 		} else if (direnction == 'E') {
-			if (player.position.pareteEst) {
+			if (player.position.east) {
 				System.out.println("Ouch!!!");
 			} else {
 				return endGame(getEst(player.position));
@@ -228,7 +280,8 @@ public class Labyrinth {
 	private Cell getNorth(Cell position) {
 		Cell destination = null;
 		if (position.row > 0) {
-			destination = celle.get(getIndexFromCoords(position.row - 1,position.col));
+			destination = cells.get(getIndexFromCoords(position.row - 1,
+					position.col));
 		} else {
 			System.out.println("Can't go this way");
 		}
@@ -238,8 +291,9 @@ public class Labyrinth {
 	private Cell getSouth(Cell position) {
 		Cell destination = null;
 		if (position.row < dimension) {
-			destination = celle.get(getIndexFromCoords(position.row + 1, position.col));
-		}else {
+			destination = cells.get(getIndexFromCoords(position.row + 1,
+					position.col));
+		} else {
 			System.out.println("Can't go this way");
 		}
 		return destination;
@@ -248,8 +302,9 @@ public class Labyrinth {
 	private Cell getEst(Cell position) {
 		Cell destination = null;
 		if (position.col < dimension) {
-			destination =celle.get(getIndexFromCoords(position.row, position.col + 1)); 
-		}else {
+			destination = cells.get(getIndexFromCoords(position.row,
+					position.col + 1));
+		} else {
 			System.out.println("Can't go this way");
 		}
 		return destination;
@@ -258,8 +313,9 @@ public class Labyrinth {
 	private Cell getWest(Cell position) {
 		Cell destination = null;
 		if (position.col > 0) {
-			destination = celle.get(getIndexFromCoords(position.row, position.col - 1));
-		}else {
+			destination = cells.get(getIndexFromCoords(position.row,
+					position.col - 1));
+		} else {
 			System.out.println("Can't go this way");
 		}
 		return destination;

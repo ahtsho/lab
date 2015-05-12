@@ -2,6 +2,8 @@ package core;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import view.Console;
+
 public class Game {
 
 	public static void main(String[] args) {
@@ -28,7 +30,9 @@ public class Game {
 		int level = 2;
 		Labyrinth lab = Levels.getLabyrinth(level,p);
 		// lab.showCoords();
-		lab.draw();
+		Console console = new Console(lab);
+		console.draw();
+//		lab.draw();
 		String read;
 		Scanner scanIn = new Scanner(System.in);
 		
@@ -40,9 +44,11 @@ public class Game {
 					| read.startsWith("W") | read.startsWith("E")) {
 				
 				if(lab.move(p, read.charAt(0))){
-					lab.draw();
+//					lab.draw();
+					console.draw();
 				} else {
-					lab.draw();
+//					lab.draw();
+					console.draw();
 					System.out.println();
 					System.out.println("You won!");
 					break;

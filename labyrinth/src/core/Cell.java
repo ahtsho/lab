@@ -2,23 +2,24 @@ package core;
 
 public class Cell {
 
-	char nome;
+	char name;
 	boolean north;
 	boolean south;
 	boolean west;
-	boolean pareteEst;
+	boolean east;
 	int row, col;
 	
-	Cell (boolean nord, boolean sud, boolean ovest, boolean est, char n){
-		north = nord;
-		south = sud;
-		west = ovest;
-		pareteEst = est;
-		nome = n;
+	Cell (boolean N, boolean S, boolean W, boolean E, char cellName){
+		north = N;
+		south = S;
+		west = W;
+		east = E;
+		name = cellName;
 	}
 	
+	@Deprecated
 	public void draw(){
-		if(pareteEst==true){
+		if(east==true){
 			System.out.print("+");
 		} else {
 			System.out.print(" ");
@@ -36,7 +37,7 @@ public class Cell {
 		}
 		System.out.println();
 		
-		if(pareteEst==true){
+		if(east==true){
 			System.out.print("|     ");
 		} else {
 			System.out.print("      ");
@@ -48,7 +49,7 @@ public class Cell {
 		}
 		System.out.println();
 		
-		if(pareteEst==true){
+		if(east==true){
 			System.out.print("+");
 		} else {
 			System.out.print(" ");
@@ -64,6 +65,54 @@ public class Cell {
 		} else {
 			System.out.print(" ");
 		}
+	}
+
+	public boolean isNorth() {
+		return north;
+	}
+
+	public void setNorth(boolean north) {
+		this.north = north;
+	}
+
+	public boolean isSouth() {
+		return south;
+	}
+
+	public void setSouth(boolean south) {
+		this.south = south;
+	}
+
+	public boolean isWest() {
+		return west;
+	}
+
+	public void setWest(boolean west) {
+		this.west = west;
+	}
+
+	public boolean isEast() {
+		return east;
+	}
+
+	public void setEast(boolean east) {
+		this.east = east;
+	}
+
+	public int getRow() {
+		return row;
+	}
+
+	public void setRow(int row) {
+		this.row = row;
+	}
+
+	public int getCol() {
+		return col;
+	}
+
+	public void setCol(int col) {
+		this.col = col;
 	}
 	
 	
