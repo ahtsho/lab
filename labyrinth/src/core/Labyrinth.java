@@ -33,7 +33,16 @@ public class Labyrinth {
 		this.cells = cells;
 	}
 
+	public boolean isEntrance(Cell c){
+		if (c==entrance) return true;
+		return false;
+	}
 
+	public boolean isExit(Cell c){
+		if (c==exit) return true;
+		return false;
+	}
+	
 	public Cell getEntrance() {
 		return entrance;
 	}

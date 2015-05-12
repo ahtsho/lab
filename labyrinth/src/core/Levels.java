@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 public class Levels {
 
+	public static int MAX_LEVEL = 2;
+	public static boolean levelChanged;
+	
 	public static Labyrinth getLabyrinth(int level, Player p) {
 		if(level==1){
 			Cell first = new Cell(true, true, false, false, 'A');
@@ -51,6 +54,15 @@ public class Levels {
 		}
 		
 		return null;
+	}
+
+	public static boolean isLast(int level) {
+		if(level>MAX_LEVEL) return true;
+		return false;
+	}
+
+	public static int next(int currentLevel) {
+		return (currentLevel + 1);
 	}
 	 
 }

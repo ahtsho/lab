@@ -4,15 +4,18 @@ public class Game {
 
 	boolean started;
 	boolean paused;
+	boolean levelEnded;
 
-	public Game(boolean start, boolean pause) {
+	public Game(boolean start, boolean pause, boolean level) {
 		started = start;
 		paused = pause;
+		levelEnded = level;
 	}
 
 	public void start() {
 		started = true;
 		paused = false;
+		levelEnded = false;
 	}
 
 	public void pause() {
@@ -31,4 +34,7 @@ public class Game {
 		return false;
 	}
 
+	public void nextLevel(){
+		levelEnded = true;
+	}
 }

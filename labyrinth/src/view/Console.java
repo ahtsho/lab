@@ -4,17 +4,7 @@ import core.Cell;
 import core.Labyrinth;
 
 public class Console {
-	
-			
-	public static void printWelcomeMsg(){
-		System.out.println("**************************************************************************");
-		System.out.println("*                            _   _   ____   ___    ___                   *");
-		System.out.println("*                           | \\ / | |    |    /   |                      *");
-		System.out.println("*            WELCOME TO THE |     | |----|   /    |---                   *");
-		System.out.println("*                           |     | |    |  /____ |____                  *");
-		System.out.println("*                                                                        *");
-		System.out.println("**************************************************************************");
-	}
+
 	
 
 	public static String HORIZONTAL_WALL = "=====";
@@ -23,6 +13,9 @@ public class Console {
 
 	public static String CORNER = "+";
 	public static String NO_CORNER = ".";
+
+	public static final String ENTRANCE = "@";
+	public static final String EXIT = "¤";
 
 	public static String VERTICAL_WALL = "|";
 	public static String NO_VERTICAL_WALL = " ";
@@ -93,19 +86,40 @@ public class Console {
 			c = lab.getCells().get(f);
 			if (c.isWest()) {
 				if (lab.getPlayer().getPosition().equals(c)) {
-					System.out.print(Console.VERTICAL_WALL + "  "
-							+ lab.getPlayer().getName() + "  ");
+					if (lab.isEntrance(c)) {
+						System.out.println(Console.ENTRANCE + "  "
+								+ lab.getPlayer().getName() + "  ");
+					} else {
+						System.out.print(Console.VERTICAL_WALL + "  "
+								+ lab.getPlayer().getName() + "  ");
+					}
 				} else {
-					System.out.print(Console.VERTICAL_WALL
-							+ Console.HORIZONTAL_SPACE);
+					if (lab.isEntrance(c)) {
+						System.out.print(Console.ENTRANCE
+								+ Console.HORIZONTAL_SPACE);
+					} else {
+						System.out.print(Console.VERTICAL_WALL
+								+ Console.HORIZONTAL_SPACE);
+					}
+
 				}
 			} else {
 				if (lab.getPlayer().getPosition().equals(c)) {
-					System.out.print(Console.NO_VERTICAL_WALL + "  "
-							+ lab.getPlayer().getName() + "  ");
+					if (lab.isEntrance(c)) {
+						System.out.print(Console.ENTRANCE + "  "
+								+ lab.getPlayer().getName() + "  ");
+					} else {
+						System.out.print(Console.NO_VERTICAL_WALL + "  "
+								+ lab.getPlayer().getName() + "  ");
+					}
 				} else {
-					System.out.print(Console.NO_VERTICAL_WALL
-							+ Console.HORIZONTAL_SPACE);
+					if (lab.isEntrance(c)) {
+						System.out.print(Console.ENTRANCE
+								+ Console.HORIZONTAL_SPACE);
+					} else {
+						System.out.print(Console.NO_VERTICAL_WALL
+								+ Console.HORIZONTAL_SPACE);
+					}
 				}
 			}
 
@@ -115,19 +129,41 @@ public class Console {
 		c = lab.getCells().get(f);
 		if (c.isWest()) {
 			if (lab.getPlayer().getPosition().equals(c)) {
-				System.out.print(Console.VERTICAL_WALL + "  "
-						+ lab.getPlayer().getName() + "  ");
+				if (lab.isEntrance(c)) {
+					System.out.print(Console.ENTRANCE + "  "
+							+ lab.getPlayer().getName() + "  ");
+				} else {
+					System.out.print(Console.VERTICAL_WALL + "  "
+							+ lab.getPlayer().getName() + "  ");
+				}
 			} else {
-				System.out.print(Console.VERTICAL_WALL
-						+ Console.HORIZONTAL_SPACE);
+				if (lab.isEntrance(c)) {
+					System.out.print(Console.ENTRANCE
+							+ Console.HORIZONTAL_SPACE);
+				} else {
+					System.out.print(Console.VERTICAL_WALL
+							+ Console.HORIZONTAL_SPACE);
+				}
 			}
 		} else {
 			if (lab.getPlayer().getPosition().equals(c)) {
-				System.out.print(Console.NO_VERTICAL_WALL + "  "
-						+ lab.getPlayer().getName() + "  ");
+				if (lab.isEntrance(c)) {
+
+					System.out.print(Console.ENTRANCE + "  "
+							+ lab.getPlayer().getName() + "  ");
+				} else {
+
+					System.out.print(Console.NO_VERTICAL_WALL + "  "
+							+ lab.getPlayer().getName() + "  ");
+				}
 			} else {
-				System.out.print(Console.NO_VERTICAL_WALL
-						+ Console.HORIZONTAL_SPACE);
+				if (lab.isEntrance(c)) {
+					System.out.print(Console.ENTRANCE
+							+ Console.HORIZONTAL_SPACE);
+				} else {
+					System.out.print(Console.NO_VERTICAL_WALL
+							+ Console.HORIZONTAL_SPACE);
+				}
 			}
 		}
 
@@ -178,23 +214,77 @@ public class Console {
 		}
 	}
 
-	public static void printGameStartInstructions() {
-		System.out.println("Press Y to start the game");
-	}
-	public static void printGameInstructions() {
-		System.out.println("Press N:north, S:south, W:west, E:east"); 
-		System.out.println("Press Q to quit the game");
-		System.out.println();		
-	}
+	
 
 	public static char adaptDirection(char c) {
-		if(c=='n'|c=='N') return Labyrinth.NORTH;
-		if(c=='s'|c=='S') return Labyrinth.SOUTH;
-		if(c=='w'|c=='W') return Labyrinth.WEST;
-		if(c=='e'|c=='E') return Labyrinth.EAST;
+		if (c == 'n' | c == 'N')
+			return Labyrinth.NORTH;
+		if (c == 's' | c == 'S')
+			return Labyrinth.SOUTH;
+		if (c == 'w' | c == 'W')
+			return Labyrinth.WEST;
+		if (c == 'e' | c == 'E')
+			return Labyrinth.EAST;
 		return 0;
 	}
-	
-	
 
+	public void printMoveMsg() {
+		System.out.println();
+		System.out.println();
+		System.out.println(">   move: ");
+		System.out.println();
+	}
+	public static void printGameStartInstructions() {
+		System.out.println("    -------------------------");
+		System.out.println("    Press Y to start the game");
+		System.out.println("    -------------------------");
+	}
+
+	public static void printGameInstructions() {
+		System.out.println("    --------------------------------------");
+		System.out.println("    Press N:north, S:south, W:west, E:east");
+		System.out.println("    Press Q to quit the game");
+		System.out.println("    -------------------------");
+	}
+	public void printLevelFinishedMsg(int level) {
+		System.out.println();
+		System.out.println("        ------------------------ ");
+		System.out.println(" WOW!!! You have finished level " + level);
+		System.out.println("        ------------------------");
+	}
+
+	public void printGameTerminatedByUserMsg() {
+		System.out.println("          ---------------------- ");
+		System.out.println("BOOOOO!!! You quit? Too hard huh!");
+		System.out.println("          ---------------------- ");
+
+	}
+
+	public static void printGameWonMsg() {
+		System.out.println("************************************************");
+		System.out.println("*     +        +            +         +        *");
+		System.out.println("*                                              *");
+		System.out.println("+ YEEEEEEEE!!! You have finished the Maze game +");
+		System.out.println("*                                              *");
+		System.out.println("*       +            +           +        +    *");
+		System.out.println("************************************************");
+	}
+
+	public static void printWelcomeMsg() {
+		System.out.println(" ****************************************************************************");
+		System.out.println("*                             _  _   ____   ___    ___                       *");
+		System.out.println("*                            | \\/ | |    |    /   |                          *");
+		System.out.println("*            WELCOME TO THE  |    | |----|   /    |---                       *");
+		System.out.println("*                            |    | |    |  /____ |___                       *");
+		System.out.println("*                                                                            *");
+		System.out.println(" ****************************************************************************");
+	}
+
+	public static void printLevel(int level) {
+		System.out.println();
+		System.out.println("     -------");
+		System.out.println("MAZE Level " + level);
+		System.out.println("     -------");
+		System.out.println();
+	}
 }
