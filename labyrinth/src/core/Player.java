@@ -1,4 +1,4 @@
-package labyrinth;
+package core;
 
 public class Player {
 	String name;

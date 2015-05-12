@@ -1,6 +1,8 @@
-package labyrinth;
+package core;
 
 import java.util.ArrayList;
+
+import view.Console;
 
 public class Labyrinth {
 	ArrayList<Cell> celle;
@@ -61,33 +63,33 @@ public class Labyrinth {
 				succ = celle.get(f);
 			}
 
-			if (c.pareteOvest) {
-				System.out.print("+");
+			if (c.west) {
+				System.out.print(Console.CORNER);
 			} else {
-				System.out.print(" ");
+				System.out.print(Console.NO_CORNER);
 			}
-			if (c.pareteSud) {
-				System.out.print("-----");
+			if (c.south) {
+				System.out.print(Console.HORIZONTAL_WALL);
 			} else {
-				System.out.print("     ");
+				System.out.print(Console.NO_HORIZONTAL_WALL);
 			}
 		}
 		f = (int) (r * dimension + dimension - 1);
 		c = celle.get(f);
-		if (c.pareteOvest) {
-			System.out.print("+");
+		if (c.west) {
+			System.out.print(Console.CORNER);
 		} else {
-			System.out.print(" ");
+			System.out.print(Console.NO_CORNER);
 		}
-		if (c.pareteSud) {
-			System.out.print("-----");
+		if (c.south) {
+			System.out.print(Console.HORIZONTAL_WALL);
 		} else {
-			System.out.print("     ");
+			System.out.print(Console.NO_HORIZONTAL_WALL);
 		}
 		if (c.pareteEst) {
-			System.out.println("+");
+			System.out.print(Console.CORNER);
 		} else {
-			System.out.print("");
+			System.out.print(Console.NO_CORNER);
 		}
 	}
 
@@ -99,41 +101,41 @@ public class Labyrinth {
 			f = (int) (r * dimension + col);
 			c = celle.get(f);
 			// parti in mezzo 2/3
-			if (c.pareteOvest) {
+			if (c.west) {
 				if (player.position.equals(c)) {
-					System.out.print("|  " + player.name + "  ");
+					System.out.print(Console.VERTICAL_WALL+"  " + player.name + "  ");
 				} else {
-					System.out.print("|     ");
+					System.out.print(Console.VERTICAL_WALL+Console.HORIZONTAL_SPACE);
 				}
 			} else {
 				if (player.position.equals(c)) {
-					System.out.print("   " + player.name + "  ");
+					System.out.print(Console.NO_VERTICAL_WALL+"  " + player.name + "  ");
 				} else {
-					System.out.print("      ");
+					System.out.print(Console.NO_VERTICAL_WALL+Console.HORIZONTAL_SPACE);
 				}
 			}
 
 		}
 		f = (int) (r * dimension + dimension - 1);
 		c = celle.get(f);
-		if (c.pareteOvest) {
+		if (c.west) {
 			if (player.position.equals(c)) {
-				System.out.print("|  " + player.name + "  ");
+				System.out.print(Console.VERTICAL_WALL+"  " + player.name + "  ");
 			} else {
-				System.out.print("|     ");
+				System.out.print(Console.VERTICAL_WALL+Console.HORIZONTAL_SPACE);
 			}
 		} else {
 			if (player.position.equals(c)) {
-				System.out.print("   " + player.name + "  ");
+				System.out.print(Console.NO_VERTICAL_WALL+"  " + player.name + "  ");
 			} else {
-				System.out.print("      ");
+				System.out.print(Console.NO_VERTICAL_WALL+Console.HORIZONTAL_SPACE);
 			}
 		}
 
 		if (c.pareteEst) {
-			System.out.print("|");
+			System.out.print(Console.VERTICAL_WALL);
 		} else {
-			System.out.print("");
+			System.out.print(Console.NO_VERTICAL_WALL);
 		}
 		System.out.println();
 	}
@@ -151,33 +153,33 @@ public class Labyrinth {
 			}
 
 			// parti sopra 1/3
-			if (c.pareteOvest) {
-				System.out.print("+");
+			if (c.west) {
+				System.out.print(Console.CORNER);
 			} else {
-				System.out.print(" ");
+				System.out.print(Console.NO_CORNER);
 			}
-			if (c.pareteNord) {
-				System.out.print("-----");
+			if (c.north) {
+				System.out.print(Console.HORIZONTAL_WALL);
 			} else {
-				System.out.print("     ");
+				System.out.print(Console.NO_HORIZONTAL_WALL);
 			}
 		}
 		f = (int) (r * dimension + dimension - 1);
 		c = celle.get(f);
-		if (c.pareteOvest) {
-			System.out.print("+");
+		if (c.west) {
+			System.out.print(Console.CORNER);
 		} else {
-			System.out.print("-");
+			System.out.print(Console.NO_CORNER);
 		}
-		if (c.pareteNord) {
-			System.out.print("-----");
+		if (c.north) {
+			System.out.print(Console.HORIZONTAL_WALL);
 		} else {
-			System.out.print("     ");
+			System.out.print(Console.NO_HORIZONTAL_WALL);
 		}
 		if (c.pareteEst) {
-			System.out.print("+");
+			System.out.print(Console.CORNER);
 		} else {
-			System.out.print("");
+			System.out.print(Console.NO_CORNER);
 		}
 		System.out.println();
 
@@ -196,13 +198,13 @@ public class Labyrinth {
 
 	public boolean move(Player player, char direnction) {
 		if (direnction == 'N') {
-			if (player.position.pareteNord) {
+			if (player.position.north) {
 				System.out.println("Ouch!!!");
 			} else {
 				return endGame(getNorth(player.position));
 			}
 		} else if (direnction == 'S') {
-			if (player.position.pareteSud) {
+			if (player.position.south) {
 				System.out.println("Ouch!!!");
 			} else {
 				return endGame(getSouth(player.position));
@@ -214,7 +216,7 @@ public class Labyrinth {
 				return endGame(getEst(player.position));
 			}
 		} else if (direnction == 'W') {
-			if (player.position.pareteOvest) {
+			if (player.position.west) {
 				System.out.println("Ouch!!!");
 			} else {
 				return endGame(getWest(player.position));

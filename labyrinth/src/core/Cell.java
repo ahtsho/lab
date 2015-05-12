@@ -1,18 +1,18 @@
-package labyrinth;
+package core;
 
 public class Cell {
 
 	char nome;
-	boolean pareteNord;
-	boolean pareteSud;
-	boolean pareteOvest;
+	boolean north;
+	boolean south;
+	boolean west;
 	boolean pareteEst;
 	int row, col;
 	
 	Cell (boolean nord, boolean sud, boolean ovest, boolean est, char n){
-		pareteNord = nord;
-		pareteSud = sud;
-		pareteOvest = ovest;
+		north = nord;
+		south = sud;
+		west = ovest;
 		pareteEst = est;
 		nome = n;
 	}
@@ -24,12 +24,12 @@ public class Cell {
 			System.out.print(" ");
 		}
 		
-		if(pareteNord==true){
+		if(north==true){
 			System.out.print("-----");	
 		} else {
 			System.out.print("     ");
 		}
-		if(pareteOvest==true){
+		if(west==true){
 			System.out.print("+");
 		} else {
 			System.out.print(" ");
@@ -41,7 +41,7 @@ public class Cell {
 		} else {
 			System.out.print("      ");
 		}
-		if(pareteOvest==true){
+		if(west==true){
 			System.out.print("|");
 		} else {
 			System.out.print(" ");
@@ -54,12 +54,12 @@ public class Cell {
 			System.out.print(" ");
 		}
 		
-		if(pareteSud==true){
+		if(south==true){
 			System.out.print("_____");	
 		} else {
 			System.out.print("     ");
 		}
-		if(pareteOvest==true){
+		if(west==true){
 			System.out.print("+");
 		} else {
 			System.out.print(" ");
