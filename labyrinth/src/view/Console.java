@@ -274,9 +274,9 @@ public class Console {
 		System.out.println(" ****************************************************************************");
 		System.out.println("*                             _  _   ____   ___    ___                       *");
 		System.out.println("*                            | \\/ | |    |    /   |                          *");
-		System.out.println("*            WELCOME TO THE  |    | |----|   /    |---                       *");
-		System.out.println("*                            |    | |    |  /____ |___                       *");
-		System.out.println("*                                                                            *");
+		System.out.println("*            WELCOME TO THE  |    | |----|   /    |---           2015        *");
+		System.out.println("*                            |    | |    |  /___  |___                       *");
+		System.out.println("*                                                         by ahtsho & feffi  *");
 		System.out.println(" ****************************************************************************");
 	}
 
