@@ -30,9 +30,11 @@ public class Console {
 		for (int row = 0; row < lab.getLabyrinthDimension() - 1; row++) {
 			drawFirstThird(row);
 			drawSecondThird(row);
+//			drawSecondThirdWithCellName(row);
 		}
 		drawFirstThird(lab.getLabyrinthDimension() - 1);
 		drawSecondThird(lab.getLabyrinthDimension() - 1);
+//		drawSecondThirdWithCellName(lab.getLabyrinthDimension() - 1);
 		drawThirdThird(lab.getLabyrinthDimension() - 1);
 	}
 
@@ -85,42 +87,46 @@ public class Console {
 			f = (int) (r * lab.getLabyrinthDimension() + col);
 			c = lab.getCells().get(f);
 			if (c.isWest()) {
+				
 				if (lab.getPlayer().getPosition().equals(c)) {
-					if (lab.isEntrance(c)) {
-						System.out.println(Console.ENTRANCE + "  "
-								+ lab.getPlayer().getName() + "  ");
-					} else {
+//					if (lab.isEntrance(c)) {
+//						System.out.println(Console.ENTRANCE + "  "
+//								+ lab.getPlayer().getName() + "  ");
+//					} else {
 						System.out.print(Console.VERTICAL_WALL + "  "
 								+ lab.getPlayer().getName() + "  ");
-					}
+//					}
 				} else {
-					if (lab.isEntrance(c)) {
-						System.out.print(Console.ENTRANCE
-								+ Console.HORIZONTAL_SPACE);
-					} else {
+//					if (lab.isEntrance(c)) {
+//						System.out.print(Console.ENTRANCE
+//								+ Console.HORIZONTAL_SPACE);
+//					} else {
 						System.out.print(Console.VERTICAL_WALL
 								+ Console.HORIZONTAL_SPACE);
-					}
+//					}
 
 				}
+				
 			} else {
+				
 				if (lab.getPlayer().getPosition().equals(c)) {
-					if (lab.isEntrance(c)) {
-						System.out.print(Console.ENTRANCE + "  "
-								+ lab.getPlayer().getName() + "  ");
-					} else {
+//					if (lab.isEntrance(c)) {
+//						System.out.print(Console.ENTRANCE + "  "
+//								+ lab.getPlayer().getName() + "  ");
+//					} else {
 						System.out.print(Console.NO_VERTICAL_WALL + "  "
 								+ lab.getPlayer().getName() + "  ");
-					}
+//					}
 				} else {
-					if (lab.isEntrance(c)) {
-						System.out.print(Console.ENTRANCE
-								+ Console.HORIZONTAL_SPACE);
-					} else {
+//					if (lab.isEntrance(c)) {
+//						System.out.print(Console.ENTRANCE
+//								+ Console.HORIZONTAL_SPACE);
+//					} else {
 						System.out.print(Console.NO_VERTICAL_WALL
 								+ Console.HORIZONTAL_SPACE);
-					}
+//					}
 				}
+				
 			}
 
 		}
@@ -128,43 +134,48 @@ public class Console {
 				+ lab.getLabyrinthDimension() - 1);
 		c = lab.getCells().get(f);
 		if (c.isWest()) {
+			
 			if (lab.getPlayer().getPosition().equals(c)) {
-				if (lab.isEntrance(c)) {
-					System.out.print(Console.ENTRANCE + "  "
-							+ lab.getPlayer().getName() + "  ");
-				} else {
+//				if (lab.isEntrance(c)) {
+//					System.out.print(Console.ENTRANCE + "  "
+//							+ lab.getPlayer().getName() + "  ");
+//				} else {
 					System.out.print(Console.VERTICAL_WALL + "  "
 							+ lab.getPlayer().getName() + "  ");
-				}
+//				}
 			} else {
-				if (lab.isEntrance(c)) {
-					System.out.print(Console.ENTRANCE
-							+ Console.HORIZONTAL_SPACE);
-				} else {
+//				if (lab.isEntrance(c)) {
+//					System.out.print(Console.ENTRANCE
+//							+ Console.HORIZONTAL_SPACE);
+//				} else {
 					System.out.print(Console.VERTICAL_WALL
 							+ Console.HORIZONTAL_SPACE);
-				}
+//				}
 			}
+			
 		} else {
+			
+			
 			if (lab.getPlayer().getPosition().equals(c)) {
-				if (lab.isEntrance(c)) {
-
-					System.out.print(Console.ENTRANCE + "  "
-							+ lab.getPlayer().getName() + "  ");
-				} else {
+//				if (lab.isEntrance(c)) {
+//
+//					System.out.print(Console.ENTRANCE + "  "
+//							+ lab.getPlayer().getName() + "  ");
+//				} else {
 
 					System.out.print(Console.NO_VERTICAL_WALL + "  "
 							+ lab.getPlayer().getName() + "  ");
-				}
+//				}
 			} else {
-				if (lab.isEntrance(c)) {
-					System.out.print(Console.ENTRANCE
-							+ Console.HORIZONTAL_SPACE);
-				} else {
+//				if (lab.isEntrance(c)) {
+//					System.out.print(Console.ENTRANCE
+//							+ Console.HORIZONTAL_SPACE);
+//				} else {
 					System.out.print(Console.NO_VERTICAL_WALL
 							+ Console.HORIZONTAL_SPACE);
-				}
+//				}
 			}
+			
 		}
 
 		if (c.isEast()) {
@@ -175,6 +186,43 @@ public class Console {
 		System.out.println();
 	}
 
+	private void drawSecondThirdWithCellName(int r) {
+		int f = 0;
+		Cell c = null;
+		for (int col = 0; col < lab.getLabyrinthDimension() - 1; col++) {
+
+			f = (int) (r * lab.getLabyrinthDimension() + col);
+			c = lab.getCells().get(f);
+			if (c.isWest()) {
+				System.out.print(Console.VERTICAL_WALL + "  "
+						+ c.getName() + "  ");
+
+			} else {
+				System.out.print(Console.NO_VERTICAL_WALL+c.getName()
+						+ Console.HORIZONTAL_SPACE);
+			}
+
+		}
+		f = (int) (r * lab.getLabyrinthDimension()
+				+ lab.getLabyrinthDimension() - 1);
+		c = lab.getCells().get(f);
+		if (c.isWest()) {
+			System.out.print(Console.VERTICAL_WALL + "  "+c.getName()+"  ");
+		} else {
+			
+			System.out.print(Console.NO_VERTICAL_WALL + "  "+c.getName()+ "  ");
+
+		}
+
+		if (c.isEast()) {
+			System.out.print(Console.VERTICAL_WALL);
+		} else {
+			System.out.print(Console.NO_VERTICAL_WALL);
+		}
+		System.out.println();
+	}
+
+	
 	private void drawThirdThird(int r) {
 		int f = 0;
 		Cell c = null;
