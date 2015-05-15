@@ -2,19 +2,19 @@ package core;
 
 public class Cell {
 
-	char name;
+	String name;
 	boolean north;
 	boolean south;
 	boolean west;
 	boolean east;
 	int row, col;
 	
-	Cell (boolean N, boolean S, boolean W, boolean E, char cellName){
+	Cell (boolean N, boolean S, boolean W, boolean E, String string){
 		north = N;
 		south = S;
 		west = W;
 		east = E;
-		name = cellName;
+		name = string;
 	}
 	
 	@Deprecated
@@ -113,6 +113,10 @@ public class Cell {
 
 	public void setCol(int col) {
 		this.col = col;
+	}
+
+	public String getName() {
+		return name;
 	}
 	
 	
