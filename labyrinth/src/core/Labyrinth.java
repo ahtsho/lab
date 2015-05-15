@@ -14,6 +14,15 @@ public class Labyrinth {
 	int dimension;
 	Player player;
 
+	Labyrinth(ArrayList<Cell> cs, Cell c1, Cell c2) {
+		cells = cs;
+		entrance = c1;
+		exit = c2;
+		dimension = (int) Math.sqrt(cells.size());
+		disposeCells();
+	}
+	
+	
 	Labyrinth(ArrayList<Cell> cs, Cell c1, Cell c2, Player p) {
 		cells = cs;
 		entrance = c1;
