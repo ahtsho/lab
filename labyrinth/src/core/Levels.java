@@ -9,12 +9,11 @@ public class Levels {
 	
 	public static Labyrinth getLabyrinth(int level, Player p) {
 		if(level==1){
-			Cell first = new Cell(true, true, false, false, 'A');
-			Cell c2 = new Cell(true, false, false, true, 'B');
-			Cell c3 = new Cell(true, false, true, true, 'C');
-			Cell last = new Cell(false, false, true, true, 'D');
-//			Player p = new Player();
-//			p.name = "F";
+			Cell first = new Cell(true, true, false, false, "A");
+			Cell c2 = new Cell(true, false, false, true, "B");
+			Cell c3 = new Cell(true, false, true, true, "C");
+			Cell last = new Cell(false, false, true, true, "D");
+			
 			p.position = first;
 
 			ArrayList<Cell> labs = new ArrayList<Cell>();
@@ -26,17 +25,16 @@ public class Levels {
 			return new Labyrinth(labs, first, last, p);
 		} 
 		if(level==2){
-			Cell c1 = new Cell(true, false, true, false, 'B');
-			Cell c2 = new Cell(true, true, false, false, 'C');
-			Cell c3 = new Cell(true, false, false, true, 'C');
-			Cell entrance = new Cell(false, false, false, true, 'A');
-			Cell c5 = new Cell(true, true, true, false, 'C');
-			Cell c6 = new Cell(false, false, false, true, 'C');
-			Cell c7 = new Cell(false, true, true, false, 'C');
-			Cell c8 = new Cell(true, true, false, true, 'C');
-			Cell exit = new Cell(false, true, true, false, 'D');
-//			Player p = new Player();
-//			p.name = "F";
+			Cell c1 = new Cell(true, false, true, false, "B");
+			Cell c2 = new Cell(true, true, false, false, "C");
+			Cell c3 = new Cell(true, false, false, true, "C");
+			Cell entrance = new Cell(false, false, false, true, "A");
+			Cell c5 = new Cell(true, true, true, false, "C");
+			Cell c6 = new Cell(false, false, false, true, "C");
+			Cell c7 = new Cell(false, true, true, false, "C");
+			Cell c8 = new Cell(true, true, false, true, "C");
+			Cell exit = new Cell(false, true, true, false, "D");
+
 			p.position = entrance;
 
 			ArrayList<Cell> labs = new ArrayList<Cell>();
@@ -54,7 +52,7 @@ public class Levels {
 		}
 		
 		return null;
-	}
+	} 
 
 	public static boolean isLast(int level) {
 		if(level>MAX_LEVEL) return true;

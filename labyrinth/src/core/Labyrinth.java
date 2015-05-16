@@ -42,6 +42,17 @@ public class Labyrinth {
 		this.cells = cells;
 	}
 
+	public ArrayList<Cell> getLabyrinthWall() {
+		ArrayList<Cell> labyrinthWall = new ArrayList<Cell>();
+		for (int i = 0; i < cells.size(); i++) {
+			if(cells.get(i).row==0 || cells.get(i).row==dimension-1 ||
+					cells.get(i).col==0 || cells.get(i).col==dimension-1){
+				labyrinthWall.add(cells.get(i));
+			}
+		}
+		return labyrinthWall;
+	}
+	
 	public boolean isEntrance(Cell c){
 		if (c==entrance) return true;
 		return false;
@@ -99,11 +110,8 @@ public class Labyrinth {
 		}
 	}
 
-	public void showCoords() {
-		for (int i = 0; i < cells.size(); i++) {
-			System.out.println(cells.get(i).row + "," + cells.get(i).col);
-		}
-	}
+	
+	
 
 	
 	private boolean endGame(Cell destination) {
@@ -187,5 +195,18 @@ public class Labyrinth {
 			System.out.println("Can't go this way");
 		}
 		return destination;
+	}
+
+
+	public void breakExternalWall(Cell entrance) {
+		if(entrance.row == 0){
+			entrance.setNorth(false);
+		} else if (entrance.col == 0){
+			entrance.setWest(false);
+		}else if (entrance.row == dimension-1){
+			entrance.setSouth(false);
+		}else if (entrance.col == dimension-1){
+			entrance.setEast(false);
+		}
 	}
 }

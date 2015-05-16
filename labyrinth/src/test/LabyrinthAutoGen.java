@@ -11,12 +11,16 @@ public class LabyrinthAutoGen {
 
 	public static void main(String[] args) {
 		Labyrinth lab = LabyrinthGenerator.generateFull(10);
+		Console console = new Console(lab);
+		LabyrinthGenerator.createTunnel(lab);
 		Player p = new Player();
 		p.setName("A");
 		lab.setPlayer(p);
-		p.setPosition(lab.getCells().get(0));
-		Console console = new Console(lab);
+		p.setPosition(lab.getEntrance());
 		console.draw();
+//		console.showCoordinates(lab.getLabyrinthWall());
+		
+		
 	}
 
 }

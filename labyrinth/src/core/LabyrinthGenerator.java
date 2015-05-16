@@ -22,20 +22,31 @@ public class LabyrinthGenerator {
 		}
 	}
 
-	private static boolean breakWall(Cell cell, Object chooseDirenction) {
-		// TODO Auto-generated method stub
+	private static boolean breakWall(Cell cell, char chooseDirenction) {
+		
 		return false;
 	}
 
-	private static Object chooseDirenction() {
+	private static char chooseDirenction() {
 		// TODO Auto-generated method stub
-		return null;
+		return ' ';
 	}
 
 	private static Cell chooseEntrance() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Cell> borderCells = genLabyrinth.getLabyrinthWall();
+		int randomNumber = generateRandomNumber(borderCells.size()-1);
+		Cell entrance = borderCells.get(randomNumber);
+		genLabyrinth.setEntrance(entrance);
+		genLabyrinth.breakExternalWall(entrance);
+		return entrance;
 	}
+
+	public static int generateRandomNumber(int i) {
+		return (int) ((System.nanoTime() + Math.pow(System.nanoTime(), 2) )  % i);
+//		return (int) (Math.random() *i);
+	}
+
+
 	
 	
 }

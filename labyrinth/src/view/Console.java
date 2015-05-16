@@ -1,5 +1,7 @@
 package view;
 
+import java.util.ArrayList;
+
 import core.Cell;
 import core.Labyrinth;
 
@@ -34,6 +36,7 @@ public class Console {
 		}
 		drawFirstThird(lab.getLabyrinthDimension() - 1);
 		drawSecondThird(lab.getLabyrinthDimension() - 1);
+//		drawSecondThirdWithCoords(lab.getLabyrinthDimension() - 1);
 //		drawSecondThirdWithCellName(lab.getLabyrinthDimension() - 1);
 		drawThirdThird(lab.getLabyrinthDimension() - 1);
 	}
@@ -186,6 +189,38 @@ public class Console {
 		System.out.println();
 	}
 
+	private void drawSecondThirdWithCoords(int r) {
+		int f = 0;
+		Cell c = null;
+		String coords = "";
+		for (int col = 0; col < lab.getLabyrinthDimension() - 1; col++) {
+
+			f = (int) (r * lab.getLabyrinthDimension() + col);
+			c = lab.getCells().get(f);
+			coords = " "+ c.getRow()+","+c.getCol() + " ";
+			if (c.isWest()) {
+				System.out.print(Console.VERTICAL_WALL + coords);
+			} else {
+				System.out.print(Console.NO_VERTICAL_WALL +coords);				
+			}
+		}
+		f = (int) (r * lab.getLabyrinthDimension()
+				+ lab.getLabyrinthDimension() - 1);
+		c = lab.getCells().get(f);
+		if (c.isWest()) {
+			System.out.print(Console.VERTICAL_WALL + coords);
+		} else {			
+			System.out.print(Console.NO_VERTICAL_WALL +coords);
+		}
+
+		if (c.isEast()) {
+			System.out.print(Console.VERTICAL_WALL);
+		} else {
+			System.out.print(Console.NO_VERTICAL_WALL);
+		}
+		System.out.println();
+	}
+	
 	private void drawSecondThirdWithCellName(int r) {
 		int f = 0;
 		Cell c = null;
@@ -335,4 +370,12 @@ public class Console {
 		System.out.println("     -------");
 		System.out.println();
 	}
+
+	public void showCoordinates(ArrayList<Cell> labyrinthWall) {
+		for (int i = 0; i < labyrinthWall.size(); i++) {
+			System.out.println(labyrinthWall.get(i).getRow()+","+labyrinthWall.get(i).getCol());
+		}
+	}
+	
+	
 }
