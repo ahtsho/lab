@@ -8,59 +8,59 @@ public class Cell {
 	boolean west;
 	boolean east;
 	int row, col;
-	
-	Cell (boolean N, boolean S, boolean W, boolean E, String string){
+
+	Cell(boolean N, boolean S, boolean W, boolean E, String string) {
 		north = N;
 		south = S;
 		west = W;
 		east = E;
 		name = string;
 	}
-	
+
 	@Deprecated
-	public void draw(){
-		if(east==true){
+	public void draw() {
+		if (east == true) {
 			System.out.print("+");
 		} else {
 			System.out.print(" ");
 		}
-		
-		if(north==true){
-			System.out.print("-----");	
+
+		if (north == true) {
+			System.out.print("-----");
 		} else {
 			System.out.print("     ");
 		}
-		if(west==true){
+		if (west == true) {
 			System.out.print("+");
 		} else {
 			System.out.print(" ");
 		}
 		System.out.println();
-		
-		if(east==true){
+
+		if (east == true) {
 			System.out.print("|     ");
 		} else {
 			System.out.print("      ");
 		}
-		if(west==true){
+		if (west == true) {
 			System.out.print("|");
 		} else {
 			System.out.print(" ");
 		}
 		System.out.println();
-		
-		if(east==true){
+
+		if (east == true) {
 			System.out.print("+");
 		} else {
 			System.out.print(" ");
 		}
-		
-		if(south==true){
-			System.out.print("_____");	
+
+		if (south == true) {
+			System.out.print("_____");
 		} else {
 			System.out.print("     ");
 		}
-		if(west==true){
+		if (west == true) {
 			System.out.print("+");
 		} else {
 			System.out.print(" ");
@@ -118,6 +118,25 @@ public class Cell {
 	public String getName() {
 		return name;
 	}
-	
-	
+
+	public boolean breakWall(char direnction) {
+		if (direnction==Labyrinth.NORTH) {
+			this.setNorth(false);
+			return true;
+		} 
+		if (direnction==Labyrinth.WEST) {
+			this.setWest(false);
+			return true;
+		} 
+		if (direnction == Labyrinth.SOUTH) {
+			this.setSouth(false);
+			return true;
+		} 
+		if (direnction==Labyrinth.EAST) {
+			this.setEast(false);
+			return true;
+		}
+		return false;
+	}
+
 }

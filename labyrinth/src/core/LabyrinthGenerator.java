@@ -16,20 +16,28 @@ public class LabyrinthGenerator {
 	
 	public static void createTunnel(Labyrinth labyrinth){
 		Cell cell = chooseEntrance();
-		boolean out = false;
-		while(out){
-			out = breakWall(cell, chooseDirenction());
+		while(cell!=null){
+			cell = explore(cell, chooseDirenction());
 		}
 	}
 
-	private static boolean breakWall(Cell cell, char chooseDirenction) {
-		
-		return false;
+	
+
+	private static Cell explore(Cell cell, char direnction) {
+		cell.breakWall(direnction);
+		return genLabyrinth.getCellForDirection(cell, direnction);
 	}
 
-	private static char chooseDirenction() {
-		// TODO Auto-generated method stub
-		return ' ';
+	public static char chooseDirenction() {
+		int direction = generateRandomNumber(4);
+		if(direction == 1){
+			return Labyrinth.NORTH;
+		} else if (direction == 2){
+			return Labyrinth.SOUTH;
+		} else if (direction == 3){
+			return Labyrinth.WEST;
+		}
+		return Labyrinth.EAST;
 	}
 
 	private static Cell chooseEntrance() {
@@ -41,11 +49,11 @@ public class LabyrinthGenerator {
 		return entrance;
 	}
 
-	public static int generateRandomNumber(int i) {
-		return (int) ((System.nanoTime() + Math.pow(System.nanoTime(), 2) )  % i);
-//		return (int) (Math.random() *i);
+	public static int generateRandomNumber(int max) {
+		   return (int)(Math.random() * (max+1));
 	}
 
+	
 
 	
 	

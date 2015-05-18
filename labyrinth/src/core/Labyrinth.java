@@ -209,4 +209,25 @@ public class Labyrinth {
 			entrance.setEast(false);
 		}
 	}
+
+
+	public Cell getCellForDirection(Cell cell, char direnction) {
+		Cell nextcell = null;
+		
+		if(direnction == Labyrinth.NORTH && cell.row > 0){
+			nextcell = getCell(cell.row-1,cell.col);
+		}else if(direnction == Labyrinth.SOUTH && cell.row < dimension){
+			nextcell = getCell(cell.row+1,cell.col);
+		}else if(direnction == Labyrinth.WEST && cell.col > 0){
+			nextcell = getCell(cell.row,cell.col-1);
+		}else if(direnction == Labyrinth.EAST && cell.col < dimension){
+			nextcell = getCell(cell.row,cell.col+1);
+		}
+		return nextcell;
+	}
+
+
+	private Cell getCell(int row, int col) {
+		return cells.get(getIndexFromCoords(row, col));
+	}
 }
