@@ -216,11 +216,11 @@ public class Labyrinth {
 		
 		if(direnction == Labyrinth.NORTH && cell.row > 0){
 			nextcell = getCell(cell.row-1,cell.col);
-		}else if(direnction == Labyrinth.SOUTH && cell.row < dimension){
+		}else if(direnction == Labyrinth.SOUTH && cell.row < dimension-1){
 			nextcell = getCell(cell.row+1,cell.col);
 		}else if(direnction == Labyrinth.WEST && cell.col > 0){
 			nextcell = getCell(cell.row,cell.col-1);
-		}else if(direnction == Labyrinth.EAST && cell.col < dimension){
+		}else if(direnction == Labyrinth.EAST && cell.col < dimension-1){
 			nextcell = getCell(cell.row,cell.col+1);
 		}
 		return nextcell;
@@ -229,5 +229,19 @@ public class Labyrinth {
 
 	private Cell getCell(int row, int col) {
 		return cells.get(getIndexFromCoords(row, col));
+	}
+
+
+	public static char getOppositeDirection(char direction) {
+		if(direction == NORTH){
+			return SOUTH;
+		} else if(direction == SOUTH){
+			return NORTH;
+		} else if(direction == WEST){
+			return EAST;
+		} else if(direction == EAST){
+			return WEST;
+		}
+		return ' ';
 	}
 }

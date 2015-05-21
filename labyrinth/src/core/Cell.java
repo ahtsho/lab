@@ -139,4 +139,12 @@ public class Cell {
 		return false;
 	}
 
+	public char getOpenWall() {
+		if(!this.north) return Labyrinth.NORTH;
+		if(!this.south) return Labyrinth.SOUTH;
+		if(!this.west) return Labyrinth.WEST;
+		if(!this.east) return Labyrinth.EAST;
+		return ' ';
+	}
+
 }

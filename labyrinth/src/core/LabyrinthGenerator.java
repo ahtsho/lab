@@ -16,6 +16,8 @@ public class LabyrinthGenerator {
 	
 	public static void createTunnel(Labyrinth labyrinth){
 		Cell cell = chooseEntrance();
+		cell = explore(cell, chooseDirenction(cell));
+		
 		while(cell!=null){
 			cell = explore(cell, chooseDirenction());
 		}
@@ -23,23 +25,43 @@ public class LabyrinthGenerator {
 
 	
 
+	
+
 	private static Cell explore(Cell cell, char direnction) {
 		cell.breakWall(direnction);
-		return genLabyrinth.getCellForDirection(cell, direnction);
+		Cell nextCell = genLabyrinth.getCellForDirection(cell, direnction);
+		if(nextCell != null){
+			nextCell.breakWall(Labyrinth.getOppositeDirection(direnction));
+		}
+		return nextCell;
 	}
 
 	public static char chooseDirenction() {
 		int direction = generateRandomNumber(4);
+		return getDirectionFromNumber(direction);
+	}
+
+	private static char getDirectionFromNumber(int direction){
 		if(direction == 1){
 			return Labyrinth.NORTH;
 		} else if (direction == 2){
 			return Labyrinth.SOUTH;
 		} else if (direction == 3){
 			return Labyrinth.WEST;
+		} else if(direction == 4){
+			return Labyrinth.EAST;
 		}
-		return Labyrinth.EAST;
+		return ' ';
 	}
-
+	private static char chooseDirenction(Cell cell) {
+		char direction = getDirectionFromNumber(generateRandomNumber(4));
+		char openWall = cell.getOpenWall();
+		while(openWall == direction){
+			direction = getDirectionFromNumber(generateRandomNumber(4));
+		}
+		return direction;
+	}
+	
 	private static Cell chooseEntrance() {
 		ArrayList<Cell> borderCells = genLabyrinth.getLabyrinthWall();
 		int randomNumber = generateRandomNumber(borderCells.size()-1);
