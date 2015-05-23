@@ -1,5 +1,7 @@
 package core;
 
+import java.util.ArrayList;
+
 public class Cell {
 
 	String name;
@@ -146,5 +148,7 @@ public class Cell {
 		if(!this.east) return Labyrinth.EAST;
 		return ' ';
 	}
+
+	
 
 }
