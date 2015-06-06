@@ -31,12 +31,13 @@ public class Console {
 	public void draw() {
 		for (int row = 0; row < lab.getLabyrinthDimension() - 1; row++) {
 			drawFirstThird(row);
-			drawSecondThird(row);
+//			drawSecondThird(row);
+			drawSecondThirdWithCoords(row);
 //			drawSecondThirdWithCellName(row);
 		}
 		drawFirstThird(lab.getLabyrinthDimension() - 1);
-		drawSecondThird(lab.getLabyrinthDimension() - 1);
-//		drawSecondThirdWithCoords(lab.getLabyrinthDimension() - 1);
+//		drawSecondThird(lab.getLabyrinthDimension() - 1);
+		drawSecondThirdWithCoords(lab.getLabyrinthDimension() - 1);
 //		drawSecondThirdWithCellName(lab.getLabyrinthDimension() - 1);
 		drawThirdThird(lab.getLabyrinthDimension() - 1);
 	}

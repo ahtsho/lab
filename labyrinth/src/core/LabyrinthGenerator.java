@@ -4,11 +4,12 @@ import java.util.ArrayList;
 
 public class LabyrinthGenerator {
 	private static Labyrinth genLabyrinth;
-	public static ArrayList<Cell> path = new ArrayList<Cell>();
+	public static ArrayList<Cell> path;
 	
 	
 	public static Labyrinth generateFull(int n) {
 		ArrayList<Cell> labs = new ArrayList<Cell>();
+		path = new ArrayList<Cell>();
 		for (int i = 0; i < n*n; i++) {
 			labs.add(new Cell(true, true, true, true,  i%n+""));
 		}
@@ -18,15 +19,24 @@ public class LabyrinthGenerator {
 	
 	public static void createTunnel(Labyrinth labyrinth){
 		Cell cell = chooseEntrance();
+		System.out.println("ENTRANCE: "+cell.getRow()+","+cell.getCol());
 		path.add(cell);
-		cell = explore(cell, Labyrinth.getOppositeDirection(cell.getOpenWall()));
+		System.out.println(cell.getRow()+","+cell.getCol()+" visited");
+		cell = explore(cell, Labyrinth.getOppositeDirection(cell.getFirstOpenWallNSWE()));
+		System.out.println("second cell "+cell.getRow()+","+cell.getCol());
 		path.add(cell);
+		System.out.println(cell.getRow()+","+cell.getCol()+" visited");
+
 //		cell = explore(cell, chooseDirenction(cell));
-		
-		while(cell!=null){
-			cell = explore(cell, chooseDirection());
+		int count=0;
+		while(cell!=null && count < labyrinth.getCells().size()){
+			count++;
+			char d = chooseDirection();
+			System.out.println("choose dir "+count+" "+d);
+			cell = explore(cell, d);
 			if(cell!=null){
 				path.add(cell);
+				System.out.println(cell.getRow()+","+cell.getCol()+" visited");
 			}
 		}
 	}
@@ -36,10 +46,12 @@ public class LabyrinthGenerator {
 	
 
 	private static Cell explore(Cell cell, char direction) {
+		System.out.println("EXPLORE");
 		Cell nextCell = genLabyrinth.getCellForDirection(cell, direction);
 		if(nextCell != null){
 			while(pathContainsCell(nextCell)){
 				direction = chooseDirection();
+				System.out.println("exp "+direction);
 				nextCell = genLabyrinth.getCellForDirection(cell, direction);
 				if(nextCell == null){
 					break;
@@ -56,10 +68,12 @@ public class LabyrinthGenerator {
 
 	private static boolean pathContainsCell(Cell cell) {
 		for(int i = 0; i < path.size(); i++){
-			if(path.get(i).row==cell.row && path.get(i).col==cell.col){
+			if(path.get(i).getRow()==cell.getRow() && path.get(i).getCol()==cell.getCol()){
+				System.out.println("Cell "+cell.getRow()+","+cell.getCol()+" found");
 				return true;
 			}
 		}
+		System.out.println("Cell "+cell.getRow()+","+cell.getCol()+" not found");
 		return false;
 	}
 
@@ -79,14 +93,6 @@ public class LabyrinthGenerator {
 		}
 		System.out.println("Wrong direnction "+direction);
 		return ' ';
-	}
-	private static char chooseDirenction(Cell cell) {
-		char direction = getDirectionFromNumber(generateRandomNumber(4));
-		char openWall = cell.getOpenWall();
-		while(openWall == direction){
-			direction = getDirectionFromNumber(generateRandomNumber(4));
-		}
-		return direction;
 	}
 	
 	private static Cell chooseEntrance() {

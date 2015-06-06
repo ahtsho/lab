@@ -3,14 +3,7 @@ package core;
 import java.util.ArrayList;
 
 public class Labyrinth {
-	public int getDimension() {
-		return dimension;
-	}
-
-
-	public void setDimension(int dimension) {
-		this.dimension = dimension;
-	}
+	
 
 
 	public static final char NORTH = 'N';
@@ -42,6 +35,13 @@ public class Labyrinth {
 		disposeCells();
 	}
 
+	public int getDimension() {
+		return dimension;
+	}
+
+	public void setDimension(int dimension) {
+		this.dimension = dimension;
+	}
 	
 	public ArrayList<Cell> getCells() {
 		return cells;
@@ -55,8 +55,8 @@ public class Labyrinth {
 	public ArrayList<Cell> getLabyrinthWall() {
 		ArrayList<Cell> labyrinthWall = new ArrayList<Cell>();
 		for (int i = 0; i < cells.size(); i++) {
-			if(cells.get(i).row==0 || cells.get(i).row==dimension-1 ||
-					cells.get(i).col==0 || cells.get(i).col==dimension-1){
+			if(cells.get(i).getRow()==0 || cells.get(i).getRow()==dimension-1 ||
+					cells.get(i).getCol()==0 || cells.get(i).getCol()==dimension-1){
 				labyrinthWall.add(cells.get(i));
 			}
 		}
@@ -114,8 +114,8 @@ public class Labyrinth {
 	private void disposeCells() {
 		for (int row = 0; row < dimension; row++) {
 			for (int col = 0; col < dimension; col++) {
-				cells.get((int) (row * dimension + col)).row = row;
-				cells.get((int) (row * dimension + col)).col = col;
+				cells.get((int) (row * dimension + col)).setRow(row);
+				cells.get((int) (row * dimension + col)).setCol(col);
 			}
 		}
 	}
@@ -136,25 +136,25 @@ public class Labyrinth {
 
 	public boolean move(Player player, char direnction) {
 		if (direnction == NORTH) {
-			if (player.position.north) {
+			if (player.position.isNorth()) {
 				System.out.println("Ouch!!!");
 			} else {
 				return endGame(getNorth(player.position));
 			}
 		} else if (direnction == SOUTH) {
-			if (player.position.south) {
+			if (player.position.isSouth()) {
 				System.out.println("Ouch!!!");
 			} else {
 				return endGame(getSouth(player.position));
 			}
 		} else if (direnction == EAST) {
-			if (player.position.east) {
+			if (player.position.isEast()) {
 				System.out.println("Ouch!!!");
 			} else {
 				return endGame(getEst(player.position));
 			}
 		} else if (direnction == WEST) {
-			if (player.position.west) {
+			if (player.position.isWest()) {
 				System.out.println("Ouch!!!");
 			} else {
 				return endGame(getWest(player.position));
@@ -165,9 +165,9 @@ public class Labyrinth {
 
 	private Cell getNorth(Cell position) {
 		Cell destination = null;
-		if (position.row > 0) {
-			destination = cells.get(getIndexFromCoords(position.row - 1,
-					position.col));
+		if (position.getRow() > 0) {
+			destination = cells.get(getIndexFromCoords(position.getRow() - 1,
+					position.getCol()));
 		} else {
 			System.out.println("Can't go this way");
 		}
@@ -176,9 +176,9 @@ public class Labyrinth {
 
 	private Cell getSouth(Cell position) {
 		Cell destination = null;
-		if (position.row < dimension) {
-			destination = cells.get(getIndexFromCoords(position.row + 1,
-					position.col));
+		if (position.getRow() < dimension) {
+			destination = cells.get(getIndexFromCoords(position.getRow() + 1,
+					position.getCol()));
 		} else {
 			System.out.println("Can't go this way");
 		}
@@ -187,9 +187,9 @@ public class Labyrinth {
 
 	private Cell getEst(Cell position) {
 		Cell destination = null;
-		if (position.col < dimension) {
-			destination = cells.get(getIndexFromCoords(position.row,
-					position.col + 1));
+		if (position.getCol() < dimension) {
+			destination = cells.get(getIndexFromCoords(position.getRow(),
+					position.getCol() + 1));
 		} else {
 			System.out.println("Can't go this way");
 		}
@@ -198,9 +198,9 @@ public class Labyrinth {
 
 	private Cell getWest(Cell position) {
 		Cell destination = null;
-		if (position.col > 0) {
-			destination = cells.get(getIndexFromCoords(position.row,
-					position.col - 1));
+		if (position.getCol() > 0) {
+			destination = cells.get(getIndexFromCoords(position.getRow(),
+					position.getCol() - 1));
 		} else {
 			System.out.println("Can't go this way");
 		}
@@ -209,13 +209,13 @@ public class Labyrinth {
 
 
 	public void breakExternalWall(Cell entrance) {
-		if(entrance.row == 0){
+		if(entrance.getRow() == 0){
 			entrance.setNorth(false);
-		} else if (entrance.col == 0){
+		} else if (entrance.getCol() == 0){
 			entrance.setWest(false);
-		}else if (entrance.row == dimension-1){
+		}else if (entrance.getRow() == dimension-1){
 			entrance.setSouth(false);
-		}else if (entrance.col == dimension-1){
+		}else if (entrance.getCol() == dimension-1){
 			entrance.setEast(false);
 		}
 	}
@@ -223,16 +223,23 @@ public class Labyrinth {
 
 	public Cell getCellForDirection(Cell cell, char direnction) {
 		Cell nextcell = null;
-		
-		if(direnction == Labyrinth.NORTH && cell.row > 0){
-			nextcell = getCell(cell.row-1,cell.col);
-		}else if(direnction == Labyrinth.SOUTH && cell.row < dimension-1){
-			nextcell = getCell(cell.row+1,cell.col);
-		}else if(direnction == Labyrinth.WEST && cell.col > 0){
-			nextcell = getCell(cell.row,cell.col-1);
-		}else if(direnction == Labyrinth.EAST && cell.col < dimension-1){
-			nextcell = getCell(cell.row,cell.col+1);
+		if(direnction == Labyrinth.NORTH && cell.getRow() > 0){
+			nextcell = getCell(cell.getRow()-1,cell.getCol());
+			System.out.println("gcfd"+nextcell.getRow()+","+nextcell.getCol());
+
+		}else if(direnction == Labyrinth.SOUTH && cell.getRow() < dimension-1){
+			nextcell = getCell(cell.getRow()+1,cell.getCol());
+			System.out.println("gcfd"+nextcell.getRow()+","+nextcell.getCol());
+		}else if(direnction == Labyrinth.WEST && cell.getCol() > 0){
+			nextcell = getCell(cell.getRow(),cell.getCol()-1);
+			System.out.println("gcfd"+nextcell.getRow()+","+nextcell.getCol());
+		}else if(direnction == Labyrinth.EAST && cell.getCol() < dimension-1){
+			nextcell = getCell(cell.getRow(),cell.getCol()+1);
+			System.out.println("gcfd"+nextcell.getRow()+","+nextcell.getCol());
+		}else {
+			System.out.println("gcfd returned null");
 		}
+		
 		return nextcell;
 	}
 

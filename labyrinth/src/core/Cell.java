@@ -1,74 +1,23 @@
 package core;
 
-import java.util.ArrayList;
 
 public class Cell {
 
 	String name;
-	boolean north;
-	boolean south;
-	boolean west;
-	boolean east;
-	int row, col;
+	private boolean north;
+	private boolean south;
+	private boolean west;
+	private boolean east;
+	private int row, col;
 
-	Cell(boolean N, boolean S, boolean W, boolean E, String string) {
+	public Cell(boolean N, boolean S, boolean W, boolean E, String string) {
 		north = N;
 		south = S;
 		west = W;
 		east = E;
 		name = string;
 	}
-
-	@Deprecated
-	public void draw() {
-		if (east == true) {
-			System.out.print("+");
-		} else {
-			System.out.print(" ");
-		}
-
-		if (north == true) {
-			System.out.print("-----");
-		} else {
-			System.out.print("     ");
-		}
-		if (west == true) {
-			System.out.print("+");
-		} else {
-			System.out.print(" ");
-		}
-		System.out.println();
-
-		if (east == true) {
-			System.out.print("|     ");
-		} else {
-			System.out.print("      ");
-		}
-		if (west == true) {
-			System.out.print("|");
-		} else {
-			System.out.print(" ");
-		}
-		System.out.println();
-
-		if (east == true) {
-			System.out.print("+");
-		} else {
-			System.out.print(" ");
-		}
-
-		if (south == true) {
-			System.out.print("_____");
-		} else {
-			System.out.print("     ");
-		}
-		if (west == true) {
-			System.out.print("+");
-		} else {
-			System.out.print(" ");
-		}
-	}
-
+	
 	public boolean isNorth() {
 		return north;
 	}
@@ -121,6 +70,11 @@ public class Cell {
 		return name;
 	}
 
+	/***
+	 * Sets the wall of a given direction to false 
+	 * @param direnction = N, S, W, E
+	 * @return true if succeded, flase if failed
+	 */
 	public boolean breakWall(char direnction) {
 		if (direnction==Labyrinth.NORTH) {
 			this.setNorth(false);
@@ -141,7 +95,11 @@ public class Cell {
 		return false;
 	}
 
-	public char getOpenWall() {
+	/***
+	 * Returns the first wall that is false checking them in the NSWE order
+	 * @return N, S, W, E if one is open, empty char if all walls are there.
+	 */
+	public char getFirstOpenWallNSWE() {
 		if(!this.north) return Labyrinth.NORTH;
 		if(!this.south) return Labyrinth.SOUTH;
 		if(!this.west) return Labyrinth.WEST;
