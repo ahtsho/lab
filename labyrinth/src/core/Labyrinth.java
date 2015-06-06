@@ -64,8 +64,13 @@ public class Labyrinth {
 		return entrance;
 	}
 
+	/**
+	 * Sets a cell as the entrance of the labyrinth and breaks it's external wall
+	 * @param entrance
+	 */
 	public void setEntrance(Cell entrance) {
 		this.entrance = entrance;
+		breakEntranceExternalWall();
 	}
 
 	public Cell getExit() {
@@ -132,7 +137,7 @@ public class Labyrinth {
 	 *		2	1	7
 	 *		2	2	8
 	 */
-	public void disposeCells() {
+	private void disposeCells() {
 		if(! (cells.get(1).getRow() == 0 && cells.get(1).getCol()==1)){
 			for (int row = 0; row < dimension; row++) {
 				for (int col = 0; col < dimension; col++) {
@@ -188,10 +193,10 @@ public class Labyrinth {
 		return destination;
 	}
 
-	/***
+	/*
 	 * Breaks the external wall of the entrance
 	 */
-	public void breakExternalWall() {
+	private void breakEntranceExternalWall() {
 		if(entrance!=null){
 			if(entrance.getRow() == 0){
 				entrance.setNorth(false);
