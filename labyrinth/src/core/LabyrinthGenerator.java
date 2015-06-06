@@ -100,7 +100,7 @@ public class LabyrinthGenerator {
 		int randomNumber = generateRandomNumber(borderCells.size()-1);
 		Cell entrance = borderCells.get(randomNumber);
 		genLabyrinth.setEntrance(entrance);
-		genLabyrinth.breakExternalWall(entrance);
+		genLabyrinth.breakExternalWall();
 		return entrance;
 	}
 

@@ -4,20 +4,20 @@ import java.util.ArrayList;
 
 public class Labyrinth {
 	
-
-
 	public static final char NORTH = 'N';
 	public static final char SOUTH = 'S';
 	public static final char WEST = 'W';
 	public static final char EAST = 'E';
-	ArrayList<Cell> cells;
-
-	Cell entrance;
-	Cell exit;
-	int dimension;
-	Player player;
-
-	Labyrinth(ArrayList<Cell> cs, Cell c1, Cell c2) {
+	
+	private ArrayList<Cell> cells;
+	private Cell entrance;
+	private Cell exit;
+	private int dimension;
+	private Player player;
+	private ArrayList<Cell> labyrinthWall;
+	
+	
+	public Labyrinth (ArrayList<Cell> cs, Cell c1, Cell c2) {
 		cells = cs;
 		entrance = c1;
 		exit = c2;
@@ -25,8 +25,7 @@ public class Labyrinth {
 		disposeCells();
 	}
 	
-	
-	Labyrinth(ArrayList<Cell> cs, Cell c1, Cell c2, Player p) {
+	public Labyrinth(ArrayList<Cell> cs, Cell c1, Cell c2, Player p) {
 		cells = cs;
 		entrance = c1;
 		exit = c2;
@@ -47,22 +46,10 @@ public class Labyrinth {
 		return cells;
 	}
 
-
 	public void setCells(ArrayList<Cell> cells) {
 		this.cells = cells;
 	}
 
-	public ArrayList<Cell> getLabyrinthWall() {
-		ArrayList<Cell> labyrinthWall = new ArrayList<Cell>();
-		for (int i = 0; i < cells.size(); i++) {
-			if(cells.get(i).getRow()==0 || cells.get(i).getRow()==dimension-1 ||
-					cells.get(i).getCol()==0 || cells.get(i).getCol()==dimension-1){
-				labyrinthWall.add(cells.get(i));
-			}
-		}
-		return labyrinthWall;
-	}
-	
 	public boolean isEntrance(Cell c){
 		if (c==entrance) return true;
 		return false;
@@ -77,31 +64,25 @@ public class Labyrinth {
 		return entrance;
 	}
 
-
 	public void setEntrance(Cell entrance) {
 		this.entrance = entrance;
 	}
-
 
 	public Cell getExit() {
 		return exit;
 	}
 
-
 	public void setExit(Cell exit) {
 		this.exit = exit;
 	}
-
 
 	public Player getPlayer() {
 		return player;
 	}
 
-
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
-
 
 	public int getLabyrinthDimension() {
 		return this.dimension;
@@ -110,59 +91,59 @@ public class Labyrinth {
 	private int getIndexFromCoords(int r, int c) {
 		return (int) (r * dimension + c);
 	}
+	
+	private Cell getCell(int row, int col) {
+		return cells.get(getIndexFromCoords(row, col));
+	}
 
-	private void disposeCells() {
-		for (int row = 0; row < dimension; row++) {
-			for (int col = 0; col < dimension; col++) {
-				cells.get((int) (row * dimension + col)).setRow(row);
-				cells.get((int) (row * dimension + col)).setCol(col);
+	/***
+	 * Returns an array list of Cells that are in the external border of the labyrinth: 
+	 * i.e. that have one of their coordinates equal to a limit value 0 or n-1
+	 * @return labyrinthWall
+	 */
+	public ArrayList<Cell> getLabyrinthWall() {
+		// labyrinth wall already calculated once
+		if(labyrinthWall!=null && labyrinthWall.size() == dimension*4 - 2){
+			return labyrinthWall;
+		}
+		// calculate wall for the first time
+		for (int i = 0; i < cells.size(); i++) {
+			if(cells.get(i).getRow()==0 || 
+					cells.get(i).getRow()==dimension-1 ||
+					cells.get(i).getCol()==0 || 
+					cells.get(i).getCol()==dimension-1){
+				labyrinthWall.add(cells.get(i));
+			}
+		}
+		return labyrinthWall;
+	}
+	
+	/*
+	 * If cells have not been assigned coordinates, it assignes it to them 
+	 * Example of 3 x 3 matrix built from an array of 9 elements
+	 * dim	row	col	index = (row * dim + col)
+	 *	3	0	0	0
+	 *		0	1	1
+	 *		0	2	2
+	 *		1	0	3
+	 *		1	1	4
+	 *		1	2	5
+	 *		2	0	6
+	 *		2	1	7
+	 *		2	2	8
+	 */
+	public void disposeCells() {
+		if(! (cells.get(1).getRow() == 0 && cells.get(1).getCol()==1)){
+			for (int row = 0; row < dimension; row++) {
+				for (int col = 0; col < dimension; col++) {
+					cells.get((int) (row * dimension + col)).setRow(row);
+					cells.get((int) (row * dimension + col)).setCol(col);
+				}
 			}
 		}
 	}
 
 	
-	
-
-	
-	private boolean endGame(Cell destination) {
-		if (destination != null) {
-			player.position = destination;
-		}
-		if (destination == exit) {
-			return false;
-		}
-		return true;
-	}
-
-	public boolean move(Player player, char direnction) {
-		if (direnction == NORTH) {
-			if (player.position.isNorth()) {
-				System.out.println("Ouch!!!");
-			} else {
-				return endGame(getNorth(player.position));
-			}
-		} else if (direnction == SOUTH) {
-			if (player.position.isSouth()) {
-				System.out.println("Ouch!!!");
-			} else {
-				return endGame(getSouth(player.position));
-			}
-		} else if (direnction == EAST) {
-			if (player.position.isEast()) {
-				System.out.println("Ouch!!!");
-			} else {
-				return endGame(getEst(player.position));
-			}
-		} else if (direnction == WEST) {
-			if (player.position.isWest()) {
-				System.out.println("Ouch!!!");
-			} else {
-				return endGame(getWest(player.position));
-			}
-		}
-		return true;
-	}
-
 	private Cell getNorth(Cell position) {
 		Cell destination = null;
 		if (position.getRow() > 0) {
@@ -207,48 +188,48 @@ public class Labyrinth {
 		return destination;
 	}
 
-
-	public void breakExternalWall(Cell entrance) {
-		if(entrance.getRow() == 0){
-			entrance.setNorth(false);
-		} else if (entrance.getCol() == 0){
-			entrance.setWest(false);
-		}else if (entrance.getRow() == dimension-1){
-			entrance.setSouth(false);
-		}else if (entrance.getCol() == dimension-1){
-			entrance.setEast(false);
+	/***
+	 * Breaks the external wall of the entrance
+	 */
+	public void breakExternalWall() {
+		if(entrance!=null){
+			if(entrance.getRow() == 0){
+				entrance.setNorth(false);
+			} else if (entrance.getCol() == 0){
+				entrance.setWest(false);
+			}else if (entrance.getRow() == dimension-1){
+				entrance.setSouth(false);
+			}else if (entrance.getCol() == dimension-1){
+				entrance.setEast(false);
+			}
 		}
 	}
 
-
+	/***
+	 * Given a cell and a direnction returns the next cell in that direction
+	 * @param cell
+	 * @param direnction
+	 * @return nextCell if found, null otherwise 
+	 */
 	public Cell getCellForDirection(Cell cell, char direnction) {
 		Cell nextcell = null;
 		if(direnction == Labyrinth.NORTH && cell.getRow() > 0){
 			nextcell = getCell(cell.getRow()-1,cell.getCol());
-			System.out.println("gcfd"+nextcell.getRow()+","+nextcell.getCol());
-
 		}else if(direnction == Labyrinth.SOUTH && cell.getRow() < dimension-1){
 			nextcell = getCell(cell.getRow()+1,cell.getCol());
-			System.out.println("gcfd"+nextcell.getRow()+","+nextcell.getCol());
 		}else if(direnction == Labyrinth.WEST && cell.getCol() > 0){
 			nextcell = getCell(cell.getRow(),cell.getCol()-1);
-			System.out.println("gcfd"+nextcell.getRow()+","+nextcell.getCol());
 		}else if(direnction == Labyrinth.EAST && cell.getCol() < dimension-1){
 			nextcell = getCell(cell.getRow(),cell.getCol()+1);
-			System.out.println("gcfd"+nextcell.getRow()+","+nextcell.getCol());
-		}else {
-			System.out.println("gcfd returned null");
 		}
-		
 		return nextcell;
 	}
 
-
-	private Cell getCell(int row, int col) {
-		return cells.get(getIndexFromCoords(row, col));
-	}
-
-
+	/**
+	 * returns the opposite direction of a given direction
+	 * @param direction
+	 * @return S for N, N for S, W for E, E for W, empty char otherwise
+	 */
 	public static char getOppositeDirection(char direction) {
 		if(direction == NORTH){
 			return SOUTH;
@@ -261,4 +242,43 @@ public class Labyrinth {
 		}
 		return ' ';
 	}
+	private boolean endGame(Cell destination) {
+		if (destination != null) {
+			player.position = destination;
+		}
+		if (destination == exit) {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean move(Player player, char direnction) {
+		if (direnction == NORTH) {
+			if (player.position.isNorth()) {
+				System.out.println("Ouch!!!");
+			} else {
+				return endGame(getNorth(player.position));
+			}
+		} else if (direnction == SOUTH) {
+			if (player.position.isSouth()) {
+				System.out.println("Ouch!!!");
+			} else {
+				return endGame(getSouth(player.position));
+			}
+		} else if (direnction == EAST) {
+			if (player.position.isEast()) {
+				System.out.println("Ouch!!!");
+			} else {
+				return endGame(getEst(player.position));
+			}
+		} else if (direnction == WEST) {
+			if (player.position.isWest()) {
+				System.out.println("Ouch!!!");
+			} else {
+				return endGame(getWest(player.position));
+			}
+		}
+		return true;
+	}
+	
 }
