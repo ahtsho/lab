@@ -108,10 +108,11 @@ public class Labyrinth {
 	 */
 	public ArrayList<Cell> getLabyrinthWall() {
 		// labyrinth wall already calculated once
-		if(labyrinthWall!=null && labyrinthWall.size() == dimension*4 - 2){
+		if(labyrinthWall != null && labyrinthWall.size() == dimension * 4 - 4){
 			return labyrinthWall;
 		}
 		// calculate wall for the first time
+		labyrinthWall = new ArrayList<Cell>();
 		for (int i = 0; i < cells.size(); i++) {
 			if(cells.get(i).getRow()==0 || 
 					cells.get(i).getRow()==dimension-1 ||
@@ -231,11 +232,29 @@ public class Labyrinth {
 	}
 
 	/**
+	 * maps numbers in the set {0,1,2,3} to {N,S;W,E}
+	 * @param direction = one of {0,1,2,3}
+	 * @return one of {N,S;W,E}
+	 * @throws Exception wrong direction
+	 */
+	public static char getDirectionFromNumber(int direction) throws Exception {
+		if (direction == 0)
+			return Labyrinth.NORTH;
+		else if (direction == 1)
+			return Labyrinth.SOUTH;
+		else if (direction == 2)
+			return Labyrinth.WEST;
+		else if (direction == 3)
+			return Labyrinth.EAST;
+		throw new Exception("Wrong direnction " + direction);
+	}
+	
+	/**
 	 * returns the opposite direction of a given direction
 	 * @param direction
 	 * @return S for N, N for S, W for E, E for W, empty char otherwise
 	 */
-	public static char getOppositeDirection(char direction) {
+	public static char getOppositeDirection(char direction) throws Exception{
 		if(direction == NORTH){
 			return SOUTH;
 		} else if(direction == SOUTH){
@@ -245,8 +264,9 @@ public class Labyrinth {
 		} else if(direction == EAST){
 			return WEST;
 		}
-		return ' ';
+		throw new Exception("Non Existing direction");	
 	}
+	
 	private boolean endGame(Cell destination) {
 		if (destination != null) {
 			player.position = destination;

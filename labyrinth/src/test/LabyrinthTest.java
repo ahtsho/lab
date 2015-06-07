@@ -1,20 +1,13 @@
 package test;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
 import core.Cell;
 import core.Labyrinth;
 
 public class LabyrinthTest {
-	Labyrinth l;
-	@Before
-	public void setUp() throws Exception {
+
+	public static void main(String[] args) {
 		ArrayList<Cell> cs = new ArrayList<Cell>();
 		Cell a = new Cell(true, true, true, true, "a");
 		Cell b = new Cell(true, true, true, true, "b");
@@ -34,38 +27,27 @@ public class LabyrinthTest {
 		cs.add(g);
 		cs.add(h);
 		cs.add(i);
-		l = new Labyrinth(cs, b, g);
+		Labyrinth l = new Labyrinth(cs, b, g);
+
+		testGetLabyrinthWall(l);
 	}
 
-	@After
-	public void tearDown() throws Exception {
-		l = null;
-	}
+	public static void testGetLabyrinthWall(Labyrinth l) {
+		System.out.println("-BEGIN------------getLabyrinthWall Test-------------");
+		ArrayList<Cell> walls = l.getLabyrinthWall();
+		if (walls.size() == l.getDimension() * 4 - 4) {
+			System.out.println("Correct number of cells = "
+					+ (l.getDimension() * 4 - 4));
+		} else {
+			System.out.println("Wrong number of cells");
+		}
 
-
-	@Test
-	public void testGetCellForDirectionNfromTopLeft() {
-		assertEquals(null, l.getCellForDirection(l.getCells().get(0), Labyrinth.NORTH));
+		System.out.println("EXPECTED: {a,b,c,d,f,g,h,i}");
+		System.out.print("FOUND   : {");
+		for (int i = 0; i < walls.size() - 1; i++) {
+			System.out.print(walls.get(i).getName() + ",");
+		}
+		System.out.println(walls.get(walls.size() - 1).getName() + "}");
+		System.out.println("-END------------getLabyrinthWall Test-------------");
 	}
-	
-	@Test
-	public void testGetCellForDirectionSfromTopLeft() {
-		assertEquals("d", l.getCellForDirection(l.getCells().get(0), Labyrinth.SOUTH).getName());
-	}
-
-	@Test
-	public void testGetCellForDirectionWfromCenter() {
-		assertEquals("d", l.getCellForDirection(l.getCells().get(4), Labyrinth.WEST).getName());
-	}
-	
-	@Test
-	public void testGetOppositeDirection() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testMove() {
-		fail("Not yet implemented");
-	}
-
 }

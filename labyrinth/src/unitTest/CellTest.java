@@ -1,4 +1,4 @@
-package test;
+package unitTest;
 
 import static org.junit.Assert.*;
 
@@ -46,29 +46,29 @@ public class CellTest {
 	}
 	
 	@Test
-	public void testGetOpenWallForN() {
+	public void testGetOpenWallForN() throws Exception {
 		c.setNorth(false);
 		assertEquals('N',c.getFirstOpenWallNSWE());
 	}
 	@Test
-	public void testGetOpenWallForS() {
+	public void testGetOpenWallForS() throws Exception {
 		c.setSouth(false);
 		assertEquals('S',c.getFirstOpenWallNSWE());
 	}
 	@Test
-	public void testGetOpenWallForW() {
+	public void testGetOpenWallForW() throws Exception {
 		c.setWest(false);
 		assertEquals('W',c.getFirstOpenWallNSWE());
 	}
 	@Test
-	public void testGetOpenWallForE() {
+	public void testGetOpenWallForE() throws Exception {
 		c.setEast(false);
 		assertEquals('E',c.getFirstOpenWallNSWE());
 	}
 
 	@Test
-	public void testGetOpenWallForFull() {
-		assertEquals(' ',c.getFirstOpenWallNSWE());
+	public void testGetOpenWallForFull() throws Exception {
+		assertEquals(new Exception("No open walls"),c.getFirstOpenWallNSWE());
 	}
 
 }

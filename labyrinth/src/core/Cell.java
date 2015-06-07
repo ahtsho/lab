@@ -1,6 +1,5 @@
 package core;
 
-
 public class Cell {
 
 	String name;
@@ -17,7 +16,7 @@ public class Cell {
 		east = E;
 		name = string;
 	}
-	
+
 	public boolean isNorth() {
 		return north;
 	}
@@ -71,24 +70,26 @@ public class Cell {
 	}
 
 	/***
-	 * Sets the wall of a given direction to false 
-	 * @param direnction = N, S, W, E
+	 * Sets the wall of a given direction to false
+	 * 
+	 * @param direnction
+	 *            = N, S, W, E
 	 * @return true if succeded, flase if failed
 	 */
 	public boolean breakWall(char direnction) {
-		if (direnction==Labyrinth.NORTH) {
+		if (direnction == Labyrinth.NORTH) {
 			this.setNorth(false);
 			return true;
-		} 
-		if (direnction==Labyrinth.WEST) {
+		}
+		if (direnction == Labyrinth.WEST) {
 			this.setWest(false);
 			return true;
-		} 
+		}
 		if (direnction == Labyrinth.SOUTH) {
 			this.setSouth(false);
 			return true;
-		} 
-		if (direnction==Labyrinth.EAST) {
+		}
+		if (direnction == Labyrinth.EAST) {
 			this.setEast(false);
 			return true;
 		}
@@ -97,16 +98,32 @@ public class Cell {
 
 	/***
 	 * Returns the first wall that is false checking them in the NSWE order
+	 * 
 	 * @return N, S, W, E if one is open, empty char if all walls are there.
 	 */
-	public char getFirstOpenWallNSWE() {
-		if(!this.north) return Labyrinth.NORTH;
-		if(!this.south) return Labyrinth.SOUTH;
-		if(!this.west) return Labyrinth.WEST;
-		if(!this.east) return Labyrinth.EAST;
-		return ' ';
+	public char getFirstOpenWallNSWE() throws Exception {
+		if (!this.north)
+			return Labyrinth.NORTH;
+		if (!this.south)
+			return Labyrinth.SOUTH;
+		if (!this.west)
+			return Labyrinth.WEST;
+		if (!this.east)
+			return Labyrinth.EAST;
+		throw new Exception("No open walls");
 	}
 
-	
+	/**
+	 * Compares the given cell with current cell's coordinates and name
+	 * @param cell
+	 * @return true if match, false otherwise
+	 */
+	public boolean equals(Cell c) {
+		if (this.getRow() == c.getRow() 
+				&& this.getCol() == c.getCol()
+				&& this.getName() == c.getName())
+			return true;
+		return false;
+	}
 
 }

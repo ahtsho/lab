@@ -378,5 +378,11 @@ public class Console {
 		}
 	}
 	
-	
+	public void drawPath(ArrayList<Cell>path) {
+		System.out.println();
+		for (int i = 0; i < path.size(); i++) {
+			Cell c = path.get(i);
+			System.out.println("(" + c.getRow() + "," + c.getCol() + ")");
+		}
+	}
 }
