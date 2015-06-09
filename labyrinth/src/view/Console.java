@@ -208,6 +208,7 @@ public class Console {
 		f = (int) (r * lab.getLabyrinthDimension()
 				+ lab.getLabyrinthDimension() - 1);
 		c = lab.getCells().get(f);
+		coords = " "+ c.getRow()+","+c.getCol() + " ";
 		if (c.isWest()) {
 			System.out.print(Console.VERTICAL_WALL + coords);
 		} else {			
