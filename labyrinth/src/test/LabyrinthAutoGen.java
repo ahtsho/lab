@@ -17,7 +17,9 @@ public class LabyrinthAutoGen {
 			e.printStackTrace();
 		}
 		 int i = 2;
-		 while(labyrinthGenerator.getPath().size() < lab.getDimension()){
+		 //(int)(i*Math.log(i)
+		 while(labyrinthGenerator.getPath().size() < (int)(lab.getDimension()*Math.log(lab.getDimension()))){
+//			 System.out.println("CH 1: Soluzione "+i+" Scartata");
 			 i++;
 			 lab = null;
 			 try {

@@ -18,6 +18,7 @@ public class LabyrinthGenerator {
 	}
 
 	public Labyrinth generateLabyrinth(int n) throws Exception {
+//		System.out.println("CH2: generateLabyrinth");
 		generateFull(n);
 		createTunnel();
 		return genLabyrinth;
@@ -29,6 +30,7 @@ public class LabyrinthGenerator {
 	 * @param n
 	 */
 	public void generateFull(int n) {
+//		System.out.println("CH 3: generateFull");
 		ArrayList<Cell> labs = new ArrayList<Cell>();
 		path = new ArrayList<Cell>();
 		for (int i = 0; i < n * n; i++) {
@@ -46,6 +48,7 @@ public class LabyrinthGenerator {
 	 *             Non exixting direction
 	 */
 	public void createTunnel() throws Exception {
+//		System.out.println("CH 4:createTunnel");
 		Cell entrance = chooseEntrance();
 		path.add(entrance);
 
@@ -53,6 +56,7 @@ public class LabyrinthGenerator {
 		path.add(cell);
 
 		while (cell != null) {
+//			System.out.println("create tunnel can still go on");
 			char d = chooseDirection();
 			cell = dig(cell, d);
 			if (cell != null) {
@@ -76,11 +80,28 @@ public class LabyrinthGenerator {
 	 *             non exixting direction
 	 */
 	public Cell dig(Cell cell, char direction) throws Exception {
+//		System.out.println("CH 7: dig ");
 		Cell nextCell = genLabyrinth.getCellForDirection(cell, direction);
-
+		boolean dirN = false;
+		boolean dirS = false;
+		boolean dirW = false;
+		boolean dirE = false;
 		if (nextCell != null) {
-			while (pathContainsCell(nextCell)) {
+			while (pathContainsCell(nextCell) & !(dirN & dirS & dirW & dirE)) {
+//				System.out.println("pathContainsCell already");
 				direction = chooseDirection();
+				if(direction==Labyrinth.NORTH){
+					dirN = true;
+				}
+				if(direction==Labyrinth.SOUTH){
+					dirS = true;
+				}
+				if(direction==Labyrinth.WEST){
+					dirW = true;
+				}
+				if(direction==Labyrinth.EAST){
+					dirE = true;
+				}
 				nextCell = genLabyrinth.getCellForDirection(cell,direction);
 				if (nextCell == null) {
 					break;
@@ -117,7 +138,12 @@ public class LabyrinthGenerator {
 	 * @throws Exception
 	 */
 	public char chooseDirection() throws Exception {
-		return Labyrinth.getDirectionFromNumber(Utils.generateRandomNumber(4));
+//		System.out.println("CH 5:chooseDirection");
+		int random = Utils.generateRandomNumber(4);
+//		System.out.println("random = "+random);
+		char direction = Labyrinth.getDirectionFromNumber(random);
+//		System.out.println("direction = "+direction);
+		return direction;
 	}
 
 	/*

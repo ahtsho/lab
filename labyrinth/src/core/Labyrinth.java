@@ -238,6 +238,7 @@ public class Labyrinth {
 	 * @throws Exception wrong direction
 	 */
 	public static char getDirectionFromNumber(int direction) throws Exception {
+//		System.out.println("CH 6: getDirectionFromNumber");
 		if (direction == 0)
 			return Labyrinth.NORTH;
 		else if (direction == 1)
