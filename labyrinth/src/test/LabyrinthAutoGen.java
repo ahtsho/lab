@@ -1,4 +1,4 @@
-package unitTest;
+package test;
 
 import view.Console;
 import core.Labyrinth;
@@ -36,5 +36,4 @@ public class LabyrinthAutoGen {
 		 console.draw();
 		
 	}
-
 }

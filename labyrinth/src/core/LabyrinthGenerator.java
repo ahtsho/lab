@@ -9,7 +9,7 @@ public class LabyrinthGenerator {
 	private Labyrinth genLabyrinth;
 	private ArrayList<Cell> path;
 
-	public Labyrinth getGenLabyrinth() {
+	public Labyrinth getLabyrinth() {
 		return genLabyrinth;
 	}
 
@@ -49,8 +49,7 @@ public class LabyrinthGenerator {
 		Cell entrance = chooseEntrance();
 		path.add(entrance);
 
-		Cell cell = dig(entrance,
-				Labyrinth.getOppositeDirection(entrance.getFirstOpenWallNSWE()));
+		Cell cell = dig(entrance,Labyrinth.getOppositeDirection(entrance.getFirstOpenWallNSWE()));
 		path.add(cell);
 
 		while (cell != null) {
@@ -81,8 +80,8 @@ public class LabyrinthGenerator {
 
 		if (nextCell != null) {
 			while (pathContainsCell(nextCell)) {
-				nextCell = genLabyrinth.getCellForDirection(cell,
-						chooseDirection());
+				direction = chooseDirection();
+				nextCell = genLabyrinth.getCellForDirection(cell,direction);
 				if (nextCell == null) {
 					break;
 				}
