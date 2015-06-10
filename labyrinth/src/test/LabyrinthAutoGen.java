@@ -8,10 +8,11 @@ import core.Player;
 public class LabyrinthAutoGen {
 
 	public static void main(String[] args) {
+		int size = 15;
 		LabyrinthGenerator labyrinthGenerator = new LabyrinthGenerator();
 		 Labyrinth lab = null;
 		try {
-			lab = labyrinthGenerator.generateLabyrinth(10);
+			lab = labyrinthGenerator.generateLabyrinth(size);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -23,12 +24,19 @@ public class LabyrinthAutoGen {
 			 i++;
 			 lab = null;
 			 try {
-				lab = labyrinthGenerator.generateLabyrinth(10);
+				lab = labyrinthGenerator.generateLabyrinth(size);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		 }
+		 
+		 try {
+			lab = labyrinthGenerator.generateDeadEndTunnels();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		 
 		 Console console = new Console(lab);
 		 Player p = new Player();

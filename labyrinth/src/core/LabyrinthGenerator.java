@@ -115,6 +115,20 @@ public class LabyrinthGenerator {
 		}
 		return nextCell;
 	}
+	
+	public Cell digFree(Cell cell, char direction) throws Exception {
+//		System.out.println("CH 7: dig ");
+		Cell nextCell = genLabyrinth.getCellForDirection(cell, direction);
+		if(genLabyrinth.getLabyrinthWall().contains(cell)){
+			return null;
+		}
+		cell.breakWall(direction);
+		// astuzia della Feffi
+		if (nextCell != null) {
+			nextCell.breakWall(Labyrinth.getOppositeDirection(direction));
+		}
+		return nextCell;
+	}
 
 	/**
 	 * checks if cell is already in the path
@@ -157,6 +171,22 @@ public class LabyrinthGenerator {
 		Cell entrance = borderCells.get(Utils.generateRandomNumber(genLabyrinth.getLabyrinthWall().size() - 1));
 		genLabyrinth.setEntrance(entrance);
 		return entrance;
+	}
+
+	public Labyrinth generateDeadEndTunnels() throws Exception {
+		
+		//loop over path, every 3
+		for(int i = 0; i < path.size(); i=i+5){
+		// create tunnel without exit
+			Cell cell = path.get(i);
+			int length = 0;
+			while (cell!= null && length < 15) {
+				length++;
+				char d = chooseDirection();
+				cell = digFree(cell, d);
+			}
+		}
+		return genLabyrinth;
 	}
 
 }
