@@ -52,13 +52,13 @@ public class LabyrinthGenerator {
 		Cell entrance = chooseEntrance();
 		path.add(entrance);
 
-		Cell cell = dig(entrance,Labyrinth.getOppositeDirection(entrance.getFirstOpenWallNSWE()));
+		Cell cell = dig(entrance,Labyrinth.getOppositeDirection(entrance.getFirstOpenWallNSWE()),path);
 		path.add(cell);
 
 		while (cell != null) {
 //			System.out.println("create tunnel can still go on");
 			char d = chooseDirection();
-			cell = dig(cell, d);
+			cell = dig(cell, d,path);
 			if (cell != null) {
 				path.add(cell);
 			}
@@ -79,7 +79,7 @@ public class LabyrinthGenerator {
 	 * @throws Exception
 	 *             non exixting direction
 	 */
-	public Cell dig(Cell cell, char direction) throws Exception {
+	public Cell dig(Cell cell, char direction, ArrayList<Cell> aPath) throws Exception {
 //		System.out.println("CH 7: dig ");
 		Cell nextCell = genLabyrinth.getCellForDirection(cell, direction);
 		boolean dirN = false;
@@ -87,7 +87,7 @@ public class LabyrinthGenerator {
 		boolean dirW = false;
 		boolean dirE = false;
 		if (nextCell != null) {
-			while (pathContainsCell(nextCell) & !(dirN & dirS & dirW & dirE)) {
+			while (pathContainsCell(nextCell, aPath) & !(dirN & dirS & dirW & dirE)) {
 //				System.out.println("pathContainsCell already");
 				direction = chooseDirection();
 				if(direction==Labyrinth.NORTH){
@@ -115,29 +115,29 @@ public class LabyrinthGenerator {
 		}
 		return nextCell;
 	}
-	
-	public Cell digFree(Cell cell, char direction) throws Exception {
-//		System.out.println("CH 7: dig ");
-		Cell nextCell = genLabyrinth.getCellForDirection(cell, direction);
-		if(genLabyrinth.getLabyrinthWall().contains(cell)){
-			return null;
-		}
-		cell.breakWall(direction);
-		// astuzia della Feffi
-		if (nextCell != null) {
-			nextCell.breakWall(Labyrinth.getOppositeDirection(direction));
-		}
-		return nextCell;
-	}
+//	
+//	public Cell digFree(Cell cell, char direction) throws Exception {
+////		System.out.println("CH 7: dig ");
+//		Cell nextCell = genLabyrinth.getCellForDirection(cell, direction);
+//		if(genLabyrinth.getLabyrinthWall().contains(cell)){
+//			return null;
+//		}
+//		cell.breakWall(direction);
+//		// astuzia della Feffi
+//		if (nextCell != null) {
+//			nextCell.breakWall(Labyrinth.getOppositeDirection(direction));
+//		}
+//		return nextCell;
+//	}
 
 	/**
 	 * checks if cell is already in the path
 	 * @param cell
 	 * @return true if contained, false otherwise
 	 */
-	public boolean pathContainsCell(Cell cell) {
-		for (int i = 0; i < path.size(); i++) {
-			if (cell.equals(path.get(i))) {
+	public boolean pathContainsCell(Cell cell, ArrayList<Cell> aPath) {
+		for (int i = 0; i < aPath.size(); i++) {
+			if (cell.equals(aPath.get(i))) {
 				return true;
 			}
 		}
@@ -177,13 +177,16 @@ public class LabyrinthGenerator {
 		
 		//loop over path, every 3
 		for(int i = 0; i < path.size(); i=i+5){
+			ArrayList<Cell> subPath = new ArrayList<Cell>();
 		// create tunnel without exit
 			Cell cell = path.get(i);
+			subPath.add(cell);
 			int length = 0;
 			while (cell!= null && length < 15) {
 				length++;
 				char d = chooseDirection();
-				cell = digFree(cell, d);
+				cell = dig(cell, d, subPath);
+				subPath.add(cell);
 			}
 		}
 		return genLabyrinth;

@@ -82,16 +82,16 @@ public class LabyrinthGeneratorTest {
 		System.out.println("-BEGIN------------dig Test-------------");
 		System.out.println("TEST 1: choose new existing cell to dig up to");
 		System.out.println(Constants.EXPECTED+" from cell 4 dig up, get to cell 1, breaking 4N and 1S");
-		Cell next = lg.dig(lg.getLabyrinth().getCells().get(4), Labyrinth.NORTH);
+		Cell next = lg.dig(lg.getLabyrinth().getCells().get(4), Labyrinth.NORTH, lg.getPath());
 		System.out.println(Constants.FOUND+" nextcell="+next.getName()+" 4N="+lg.getLabyrinth().getCells().get(4).isNorth()+", 1S="+next.isSouth());
 		System.out.println("TEST 2: dig out");
 		System.out.println(Constants.EXPECTED+" from cell 8 dig east, get null, breaking 8E");
-		Cell next2 = lg.dig(lg.getLabyrinth().getCells().get(8), Labyrinth.EAST);
+		Cell next2 = lg.dig(lg.getLabyrinth().getCells().get(8), Labyrinth.EAST,lg.getPath());
 		System.out.println(Constants.FOUND+" nextcell="+next2+" 8E="+lg.getLabyrinth().getCells().get(8).isEast());
 		System.out.println("TEST 3: dig an already visited cell");
 		System.out.println(Constants.EXPECTED+" from cell 2 dig west, cannot go to cell 1, becaues it's in the path, so tries to go N or E going out, or S to 5 breaking 2S and 5N");
 		lg.getPath().add(lg.getLabyrinth().getCells().get(1));
-		Cell next3 = lg.dig(lg.getLabyrinth().getCells().get(2), Labyrinth.WEST);
+		Cell next3 = lg.dig(lg.getLabyrinth().getCells().get(2), Labyrinth.WEST,lg.getPath());
 		System.out.print(Constants.FOUND+" nextcell=");
 		if(next3!=null){
 			System.out.println(next3.getName()+" 2S="+lg.getLabyrinth().getCells().get(2).isSouth()+", 5N="+next3.isNorth());
