@@ -14,19 +14,13 @@ public class LabyrinthAutoGen {
 		try {
 			lab = labyrinthGenerator.generateLabyrinth(size);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 int i = 2;
-		 //(int)(i*Math.log(i)
 		 while(labyrinthGenerator.getPath().size() < (int)(lab.getDimension()*Math.log(lab.getDimension()))){
-//			 System.out.println("CH 1: Soluzione "+i+" Scartata");
-			 i++;
 			 lab = null;
 			 try {
 				lab = labyrinthGenerator.generateLabyrinth(size);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		 }
@@ -34,7 +28,6 @@ public class LabyrinthAutoGen {
 		 try {
 			lab = labyrinthGenerator.generateDeadEndTunnels();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		 

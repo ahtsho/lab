@@ -18,7 +18,6 @@ public class LabyrinthGenerator {
 	}
 
 	public Labyrinth generateLabyrinth(int n) throws Exception {
-//		System.out.println("CH2: generateLabyrinth");
 		generateFull(n);
 		createTunnel();
 		return genLabyrinth;
@@ -30,7 +29,6 @@ public class LabyrinthGenerator {
 	 * @param n
 	 */
 	public void generateFull(int n) {
-//		System.out.println("CH 3: generateFull");
 		ArrayList<Cell> labs = new ArrayList<Cell>();
 		path = new ArrayList<Cell>();
 		for (int i = 0; i < n * n; i++) {
@@ -134,11 +132,8 @@ public class LabyrinthGenerator {
 	 * @throws Exception
 	 */
 	public char chooseDirection() throws Exception {
-//		System.out.println("CH5:chooseDirection");
 		int random = Utils.generateRandomNumber(4);
-//		System.out.println("random = "+random);
 		char direction = Labyrinth.getDirectionFromNumber(random);
-//		System.out.println("direction = "+direction);
 		return direction;
 	}
 
@@ -163,9 +158,12 @@ public class LabyrinthGenerator {
 			Cell cell = path.get(i);
 			subPath.add(cell);
 
-			int length = 0;
+			cell = dig(cell,Labyrinth.getOppositeDirection(cell.getFirstOpenWallNSWE()),subPath);
+			if(cell!=null){
+				subPath.add(cell);
+			}
+			
 			while (cell!= null) {
-//				length++;
 				if(!genLabyrinth.isInLabyrinthWall(cell)){
 					char d = chooseDirection();
 					cell = dig(cell, d, subPath);
