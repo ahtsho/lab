@@ -48,7 +48,6 @@ public class LabyrinthGenerator {
 	 *             Non exixting direction
 	 */
 	public void createTunnel() throws Exception {
-//		System.out.println("CH 4:createTunnel");
 		Cell entrance = chooseEntrance();
 		path.add(entrance);
 
@@ -56,7 +55,6 @@ public class LabyrinthGenerator {
 		path.add(cell);
 
 		while (cell != null) {
-//			System.out.println("create tunnel can still go on");
 			char d = chooseDirection();
 			cell = dig(cell, d,path);
 			if (cell != null) {
@@ -80,7 +78,6 @@ public class LabyrinthGenerator {
 	 *             non exixting direction
 	 */
 	public Cell dig(Cell cell, char direction, ArrayList<Cell> aPath) throws Exception {
-//		System.out.println("CH 7: dig ");
 		Cell nextCell = genLabyrinth.getCellForDirection(cell, direction);
 		boolean dirN = false;
 		boolean dirS = false;
@@ -88,7 +85,6 @@ public class LabyrinthGenerator {
 		boolean dirE = false;
 		if (nextCell != null) {
 			while (pathContainsCell(nextCell, aPath) & !(dirN & dirS & dirW & dirE)) {
-//				System.out.println("pathContainsCell already");
 				direction = chooseDirection();
 				if(direction==Labyrinth.NORTH){
 					dirN = true;
@@ -115,20 +111,6 @@ public class LabyrinthGenerator {
 		}
 		return nextCell;
 	}
-//	
-//	public Cell digFree(Cell cell, char direction) throws Exception {
-////		System.out.println("CH 7: dig ");
-//		Cell nextCell = genLabyrinth.getCellForDirection(cell, direction);
-//		if(genLabyrinth.getLabyrinthWall().contains(cell)){
-//			return null;
-//		}
-//		cell.breakWall(direction);
-//		// astuzia della Feffi
-//		if (nextCell != null) {
-//			nextCell.breakWall(Labyrinth.getOppositeDirection(direction));
-//		}
-//		return nextCell;
-//	}
 
 	/**
 	 * checks if cell is already in the path
@@ -152,7 +134,7 @@ public class LabyrinthGenerator {
 	 * @throws Exception
 	 */
 	public char chooseDirection() throws Exception {
-//		System.out.println("CH 5:chooseDirection");
+//		System.out.println("CH5:chooseDirection");
 		int random = Utils.generateRandomNumber(4);
 //		System.out.println("random = "+random);
 		char direction = Labyrinth.getDirectionFromNumber(random);
@@ -173,20 +155,27 @@ public class LabyrinthGenerator {
 		return entrance;
 	}
 
-	public Labyrinth generateDeadEndTunnels() throws Exception {
-		
+	public Labyrinth generateDeadEndTunnels() throws Exception {	
 		//loop over path, every 3
+		ArrayList<Cell> subPath = new ArrayList<Cell>();
 		for(int i = 0; i < path.size(); i=i+5){
-			ArrayList<Cell> subPath = new ArrayList<Cell>();
 		// create tunnel without exit
 			Cell cell = path.get(i);
 			subPath.add(cell);
+
 			int length = 0;
-			while (cell!= null && length < 15) {
-				length++;
-				char d = chooseDirection();
-				cell = dig(cell, d, subPath);
-				subPath.add(cell);
+			while (cell!= null) {
+//				length++;
+				if(!genLabyrinth.isInLabyrinthWall(cell)){
+					char d = chooseDirection();
+					cell = dig(cell, d, subPath);
+					if(cell==null){
+						break;
+					}	
+					subPath.add(cell);
+				} else {
+					break;
+				}
 			}
 		}
 		return genLabyrinth;

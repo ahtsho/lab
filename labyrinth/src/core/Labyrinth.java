@@ -306,5 +306,12 @@ public class Labyrinth {
 		}
 		return true;
 	}
+
+	public boolean isInLabyrinthWall(Cell cell) {
+ 		for(Cell wallCell : labyrinthWall){
+ 			if(wallCell.equals(cell)) return true;
+ 		}
+		return false;
+	}
 	
 }
