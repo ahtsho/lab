@@ -59,6 +59,7 @@ public class LabyrinthGenerator {
 				path.add(cell);
 			}
 		}
+		genLabyrinth.setExit(path.get(path.size()-1));
 	}
 
 	/**

@@ -23,7 +23,12 @@ public class GameManager {
 		Game game = new Game(false, false, false);
 
 		while (!Levels.isLast(level)) {
-			Labyrinth lab = Levels.getLabyrinth(level, p);
+			Labyrinth lab = null;
+			try {
+				lab = Levels.genLabyrinth(level+2, p);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 			Console console = new Console(lab);
 			
 			if(Levels.levelChanged){
