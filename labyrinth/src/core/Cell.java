@@ -72,24 +72,24 @@ public class Cell {
 	/***
 	 * Sets the wall of a given direction to false
 	 * 
-	 * @param direnction
+	 * @param direction
 	 *            = N, S, W, E
 	 * @return true if succeded, flase if failed
 	 */
-	public boolean breakWall(char direnction) {
-		if (direnction == Labyrinth.NORTH) {
+	public boolean breakWall(char direction) {
+		if (direction == Labyrinth.NORTH) {
 			this.setNorth(false);
 			return true;
 		}
-		if (direnction == Labyrinth.WEST) {
+		if (direction == Labyrinth.WEST) {
 			this.setWest(false);
 			return true;
 		}
-		if (direnction == Labyrinth.SOUTH) {
+		if (direction == Labyrinth.SOUTH) {
 			this.setSouth(false);
 			return true;
 		}
-		if (direnction == Labyrinth.EAST) {
+		if (direction == Labyrinth.EAST) {
 			this.setEast(false);
 			return true;
 		}
@@ -124,6 +124,35 @@ public class Cell {
 				&& this.getName() == c.getName())
 			return true;
 		return false;
+	}
+	
+	public boolean getWallForDirection(char direction) throws Exception{
+		if (direction == Labyrinth.NORTH) {
+			if (this.isNorth()) {
+				return true;
+			} else {
+				return false;
+			}
+		}else if (direction == Labyrinth.SOUTH) {
+			if (this.isSouth()) {
+				return true;
+			} else {
+				return false;
+			}
+		}else if (direction == Labyrinth.WEST) {
+			if (this.isWest()) {
+				return true;
+			} else {
+				return false;
+			}
+		} else if (direction == Labyrinth.EAST) {
+			if (this.isEast()) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		throw new Exception ("No such direction");
 	}
 
 }

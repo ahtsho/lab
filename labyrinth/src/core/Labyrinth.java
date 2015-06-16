@@ -268,43 +268,54 @@ public class Labyrinth {
 		throw new Exception("Non Existing direction");	
 	}
 	
-	private boolean endGame(Cell destination) {
+	/*
+	 * Given a cell to go to, 
+	 */
+	public boolean moveTo(Cell destination) {
 		if (destination != null) {
 			player.position = destination;
+			if (destination == exit) {
+				return false;
+			}
 		}
-		if (destination == exit) {
-			return false;
-		}
+		
 		return true;
 	}
-
-	public boolean move(Player player, char direnction) {
-		if (direnction == NORTH) {
-			if (player.position.isNorth()) {
-				System.out.println("Ouch!!!");
-			} else {
-				return endGame(getNorth(player.position));
-			}
-		} else if (direnction == SOUTH) {
-			if (player.position.isSouth()) {
-				System.out.println("Ouch!!!");
-			} else {
-				return endGame(getSouth(player.position));
-			}
-		} else if (direnction == EAST) {
-			if (player.position.isEast()) {
-				System.out.println("Ouch!!!");
-			} else {
-				return endGame(getEst(player.position));
-			}
-		} else if (direnction == WEST) {
-			if (player.position.isWest()) {
-				System.out.println("Ouch!!!");
-			} else {
-				return endGame(getWest(player.position));
-			}
+	
+	public boolean move(Player player, char direction) throws Exception {
+		if(player.getPosition().getWallForDirection(direction)){
+			System.out.println("Ouch!!!");
+		} else {
+			return moveTo(getCellForDirection(player.position,direction));
 		}
 		return true;
+		
+//		if (direnction == NORTH) {
+//			if (player.position.isNorth()) {
+//				System.out.println("Ouch!!!");
+//			} else {
+//				return endGame(getNorth(player.position));
+//			}
+//		} else if (direnction == SOUTH) {
+//			if (player.position.isSouth()) {
+//				System.out.println("Ouch!!!");
+//			} else {
+//				return endGame(getSouth(player.position));
+//			}
+//		} else if (direnction == EAST) {
+//			if (player.position.isEast()) {
+//				System.out.println("Ouch!!!");
+//			} else {
+//				return endGame(getEst(player.position));
+//			}
+//		} else if (direnction == WEST) {
+//			if (player.position.isWest()) {
+//				System.out.println("Ouch!!!");
+//			} else {
+//				return endGame(getWest(player.position));
+//			}
+//		}
+//		return true;
 	}
 
 	public boolean isInLabyrinthWall(Cell cell) {

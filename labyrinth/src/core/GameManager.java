@@ -47,16 +47,20 @@ public class GameManager {
 							| read.toLowerCase().startsWith("s")
 							| read.toLowerCase().startsWith("w") | read
 							.toLowerCase().startsWith("e"))) {
-						if (lab.move(p,
-								Console.adaptDirection((read.charAt(0))))) {
-							console.draw();
-							console.printMoveMsg();
-						} else {
-							console.draw();
-							console.printLevelFinishedMsg(level);
-							level = Levels.next(level);
-							Levels.levelChanged = true;
-							break;
+						try {
+							if (lab.move(p,Console.adaptDirection((read.charAt(0))))) {
+								console.draw();
+								console.printMoveMsg();
+							} else {
+								console.draw();
+								console.printLevelFinishedMsg(level);
+								level = Levels.next(level);
+								Levels.levelChanged = true;
+								break;
+							}
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
 						}
 					} else if (read.toLowerCase().startsWith("q")) {
 						game.end();

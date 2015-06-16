@@ -159,10 +159,10 @@ public class LabyrinthGenerator {
 			Cell cell = path.get(i);
 			subPath.add(cell);
 
-			cell = dig(cell,Labyrinth.getOppositeDirection(cell.getFirstOpenWallNSWE()),subPath);
-			if(cell!=null){
-				subPath.add(cell);
-			}
+//			cell = dig(cell,Labyrinth.getOppositeDirection(cell.getFirstOpenWallNSWE()),subPath);
+//			if(cell!=null){
+//				subPath.add(cell);
+//			}
 			
 			while (cell!= null) {
 				if(!genLabyrinth.isInLabyrinthWall(cell)){
