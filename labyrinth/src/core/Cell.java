@@ -2,6 +2,11 @@ package core;
 
 public class Cell {
 
+	public static final char WEST = 'W';
+	public static final char EAST = 'E';
+	public static final char SOUTH = 'S';
+	public static final char NORTH = 'N';
+	
 	String name;
 	private boolean north;
 	private boolean south;
@@ -77,19 +82,19 @@ public class Cell {
 	 * @return true if succeded, flase if failed
 	 */
 	public boolean breakWall(char direction) {
-		if (direction == Labyrinth.NORTH) {
+		if (direction == Cell.NORTH) {
 			this.setNorth(false);
 			return true;
 		}
-		if (direction == Labyrinth.WEST) {
+		if (direction == Cell.WEST) {
 			this.setWest(false);
 			return true;
 		}
-		if (direction == Labyrinth.SOUTH) {
+		if (direction == Cell.SOUTH) {
 			this.setSouth(false);
 			return true;
 		}
-		if (direction == Labyrinth.EAST) {
+		if (direction == Cell.EAST) {
 			this.setEast(false);
 			return true;
 		}
@@ -103,13 +108,13 @@ public class Cell {
 	 */
 	public char getFirstOpenWallNSWE() throws Exception {
 		if (!this.north)
-			return Labyrinth.NORTH;
+			return Cell.NORTH;
 		if (!this.south)
-			return Labyrinth.SOUTH;
+			return Cell.SOUTH;
 		if (!this.west)
-			return Labyrinth.WEST;
+			return Cell.WEST;
 		if (!this.east)
-			return Labyrinth.EAST;
+			return Cell.EAST;
 		throw new Exception("No open walls");
 	}
 
@@ -127,25 +132,25 @@ public class Cell {
 	}
 	
 	public boolean getWallForDirection(char direction) throws Exception{
-		if (direction == Labyrinth.NORTH) {
+		if (direction == Cell.NORTH) {
 			if (this.isNorth()) {
 				return true;
 			} else {
 				return false;
 			}
-		}else if (direction == Labyrinth.SOUTH) {
+		}else if (direction == Cell.SOUTH) {
 			if (this.isSouth()) {
 				return true;
 			} else {
 				return false;
 			}
-		}else if (direction == Labyrinth.WEST) {
+		}else if (direction == Cell.WEST) {
 			if (this.isWest()) {
 				return true;
 			} else {
 				return false;
 			}
-		} else if (direction == Labyrinth.EAST) {
+		} else if (direction == Cell.EAST) {
 			if (this.isEast()) {
 				return true;
 			} else {

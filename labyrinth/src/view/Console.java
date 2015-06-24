@@ -303,13 +303,13 @@ public class Console {
 
 	public static char adaptDirection(char c) {
 		if (c == 'n' | c == 'N')
-			return Labyrinth.NORTH;
+			return Cell.NORTH;
 		if (c == 's' | c == 'S')
-			return Labyrinth.SOUTH;
+			return Cell.SOUTH;
 		if (c == 'w' | c == 'W')
-			return Labyrinth.WEST;
+			return Cell.WEST;
 		if (c == 'e' | c == 'E')
-			return Labyrinth.EAST;
+			return Cell.EAST;
 		return 0;
 	}
 

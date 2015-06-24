@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import core.Cell;
-import core.Labyrinth;
 
 public class CellTest {
  Cell c;
@@ -23,25 +22,25 @@ public class CellTest {
 
 	@Test
 	public void testBreakNorthWall() {
-		c.breakWall(Labyrinth.NORTH);
+		c.breakWall(Cell.NORTH);
 		assertFalse(c.isNorth());
 	}
 
 	@Test
 	public void testBreakSouthWall() {
-		c.breakWall(Labyrinth.SOUTH);
+		c.breakWall(Cell.SOUTH);
 		assertFalse(c.isSouth());
 	}
 
 	@Test
 	public void testBreakEastWall() {
-		c.breakWall(Labyrinth.EAST);
+		c.breakWall(Cell.EAST);
 		assertFalse(c.isEast());
 	}
 
 	@Test
 	public void testBreakWestWall() {
-		c.breakWall(Labyrinth.WEST);
+		c.breakWall(Cell.WEST);
 		assertFalse(c.isWest());
 	}
 	

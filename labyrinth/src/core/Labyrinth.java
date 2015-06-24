@@ -4,11 +4,6 @@ import java.util.ArrayList;
 
 public class Labyrinth {
 	
-	public static final char NORTH = 'N';
-	public static final char SOUTH = 'S';
-	public static final char WEST = 'W';
-	public static final char EAST = 'E';
-	
 	private ArrayList<Cell> cells;
 	private Cell entrance;
 	private Cell exit;
@@ -219,13 +214,13 @@ public class Labyrinth {
 	 */
 	public Cell getCellForDirection(Cell cell, char direnction) {
 		Cell nextcell = null;
-		if(direnction == Labyrinth.NORTH && cell.getRow() > 0){
+		if(direnction == Cell.NORTH && cell.getRow() > 0){
 			nextcell = getCell(cell.getRow()-1,cell.getCol());
-		}else if(direnction == Labyrinth.SOUTH && cell.getRow() < dimension-1){
+		}else if(direnction == Cell.SOUTH && cell.getRow() < dimension-1){
 			nextcell = getCell(cell.getRow()+1,cell.getCol());
-		}else if(direnction == Labyrinth.WEST && cell.getCol() > 0){
+		}else if(direnction == Cell.WEST && cell.getCol() > 0){
 			nextcell = getCell(cell.getRow(),cell.getCol()-1);
-		}else if(direnction == Labyrinth.EAST && cell.getCol() < dimension-1){
+		}else if(direnction == Cell.EAST && cell.getCol() < dimension-1){
 			nextcell = getCell(cell.getRow(),cell.getCol()+1);
 		}
 		return nextcell;
@@ -240,13 +235,13 @@ public class Labyrinth {
 	public static char getDirectionFromNumber(int direction) throws Exception {
 //		System.out.println("CH 6: getDirectionFromNumber");
 		if (direction == 0)
-			return Labyrinth.NORTH;
+			return Cell.NORTH;
 		else if (direction == 1)
-			return Labyrinth.SOUTH;
+			return Cell.SOUTH;
 		else if (direction == 2)
-			return Labyrinth.WEST;
+			return Cell.WEST;
 		else if (direction == 3)
-			return Labyrinth.EAST;
+			return Cell.EAST;
 		throw new Exception("Wrong direnction " + direction);
 	}
 	
@@ -256,14 +251,14 @@ public class Labyrinth {
 	 * @return S for N, N for S, W for E, E for W, empty char otherwise
 	 */
 	public static char getOppositeDirection(char direction) throws Exception{
-		if(direction == NORTH){
-			return SOUTH;
-		} else if(direction == SOUTH){
-			return NORTH;
-		} else if(direction == WEST){
-			return EAST;
-		} else if(direction == EAST){
-			return WEST;
+		if(direction == Cell.NORTH){
+			return Cell.SOUTH;
+		} else if(direction == Cell.SOUTH){
+			return Cell.NORTH;
+		} else if(direction == Cell.WEST){
+			return Cell.EAST;
+		} else if(direction == Cell.EAST){
+			return Cell.WEST;
 		}
 		throw new Exception("Non Existing direction");	
 	}

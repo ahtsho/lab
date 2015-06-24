@@ -85,16 +85,16 @@ public class LabyrinthGenerator {
 		if (nextCell != null) {
 			while (pathContainsCell(nextCell, aPath) & !(dirN & dirS & dirW & dirE)) {
 				direction = chooseDirection();
-				if(direction==Labyrinth.NORTH){
+				if(direction==Cell.NORTH){
 					dirN = true;
 				}
-				if(direction==Labyrinth.SOUTH){
+				if(direction==Cell.SOUTH){
 					dirS = true;
 				}
-				if(direction==Labyrinth.WEST){
+				if(direction==Cell.WEST){
 					dirW = true;
 				}
-				if(direction==Labyrinth.EAST){
+				if(direction==Cell.EAST){
 					dirE = true;
 				}
 				nextCell = genLabyrinth.getCellForDirection(cell,direction);

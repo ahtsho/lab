@@ -45,17 +45,17 @@ public class LabyrinthTest {
 
 	@Test
 	public void testGetCellForDirectionNfromTopLeft() {
-		assertEquals(null, l.getCellForDirection(l.getCells().get(0), Labyrinth.NORTH));
+		assertEquals(null, l.getCellForDirection(l.getCells().get(0), Cell.NORTH));
 	}
 	
 	@Test
 	public void testGetCellForDirectionSfromTopLeft() {
-		assertEquals("d", l.getCellForDirection(l.getCells().get(0), Labyrinth.SOUTH).getName());
+		assertEquals("d", l.getCellForDirection(l.getCells().get(0), Cell.SOUTH).getName());
 	}
 
 	@Test
 	public void testGetCellForDirectionWfromCenter() {
-		assertEquals("d", l.getCellForDirection(l.getCells().get(4), Labyrinth.WEST).getName());
+		assertEquals("d", l.getCellForDirection(l.getCells().get(4), Cell.WEST).getName());
 	}
 	
 	@Test
