@@ -12,7 +12,7 @@ public class GameManager {
 		Console.printGameInstructions();
 		Console.printGameStartInstructions();
 
-		Player p = new Player();
+		Player p = new Player(1);
 		p.name = "F";
 
 		int level = 1;
@@ -43,6 +43,13 @@ public class GameManager {
 				read = scanIn.nextLine();
 				
 				if (game.isOn()) {
+					if(p.getLife() == 0){
+						System.out.println("GAME OVER");
+						return;
+					}
+					if ((read.toLowerCase().startsWith("l"))){
+						System.out.println("Player has Life="+p.getLife()+" damage="+p.getDamage());
+					}
 					if ((read.toLowerCase().startsWith("n")
 							| read.toLowerCase().startsWith("s")
 							| read.toLowerCase().startsWith("w") | read

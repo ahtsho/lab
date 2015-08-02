@@ -279,38 +279,11 @@ public class Labyrinth {
 	
 	public boolean move(Player player, char direction) throws Exception {
 		if(player.getPosition().getWallForDirection(direction)){
-			System.out.println("Ouch!!!");
+			player.damage((float)0.1);
 		} else {
 			return moveTo(getCellForDirection(player.position,direction));
 		}
 		return true;
-		
-//		if (direnction == NORTH) {
-//			if (player.position.isNorth()) {
-//				System.out.println("Ouch!!!");
-//			} else {
-//				return endGame(getNorth(player.position));
-//			}
-//		} else if (direnction == SOUTH) {
-//			if (player.position.isSouth()) {
-//				System.out.println("Ouch!!!");
-//			} else {
-//				return endGame(getSouth(player.position));
-//			}
-//		} else if (direnction == EAST) {
-//			if (player.position.isEast()) {
-//				System.out.println("Ouch!!!");
-//			} else {
-//				return endGame(getEst(player.position));
-//			}
-//		} else if (direnction == WEST) {
-//			if (player.position.isWest()) {
-//				System.out.println("Ouch!!!");
-//			} else {
-//				return endGame(getWest(player.position));
-//			}
-//		}
-//		return true;
 	}
 
 	public boolean isInLabyrinthWall(Cell cell) {

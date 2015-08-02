@@ -29,6 +29,7 @@ public class Console {
 	}
 
 	public void draw() {
+		System.out.println("Player has Life="+lab.getPlayer().getLife()+" damage="+lab.getPlayer().getDamage());
 		for (int row = 0; row < lab.getLabyrinthDimension() - 1; row++) {
 			drawFirstThird(row);
 			drawSecondThird(row);
