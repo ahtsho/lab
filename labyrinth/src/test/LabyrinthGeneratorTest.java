@@ -2,6 +2,7 @@ package test;
 
 import view.Console;
 import core.Cell;
+import core.Guard;
 import core.Labyrinth;
 import core.LabyrinthGenerator;
 import core.Player;

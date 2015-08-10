@@ -10,6 +10,7 @@ public class Labyrinth {
 	private int dimension;
 	private Player player;
 	private ArrayList<Cell> labyrinthWall;
+	private Guard guard;
 	
 	
 	public Labyrinth (ArrayList<Cell> cs, Cell c1, Cell c2) {
@@ -58,7 +59,15 @@ public class Labyrinth {
 	public Cell getEntrance() {
 		return entrance;
 	}
+	
+	public Guard getGuard(){
+		return this.guard;
+	}
 
+	public void setGuard(Guard aguard){
+		guard = aguard;
+	}
+	
 	/**
 	 * Sets a cell as the entrance of the labyrinth and breaks it's external wall
 	 * @param entrance

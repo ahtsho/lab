@@ -12,6 +12,7 @@ public class Console {
 	public static String HORIZONTAL_WALL = "=====";
 	public static String NO_HORIZONTAL_WALL = "     ";
 	public static String HORIZONTAL_SPACE = "     ";
+	public static String TWO_HORIZONTAL_SPACES = "  ";
 
 	public static String CORNER = "+";
 	public static String NO_CORNER = ".";
@@ -92,44 +93,25 @@ public class Console {
 			f = (int) (r * lab.getLabyrinthDimension() + col);
 			c = lab.getCells().get(f);
 			if (c.isWest()) {
-				
-				if (lab.getPlayer().getPosition().equals(c)) {
-//					if (lab.isEntrance(c)) {
-//						System.out.println(Console.ENTRANCE + "  "
-//								+ lab.getPlayer().getName() + "  ");
-//					} else {
-						System.out.print(Console.VERTICAL_WALL + "  "
-								+ lab.getPlayer().getName() + "  ");
-//					}
-				} else {
-//					if (lab.isEntrance(c)) {
-//						System.out.print(Console.ENTRANCE
-//								+ Console.HORIZONTAL_SPACE);
-//					} else {
-						System.out.print(Console.VERTICAL_WALL
-								+ Console.HORIZONTAL_SPACE);
-//					}
-
+				System.out.print(Console.VERTICAL_WALL +TWO_HORIZONTAL_SPACES);
+				if (lab.getPlayer().getPosition().equals(c) && lab.getGuard().getPosition().equals(c)) {
+					System.out.print("*");
+				}else if (lab.getGuard().getPosition().equals(c)) {
+					System.out.print(lab.getGuard().getName());
+				}else if (lab.getPlayer().getPosition().equals(c)) {
+					System.out.print(lab.getPlayer().getName());
+				} else{
+					System.out.print(" ");
 				}
-				
+				System.out.print(Console.TWO_HORIZONTAL_SPACES);
 			} else {
 				
 				if (lab.getPlayer().getPosition().equals(c)) {
-//					if (lab.isEntrance(c)) {
-//						System.out.print(Console.ENTRANCE + "  "
-//								+ lab.getPlayer().getName() + "  ");
-//					} else {
 						System.out.print(Console.NO_VERTICAL_WALL + "  "
 								+ lab.getPlayer().getName() + "  ");
-//					}
 				} else {
-//					if (lab.isEntrance(c)) {
-//						System.out.print(Console.ENTRANCE
-//								+ Console.HORIZONTAL_SPACE);
-//					} else {
 						System.out.print(Console.NO_VERTICAL_WALL
 								+ Console.HORIZONTAL_SPACE);
-//					}
 				}
 				
 			}
@@ -139,46 +121,41 @@ public class Console {
 				+ lab.getLabyrinthDimension() - 1);
 		c = lab.getCells().get(f);
 		if (c.isWest()) {
-			
-			if (lab.getPlayer().getPosition().equals(c)) {
-//				if (lab.isEntrance(c)) {
-//					System.out.print(Console.ENTRANCE + "  "
-//							+ lab.getPlayer().getName() + "  ");
-//				} else {
-					System.out.print(Console.VERTICAL_WALL + "  "
-							+ lab.getPlayer().getName() + "  ");
-//				}
-			} else {
-//				if (lab.isEntrance(c)) {
-//					System.out.print(Console.ENTRANCE
-//							+ Console.HORIZONTAL_SPACE);
-//				} else {
-					System.out.print(Console.VERTICAL_WALL
-							+ Console.HORIZONTAL_SPACE);
-//				}
+			System.out.print(Console.VERTICAL_WALL +TWO_HORIZONTAL_SPACES);
+			if (lab.getPlayer().getPosition().equals(c) && lab.getGuard().getPosition().equals(c)) {
+				System.out.print("*");
+			}else if (lab.getGuard().getPosition().equals(c)) {
+				System.out.print(lab.getGuard().getName());
+			}else if (lab.getPlayer().getPosition().equals(c)) {
+				System.out.print(lab.getPlayer().getName());
+			} else{
+				System.out.print(" ");
 			}
+			System.out.print(Console.TWO_HORIZONTAL_SPACES);
+//			
+//			if (lab.getPlayer().getPosition().equals(c)) {
+//					System.out.print(Console.VERTICAL_WALL + "  "
+//							+ lab.getPlayer().getName() + "  ");
+//			} if (lab.getGuard().getPosition().equals(c)) {
+//				System.out.print(Console.VERTICAL_WALL + "  "
+//						+ lab.getGuard().getName() + "  ");
+//			}else {
+//					System.out.print(Console.VERTICAL_WALL
+//							+ Console.HORIZONTAL_SPACE);
+//			}
 			
 		} else {
 			
 			
 			if (lab.getPlayer().getPosition().equals(c)) {
-//				if (lab.isEntrance(c)) {
-//
-//					System.out.print(Console.ENTRANCE + "  "
-//							+ lab.getPlayer().getName() + "  ");
-//				} else {
-
 					System.out.print(Console.NO_VERTICAL_WALL + "  "
 							+ lab.getPlayer().getName() + "  ");
-//				}
+			} if (lab.getGuard().getPosition().equals(c)) {
+				System.out.print(Console.NO_VERTICAL_WALL + "  "
+						+ lab.getGuard().getName() + "  ");
 			} else {
-//				if (lab.isEntrance(c)) {
-//					System.out.print(Console.ENTRANCE
-//							+ Console.HORIZONTAL_SPACE);
-//				} else {
 					System.out.print(Console.NO_VERTICAL_WALL
 							+ Console.HORIZONTAL_SPACE);
-//				}
 			}
 			
 		}

@@ -19,7 +19,10 @@ public class Levels {
 		p.setName("A");
 		lab.setPlayer(p);
 		p.setPosition(lab.getEntrance());
-		return labyrinthGenerator.generateDeadEndTunnels();
+		
+		Labyrinth l =labyrinthGenerator.generateDeadEndTunnels();
+		lab.setGuard(new Guard("G",labyrinthGenerator.getSubPath().get(0), 1));
+		return l;
 	}
 
 	public static Labyrinth getLabyrinth(int level, Player p) {

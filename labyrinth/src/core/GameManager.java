@@ -14,7 +14,7 @@ public class GameManager {
 
 		Player p = new Player(1);
 		p.name = "F";
-
+		
 		int level = 1;
 		
 		// console.draw();
@@ -26,6 +26,7 @@ public class GameManager {
 			Labyrinth lab = null;
 			try {
 				lab = Levels.genLabyrinth(level+2, p);
+				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
