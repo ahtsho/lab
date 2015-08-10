@@ -2,6 +2,8 @@ package core;
 
 import java.util.ArrayList;
 
+import utils.Utils;
+
 public class Levels {
 
 	public static int MAX_LEVEL = 100;
@@ -19,9 +21,22 @@ public class Levels {
 		p.setName("A");
 		lab.setPlayer(p);
 		p.setPosition(lab.getEntrance());
-		
-		Labyrinth l =labyrinthGenerator.generateDeadEndTunnels();
-		lab.setGuard(new Guard("G",labyrinthGenerator.getSubPath().get(0), 1));
+
+		Labyrinth l = labyrinthGenerator.generateDeadEndTunnels();
+		ArrayList<Cell> subPaths = labyrinthGenerator.getSubPath();
+		if (subPaths.size() > 1) {
+			int i = 0;
+			while (true) {
+				i = Utils.generateRandomNumber(subPaths.size());
+				if (!subPaths.get(i).equals(lab.getEntrance())) {
+					break;
+				} else {
+					System.out.println("Entrance picked ");
+				}
+			}
+			lab.setGuard(new Guard("G", labyrinthGenerator.getSubPath().get(i),
+					1));
+		}
 		return l;
 	}
 

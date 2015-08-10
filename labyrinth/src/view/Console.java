@@ -94,9 +94,9 @@ public class Console {
 			c = lab.getCells().get(f);
 			if (c.isWest()) {
 				System.out.print(Console.VERTICAL_WALL +TWO_HORIZONTAL_SPACES);
-				if (lab.getPlayer().getPosition().equals(c) && lab.getGuard().getPosition().equals(c)) {
+				if (lab.getPlayer().getPosition().equals(c) && lab.getGuard()!= null && lab.getGuard().getPosition().equals(c)) {
 					System.out.print("*");
-				}else if (lab.getGuard().getPosition().equals(c)) {
+				}else if (lab.getGuard()!= null && lab.getGuard().getPosition().equals(c)) {
 					System.out.print(lab.getGuard().getName());
 				}else if (lab.getPlayer().getPosition().equals(c)) {
 					System.out.print(lab.getPlayer().getName());
@@ -105,14 +105,17 @@ public class Console {
 				}
 				System.out.print(Console.TWO_HORIZONTAL_SPACES);
 			} else {
-				
-				if (lab.getPlayer().getPosition().equals(c)) {
-						System.out.print(Console.NO_VERTICAL_WALL + "  "
-								+ lab.getPlayer().getName() + "  ");
-				} else {
-						System.out.print(Console.NO_VERTICAL_WALL
-								+ Console.HORIZONTAL_SPACE);
+				System.out.print(Console.NO_VERTICAL_WALL +TWO_HORIZONTAL_SPACES);
+				if (lab.getPlayer().getPosition().equals(c) && lab.getGuard()!= null && lab.getGuard().getPosition().equals(c)) {
+					System.out.print("*");
+				}else if (lab.getGuard()!= null && lab.getGuard().getPosition().equals(c)) {
+					System.out.print(lab.getGuard().getName());
+				}else if (lab.getPlayer().getPosition().equals(c)) {
+					System.out.print(lab.getPlayer().getName());
+				} else{
+					System.out.print(" ");
 				}
+				System.out.print(Console.TWO_HORIZONTAL_SPACES);
 				
 			}
 
@@ -122,9 +125,9 @@ public class Console {
 		c = lab.getCells().get(f);
 		if (c.isWest()) {
 			System.out.print(Console.VERTICAL_WALL +TWO_HORIZONTAL_SPACES);
-			if (lab.getPlayer().getPosition().equals(c) && lab.getGuard().getPosition().equals(c)) {
+			if (lab.getPlayer().getPosition().equals(c) && lab.getGuard()!= null && lab.getGuard().getPosition().equals(c)) {
 				System.out.print("*");
-			}else if (lab.getGuard().getPosition().equals(c)) {
+			}else if (lab.getGuard()!= null && lab.getGuard().getPosition().equals(c)) {
 				System.out.print(lab.getGuard().getName());
 			}else if (lab.getPlayer().getPosition().equals(c)) {
 				System.out.print(lab.getPlayer().getName());
@@ -132,31 +135,30 @@ public class Console {
 				System.out.print(" ");
 			}
 			System.out.print(Console.TWO_HORIZONTAL_SPACES);
-//			
-//			if (lab.getPlayer().getPosition().equals(c)) {
-//					System.out.print(Console.VERTICAL_WALL + "  "
-//							+ lab.getPlayer().getName() + "  ");
-//			} if (lab.getGuard().getPosition().equals(c)) {
-//				System.out.print(Console.VERTICAL_WALL + "  "
-//						+ lab.getGuard().getName() + "  ");
-//			}else {
-//					System.out.print(Console.VERTICAL_WALL
-//							+ Console.HORIZONTAL_SPACE);
-//			}
 			
 		} else {
-			
-			
-			if (lab.getPlayer().getPosition().equals(c)) {
-					System.out.print(Console.NO_VERTICAL_WALL + "  "
-							+ lab.getPlayer().getName() + "  ");
-			} if (lab.getGuard().getPosition().equals(c)) {
-				System.out.print(Console.NO_VERTICAL_WALL + "  "
-						+ lab.getGuard().getName() + "  ");
-			} else {
-					System.out.print(Console.NO_VERTICAL_WALL
-							+ Console.HORIZONTAL_SPACE);
+			System.out.print(Console.NO_VERTICAL_WALL +TWO_HORIZONTAL_SPACES);
+			if (lab.getPlayer().getPosition().equals(c) && lab.getGuard()!= null && lab.getGuard().getPosition().equals(c)) {
+				System.out.print("*");
+			}else if (lab.getGuard()!= null && lab.getGuard().getPosition().equals(c)) {
+				System.out.print(lab.getGuard().getName());
+			}else if (lab.getPlayer().getPosition().equals(c)) {
+				System.out.print(lab.getPlayer().getName());
+			} else{
+				System.out.print(" ");
 			}
+			System.out.print(Console.TWO_HORIZONTAL_SPACES);
+			
+//			if (lab.getPlayer().getPosition().equals(c)) {
+//					System.out.print(Console.NO_VERTICAL_WALL + "  "
+//							+ lab.getPlayer().getName() + "  ");
+//			} if (lab.getGuard().getPosition().equals(c)) {
+//				System.out.print(Console.NO_VERTICAL_WALL + "  "
+//						+ lab.getGuard().getName() + "  ");
+//			} else {
+//					System.out.print(Console.NO_VERTICAL_WALL
+//							+ Console.HORIZONTAL_SPACE);
+//			}
 			
 		}
 
