@@ -24,6 +24,9 @@ public class Levels {
 
 		Labyrinth l = labyrinthGenerator.generateDeadEndTunnels();
 		ArrayList<Cell> subPaths = labyrinthGenerator.getSubPath();
+		for(Cell c : subPaths){
+			System.out.println(c.getRow()+","+c.getCol());
+		}
 		if (subPaths.size() > 1) {
 			int i = 0;
 			while (true) {
@@ -31,11 +34,16 @@ public class Levels {
 				if (!subPaths.get(i).equals(lab.getEntrance())) {
 					break;
 				} else {
-					System.out.println("Entrance picked ");
+//					System.out.println("Entrance picked ");
 				}
 			}
-			lab.setGuard(new Guard("G", labyrinthGenerator.getSubPath().get(i),
-					1));
+			
+//			Guard g = new Guard("G", labyrinthGenerator.getSubPath().get(i),1,5000);
+//			lab.setGuard(g);
+			
+//			Animator a = new Animator(g,l,5000);
+//			 new Thread(a).start();
+			
 		}
 		return l;
 	}

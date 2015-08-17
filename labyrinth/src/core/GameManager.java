@@ -21,7 +21,8 @@ public class GameManager {
 		String read;
 		Scanner scanIn = new Scanner(System.in);
 		Game game = new Game(false, false, false);
-
+		Cell guardPrevPos = null;
+		Cell guardCurrPos = null;
 		while (!Levels.isLast(level)) {
 			Labyrinth lab = null;
 			try {
@@ -47,6 +48,20 @@ public class GameManager {
 					if(p.getLife() == 0){
 						System.out.println("GAME OVER");
 						return;
+					}
+					if (lab.getGuard()!=null){
+						if(guardPrevPos== null && guardCurrPos==null){
+							guardCurrPos = lab.getGuard().getPosition();
+//							System.out.println(guardCurrPos.getRow()+","+guardCurrPos.getCol());
+						} else {
+							guardPrevPos = guardCurrPos;
+							guardCurrPos = lab.getGuard().getPosition();
+//							System.out.println(guardCurrPos.getRow()+","+guardCurrPos.getCol());
+							
+							if(!guardCurrPos.equals(guardPrevPos)){
+								console.draw();
+							}
+						}
 					}
 					if ((read.toLowerCase().startsWith("l"))){
 						System.out.println("Player has Life="+p.getLife()+" damage="+p.getDamage());

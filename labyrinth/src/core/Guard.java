@@ -1,50 +1,25 @@
 package core;
 
-public class Guard {
-	String name;
-	Cell position;
-	private int life;
-	private float damage=1;
-	
-	public Guard(){}
-	public Guard(int lives){
-		life = lives;
+
+public class Guard extends Player  {
+//	String name;
+//	Cell position;
+//	private int life;
+//	private float damage = 1;
+//	private int sleepTime = 5000;
+
+	public Guard() {
+		super();
 	}
-	
-	public Guard(String aname, Cell aposition, int lives){
-		name=aname;
-		position=aposition;
-		life=lives;
+
+	public Guard(int lives) {
+		super(lives);
 	}
-	public String getName() {
-		return name;
+
+	public Guard(String aname, Cell aposition, int lives) {
+		super(aname, aposition, lives);
 	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public Cell getPosition() {
-		return position;
-	}
-	public void setPosition(Cell position) {
-		this.position = position;
-	}
-	
-	public void damage(float amount){
-		if(life > 0){
-			if(damage>0){
-				damage-=amount; 
-			}else{
-				life -=1;
-				damage = 1;
-			}
-		}
-	}
-	public int getLife() {
-		return life;
-	}
-	
-	public float getDamage() {
-		return damage;
-	}
+
+				
 
 }
