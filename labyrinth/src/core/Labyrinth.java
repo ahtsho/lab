@@ -287,7 +287,7 @@ public class Labyrinth {
 		if (destination != null) {
 //			System.out.println("move to destination=" + destination);
 			player.position = destination;
-			System.out.println(player.getName()+"moved to ("+player.position.getRow()+","+player.position.getCol()+")");
+//			System.out.println(player.getName()+"moved to ("+player.position.getRow()+","+player.position.getCol()+")");
 			if (destination == exit) {
 //				System.out.println("ups exited");
 				return false;
@@ -299,18 +299,59 @@ public class Labyrinth {
 
 	public boolean moveTo(Player p,Cell destination) {
 		if (destination != null) {
-			p.position = destination;
-			if (destination == exit) {
-				return false;
+			if(areConnected(p.getPosition(),destination)){
+				p.position = destination;
+				return true;	
 			}
 		}
-
-		return true;
+		return false;
 	}
+	
+	
+
+	private boolean areConnected(Cell cell1, Cell cell2) {
+		if(cell1.getRow()==cell2.getRow()){
+			if(Math.abs(cell1.getCol()-cell2.getCol())==1){ // they are next to each other 
+				if(cell2.getCol() > cell1.getCol()){ // get the order
+					if(!cell1.isEast() && !cell2.isWest()){
+						return true;
+					} else {
+						return false;
+					}
+				} else {
+					if(!cell2.isEast() && !cell1.isWest()){
+						return true;
+					} else {
+						return false;
+					}
+				}
+				
+			}
+		} else if(cell1.getCol()==cell2.getCol()){
+			if(Math.abs(cell1.getRow()-cell2.getRow())==1){ // they are on top of each other 
+				if(cell2.getRow() > cell1.getRow()){ // get the order
+					if(!cell1.isSouth() && !cell2.isNorth()){
+						return true;
+					} else {
+						return false;
+					}
+				} else {
+					if(!cell2.isSouth() && !cell1.isNorth()){
+						return true;
+					} else {
+						return false;
+					}
+				}
+				
+			}
+		} 
+		return false;
+	}
+
 	
 	public boolean move(Player player, char direction) throws Exception {
 		if (player.getPosition().getWallForDirection(direction)) {
-			System.out.println("ouch");
+//			System.out.println("ouch");
 			player.damage((float) 0.1);
 		} else {
 
