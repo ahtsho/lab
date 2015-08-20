@@ -1,5 +1,7 @@
 package utils;
 
+import java.util.ArrayList;
+
 public class Utils {
 
 	/**
@@ -11,10 +13,10 @@ public class Utils {
 		return (int) (Math.random() * (max));
 	}
 	
-	public static void main(String[] args){
-		for (int i = 1; i < 100; i++) {
-			System.out.println("i="+i+", i^2="+(int)(Math.pow(i, 2))+", i*log(i)="+(int)(i*Math.log(i)));
+
+	public static void addInverse(ArrayList array) {
+		for(int i = array.size()-2; i>0; i--){
+			array.add(array.get(i));
 		}
-		
 	}
 }

@@ -1,5 +1,7 @@
 package core;
 
+import java.util.ArrayList;
+
 public class Cell {
 
 	public static final char WEST = 'W';
@@ -7,14 +9,24 @@ public class Cell {
 	public static final char SOUTH = 'S';
 	public static final char NORTH = 'N';
 	
-	String name;
+	private String name;
 	private boolean north;
 	private boolean south;
 	private boolean west;
 	private boolean east;
 	private int row, col;
 
+	private ArrayList<Player> hosts;
+	
+	public void setHost(ArrayList<Player> players){
+		hosts=players;
+	}
+	public ArrayList<Player> getHosts(){
+		return hosts;
+	}
+	
 	public Cell(boolean N, boolean S, boolean W, boolean E, String string) {
+		hosts = new ArrayList<Player>();
 		north = N;
 		south = S;
 		west = W;
@@ -159,5 +171,15 @@ public class Cell {
 		}
 		throw new Exception ("No such direction");
 	}
+	public void addHost(Player player) {
+		if(!hosts.contains(player)){
+			hosts.add(player);
+		}
+	}
 
+	public void removeHost(Player player) {
+		if(hosts.contains(player)){
+			hosts.remove(player);
+		}
+	}
 }

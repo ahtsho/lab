@@ -13,7 +13,7 @@ public class GameManager {
 		Console.printGameStartInstructions();
 
 		Player p = new Player(1);
-		p.name = "F";
+		p.setName("F");
 		
 		int level = 1;
 		
@@ -48,20 +48,6 @@ public class GameManager {
 					if(p.getLife() == 0){
 						System.out.println("GAME OVER");
 						return;
-					}
-					if (lab.getGuard()!=null){
-						if(guardPrevPos== null && guardCurrPos==null){
-							guardCurrPos = lab.getGuard().getPosition();
-//							System.out.println(guardCurrPos.getRow()+","+guardCurrPos.getCol());
-						} else {
-							guardPrevPos = guardCurrPos;
-							guardCurrPos = lab.getGuard().getPosition();
-//							System.out.println(guardCurrPos.getRow()+","+guardCurrPos.getCol());
-							
-							if(!guardCurrPos.equals(guardPrevPos)){
-								console.draw();
-							}
-						}
 					}
 					if ((read.toLowerCase().startsWith("l"))){
 						System.out.println("Player has Life="+p.getLife()+" damage="+p.getDamage());

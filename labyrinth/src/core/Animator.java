@@ -2,7 +2,6 @@ package core;
 
 import java.util.ArrayList;
 
-import utils.Utils;
 
 public class Animator implements Runnable {
 	private Player p;
@@ -16,13 +15,11 @@ public class Animator implements Runnable {
 		this.sleepTime = time;
 		path=aPath;
 	}
-
 	
 	@Override
 	public void run() {
 		Cell destination = null;
-		while (true) {
-			
+		while (p.getLife()>0) {		
 			try {
 				for (int i = 0; i < path.size();i++){
 					destination = path.get(i);

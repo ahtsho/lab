@@ -33,9 +33,7 @@ public class Levels {
 				i = Utils.generateRandomNumber(subPaths.size());
 				if (!subPaths.get(i).equals(lab.getEntrance())) {
 					break;
-				} else {
-//					System.out.println("Entrance picked ");
-				}
+				} 
 			}
 			
 //			Guard g = new Guard("G", labyrinthGenerator.getSubPath().get(i),1,5000);
@@ -55,7 +53,7 @@ public class Levels {
 			Cell c3 = new Cell(true, false, true, true, "C");
 			Cell last = new Cell(false, false, true, true, "D");
 
-			p.position = first;
+			p.setPosition(first);
 
 			ArrayList<Cell> labs = new ArrayList<Cell>();
 			labs.add(first);
@@ -76,7 +74,7 @@ public class Levels {
 			Cell c8 = new Cell(true, true, false, true, "C");
 			Cell exit = new Cell(false, true, true, false, "D");
 
-			p.position = entrance;
+			p.setPosition(entrance); 
 
 			ArrayList<Cell> labs = new ArrayList<Cell>();
 			labs.add(c1);

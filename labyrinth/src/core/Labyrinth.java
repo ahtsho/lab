@@ -10,7 +10,7 @@ public class Labyrinth {
 	private int dimension;
 	private Player player;
 	private ArrayList<Cell> labyrinthWall;
-	private Guard guard;
+	private ArrayList<Player> guards;
 
 	public Labyrinth(ArrayList<Cell> cs, Cell c1, Cell c2) {
 		cells = cs;
@@ -61,12 +61,12 @@ public class Labyrinth {
 		return entrance;
 	}
 
-	public Guard getGuard() {
-		return this.guard;
+	public ArrayList<Player> getGuards() {
+		return guards;
 	}
 
-	public void setGuard(Guard aguard) {
-		guard = aguard;
+	public void setGuards(ArrayList<Player> someGuards) {
+		guards = someGuards;
 	}
 
 	/**
@@ -221,8 +221,6 @@ public class Labyrinth {
 	public Cell getCellForDirection(Cell cell, char direnction) {
 		Cell nextcell = null;
 		if (cell != null) {
-//			System.out.println("getCellForDirection cell" + cell.getName()
-//					+ " dir=" + direnction);
 			if (direnction == Cell.NORTH && cell.getRow() > 0) {
 				nextcell = getCell(cell.getRow() - 1, cell.getCol());
 			} else if (direnction == Cell.SOUTH
@@ -233,8 +231,6 @@ public class Labyrinth {
 			} else if (direnction == Cell.EAST && cell.getCol() < dimension - 1) {
 				nextcell = getCell(cell.getRow(), cell.getCol() + 1);
 			}
-//			if (nextcell != null)
-//				System.out.println("next cell=" + nextcell.getName());
 		}
 		return nextcell;
 	}
@@ -249,7 +245,6 @@ public class Labyrinth {
 	 *             wrong direction
 	 */
 	public static char getDirectionFromNumber(int direction) throws Exception {
-		// System.out.println("CH 6: getDirectionFromNumber");
 		if (direction == 0)
 			return Cell.NORTH;
 		else if (direction == 1)
@@ -285,11 +280,10 @@ public class Labyrinth {
 	 */
 	public boolean moveTo(Cell destination) {
 		if (destination != null) {
-//			System.out.println("move to destination=" + destination);
-			player.position = destination;
-//			System.out.println(player.getName()+"moved to ("+player.position.getRow()+","+player.position.getCol()+")");
+			player.getPosition().removeHost(player);
+			player.setPosition(destination); 
+			
 			if (destination == exit) {
-//				System.out.println("ups exited");
 				return false;
 			}
 		}
@@ -300,7 +294,8 @@ public class Labyrinth {
 	public boolean moveTo(Player p,Cell destination) {
 		if (destination != null) {
 			if(areConnected(p.getPosition(),destination)){
-				p.position = destination;
+				p.getPosition().removeHost(p);
+				p.setPosition(destination);
 				return true;	
 			}
 		}
@@ -351,13 +346,10 @@ public class Labyrinth {
 	
 	public boolean move(Player player, char direction) throws Exception {
 		if (player.getPosition().getWallForDirection(direction)) {
-//			System.out.println("ouch");
 			player.damage((float) 0.1);
 		} else {
-
-			return moveTo(getCellForDirection(player.position, direction));
+			return moveTo(getCellForDirection(player.getPosition(), direction));
 		}
-//		System.out.println("move->true");
 		return true;
 	}
 

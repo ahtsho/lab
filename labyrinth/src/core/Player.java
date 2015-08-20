@@ -1,8 +1,8 @@
 package core;
 
 public class Player {
-	String name;
-	Cell position;
+	private String name;
+	private Cell position;
 	private int life;
 	private float damage=1;
 	
@@ -14,6 +14,7 @@ public class Player {
 	public Player(String aname, Cell aposition, int lives){
 		name=aname;
 		position=aposition;
+		aposition.addHost(this);
 		life=lives;
 	}
 	public String getName() {
@@ -27,6 +28,7 @@ public class Player {
 	}
 	public void setPosition(Cell position) {
 		this.position = position;
+		position.addHost(this);
 	}
 	
 	public void damage(float amount){
