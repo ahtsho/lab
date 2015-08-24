@@ -31,12 +31,7 @@ public class Console {
 		lab = l;
 	}
 
-	public void draw() {
-//		System.out.println("Player has Life="+lab.getPlayer().getLife()+" damage="+lab.getPlayer().getDamage());
-		Cell playerPos = lab.getPlayer().getPosition();
-		ArrayList<Cell> guardsPos = null;
-		
-		
+	public synchronized void draw() {		
 		for (int row = 0; row < lab.getLabyrinthDimension() - 1; row++) {
 			drawFirstThird(row);
 			drawSecondThird(row);

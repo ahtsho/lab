@@ -1,6 +1,8 @@
 package core;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import utils.Utils;
 
@@ -8,7 +10,9 @@ public class Levels {
 
 	public static int MAX_LEVEL = 100;
 	public static boolean levelChanged;
-
+	public static ArrayList<Animator> animators = new  ArrayList<Animator>();
+	
+	
 	public static Labyrinth genLabyrinth(int level, Player p) throws Exception {
 
 		LabyrinthGenerator labyrinthGenerator = new LabyrinthGenerator();
@@ -23,25 +27,35 @@ public class Levels {
 		p.setPosition(lab.getEntrance());
 
 		Labyrinth l = labyrinthGenerator.generateDeadEndTunnels();
-		ArrayList<Cell> subPaths = labyrinthGenerator.getSubPath();
-		for(Cell c : subPaths){
-			System.out.println(c.getRow()+","+c.getCol());
-		}
+		ArrayList<ArrayList> subPaths = labyrinthGenerator.getSubPaths();
+		
 		if (subPaths.size() > 1) {
-			int i = 0;
-			while (true) {
-				i = Utils.generateRandomNumber(subPaths.size());
-				if (!subPaths.get(i).equals(lab.getEntrance())) {
-					break;
-				} 
+			Collections.sort(subPaths, new Comparator<ArrayList>() {
+				public int compare(ArrayList a1, ArrayList a2) {
+			        return a2.size() - a1.size(); //  biggest to smallest
+			    }	
+			});
+			
+			if(subPaths.get(0).size()>2){
+			ArrayList<Cell> subPath = subPaths.get(0);
+			Guard guard = new Guard("G", subPath.get(0), 1);
+			ArrayList<Player> guards = new ArrayList<Player>();
+			guards.add(guard);
+			
+			Utils.addInverse(subPath);
+			
+			Animator anima = new Animator(guard, l, subPath, 3000);
+			animators.add(anima);
+			new Thread(anima).start();
+			
+//			Guard guard2 = new Guard("R", g, 1);
+//			guards.add(guard2);
+//			l.setGuards(guards);
+//			ArrayList<Cell> path2 = new ArrayList<Cell>();
+						
+//			Animator anima2 = new Animator(guard2, l, path2, 1500);
+//			new Thread(anima2).start();
 			}
-			
-//			Guard g = new Guard("G", labyrinthGenerator.getSubPath().get(i),1,5000);
-//			lab.setGuard(g);
-			
-//			Animator a = new Animator(g,l,5000);
-//			 new Thread(a).start();
-			
 		}
 		return l;
 	}

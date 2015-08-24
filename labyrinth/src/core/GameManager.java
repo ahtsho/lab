@@ -2,10 +2,14 @@ package core;
 
 import java.util.Scanner;
 
+import org.junit.experimental.theories.Theories;
+
+import view.AutomaDrawer;
 import view.Console;
 
 public class GameManager {
-
+	public volatile static boolean running = true;
+	static Thread t = null;
 	public static void main(String[] args) {
 
 		Console.printWelcomeMsg();
@@ -23,7 +27,10 @@ public class GameManager {
 		Game game = new Game(false, false, false);
 		Cell guardPrevPos = null;
 		Cell guardCurrPos = null;
+		
+			
 		while (!Levels.isLast(level)) {
+			running = true;
 			Labyrinth lab = null;
 			try {
 				lab = Levels.genLabyrinth(level+2, p);
@@ -33,6 +40,16 @@ public class GameManager {
 			}
 			Console console = new Console(lab);
 			
+			AutomaDrawer drawer = new AutomaDrawer(console);
+			Thread t = new Thread(drawer);
+			t.setName("L"+level);
+			
+			t.start();
+			System.out.println(t.getName()+" started");
+			
+			
+			
+			
 			if(Levels.levelChanged){
 				Levels.levelChanged = false;
 				Console.printLevel(level);
@@ -41,6 +58,8 @@ public class GameManager {
 			}
 			
 			while (true) {
+				
+				
 				System.out.println();
 				read = scanIn.nextLine();
 				
@@ -49,6 +68,8 @@ public class GameManager {
 						System.out.println("GAME OVER");
 						return;
 					}
+					
+					
 					if ((read.toLowerCase().startsWith("l"))){
 						System.out.println("Player has Life="+p.getLife()+" damage="+p.getDamage());
 					}
@@ -65,6 +86,14 @@ public class GameManager {
 								console.printLevelFinishedMsg(level);
 								level = Levels.next(level);
 								Levels.levelChanged = true;
+								
+								if(t!=null){
+									t.interrupt();
+									drawer.stop = true;
+									System.out.println(t.getName()+" interrupted");
+									
+								}
+//								running = false;
 								break;
 							}
 						} catch (Exception e) {
@@ -93,4 +122,5 @@ public class GameManager {
 		
 	}
 
+	
 }

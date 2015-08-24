@@ -8,14 +8,15 @@ public class LabyrinthGenerator {
 
 	private Labyrinth genLabyrinth;
 	private ArrayList<Cell> path;
-	private ArrayList<Cell> subPath;
+	private ArrayList<ArrayList> subPaths;
+//	private ArrayList<Cell> subPath;
 
-	public ArrayList<Cell> getSubPath() {
-		return subPath;
+	public ArrayList<ArrayList> getSubPaths() {
+		return subPaths;
 	}
 
-	public void setSubPath(ArrayList<Cell> subPath) {
-		this.subPath = subPath;
+	public void setSubPaths(ArrayList<ArrayList> paths) {
+		this.subPaths = paths;
 	}
 
 	public Labyrinth getLabyrinth() {
@@ -162,11 +163,13 @@ public class LabyrinthGenerator {
 
 	public Labyrinth generateDeadEndTunnels() throws Exception {	
 		//loop over path, every 3
-		subPath = new ArrayList<Cell>();
-		for(int i = 0; i < path.size(); i=i+5){
+		subPaths = new ArrayList<ArrayList>();
+		for(int i = 0; i < path.size(); i=i+3){
 		// create tunnel without exit
 			Cell cell = path.get(i);
+			ArrayList<Cell> subPath = new ArrayList<Cell>();
 			subPath.add(cell);
+			subPaths.add(subPath);
 			
 			while (cell!= null) {
 				if(!genLabyrinth.isInLabyrinthWall(cell)){
