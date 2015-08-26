@@ -1,4 +1,7 @@
-package core;
+package creatures;
+
+import infrastructure.Cell;
+import infrastructure.Labyrinth;
 
 import java.util.ArrayList;
 

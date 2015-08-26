@@ -1,9 +1,16 @@
-package core;
+package game;
+
+import infrastructure.Cell;
+import infrastructure.Labyrinth;
+import infrastructure.LabyrinthGenerator;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import creatures.Animator;
+import creatures.Guard;
+import creatures.Player;
 import utils.Utils;
 
 public class Levels {
@@ -38,7 +45,7 @@ public class Levels {
 			
 			if(subPaths.get(0).size()>2){
 			ArrayList<Cell> subPath = subPaths.get(0);
-			Guard guard = new Guard("G", subPath.get(0), 1);
+			Guard guard = new Guard("G", subPath.get(0), 1,1.0f);
 			ArrayList<Player> guards = new ArrayList<Player>();
 			guards.add(guard);
 			

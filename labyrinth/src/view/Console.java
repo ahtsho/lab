@@ -1,10 +1,11 @@
 package view;
 
+import infrastructure.Cell;
+import infrastructure.Labyrinth;
+
 import java.util.ArrayList;
 
-import core.Cell;
-import core.Labyrinth;
-import core.Player;
+import creatures.Player;
 
 public class Console {
 

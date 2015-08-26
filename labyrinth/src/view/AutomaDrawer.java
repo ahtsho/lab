@@ -1,6 +1,6 @@
 package view;
 
-import core.Levels;
+import game.Levels;
 
 public class AutomaDrawer implements Runnable {
 	public volatile boolean stop = false; 

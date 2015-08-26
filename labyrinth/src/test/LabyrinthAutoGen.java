@@ -1,9 +1,9 @@
 package test;
 
+import infrastructure.Labyrinth;
+import infrastructure.LabyrinthGenerator;
 import view.Console;
-import core.Labyrinth;
-import core.LabyrinthGenerator;
-import core.Player;
+import creatures.Player;
 
 public class LabyrinthAutoGen {
 

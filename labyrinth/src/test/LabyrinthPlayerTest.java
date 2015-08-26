@@ -1,14 +1,15 @@
 package test;
 
+import game.Game;
+import game.Levels;
+import infrastructure.Cell;
+import infrastructure.Labyrinth;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import view.Console;
-import core.Cell;
-import core.Game;
-import core.Labyrinth;
-import core.Levels;
-import core.Player;
+import creatures.Player;
 
 public class LabyrinthPlayerTest {
 	public static void main(String[] args) {

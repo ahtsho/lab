@@ -1,14 +1,15 @@
 package test;
 
+import infrastructure.Cell;
+import infrastructure.Labyrinth;
+
 import java.util.ArrayList;
 
 import utils.Utils;
 import view.Console;
-import core.Animator;
-import core.Cell;
-import core.Guard;
-import core.Labyrinth;
-import core.Player;
+import creatures.Animator;
+import creatures.Guard;
+import creatures.Player;
 
 public class GuardAnimationTest {
 	public static void main(String[] args) {
@@ -50,7 +51,7 @@ public class GuardAnimationTest {
 		p.setPosition(c);
 		l.setPlayer(p);
 
-		Guard guard1 = new Guard("G", a, 1);
+		Guard guard1 = new Guard("G", a, 1,1.0f);
 		ArrayList<Player> guards = new ArrayList<Player>();
 		guards.add(guard1);
 		
@@ -70,7 +71,7 @@ public class GuardAnimationTest {
 		Animator anima = new Animator(guard1, l, path, 1000);
 		new Thread(anima).start();
 		
-		Guard guard2 = new Guard("R", g, 1);
+		Guard guard2 = new Guard("R", g, 1, 1.0f);
 		guards.add(guard2);
 		l.setGuards(guards);
 		ArrayList<Cell> path2 = new ArrayList<Cell>();
@@ -133,7 +134,7 @@ public class GuardAnimationTest {
 		p.setPosition(c);
 		l.setPlayer(p);
 
-		Guard guard = new Guard("G", a, 1);
+		Guard guard = new Guard("G", a, 1,1.0f);
 		ArrayList<Player> guards = new ArrayList<Player>();
 		guards.add(guard);
 		l.setGuards(guards);
@@ -197,7 +198,7 @@ public class GuardAnimationTest {
 		p.setPosition(c);
 		l.setPlayer(p);
 
-		Guard guard = new Guard("G", d, 1);
+		Guard guard = new Guard("G", d, 1,1.0f);
 		ArrayList<Player> guards = new ArrayList<Player>();
 		guards.add(guard);
 		l.setGuards(guards);
@@ -250,7 +251,7 @@ public class GuardAnimationTest {
 		p.setPosition(c);
 		l.setPlayer(p);
 
-		Guard guard = new Guard("G", d, 1);
+		Guard guard = new Guard("G", d, 1,1.0f);
 		ArrayList<Player> guards = new ArrayList<Player>();
 		guards.add(guard);
 		l.setGuards(guards);
@@ -302,7 +303,7 @@ public class GuardAnimationTest {
 		p.setPosition(c);
 		l.setPlayer(p);
 
-		Guard guard = new Guard("G", a, 1);
+		Guard guard = new Guard("G", a, 1,1.0f);
 		ArrayList<Player> guards = new ArrayList<Player>();
 		guards.add(guard);
 		l.setGuards(guards);

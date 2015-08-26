@@ -1,9 +1,10 @@
-package core;
+package game;
+
+import infrastructure.Labyrinth;
 
 import java.util.Scanner;
 
-import org.junit.experimental.theories.Theories;
-
+import creatures.Player;
 import view.AutomaDrawer;
 import view.Console;
 
@@ -21,12 +22,9 @@ public class GameManager {
 		
 		int level = 1;
 		
-		// console.draw();
 		String read;
 		Scanner scanIn = new Scanner(System.in);
 		Game game = new Game(false, false, false);
-		Cell guardPrevPos = null;
-		Cell guardCurrPos = null;
 		
 			
 		while (!Levels.isLast(level)) {
@@ -43,12 +41,7 @@ public class GameManager {
 			AutomaDrawer drawer = new AutomaDrawer(console);
 			Thread t = new Thread(drawer);
 			t.setName("L"+level);
-			
 			t.start();
-			System.out.println(t.getName()+" started");
-			
-			
-			
 			
 			if(Levels.levelChanged){
 				Levels.levelChanged = false;
@@ -59,7 +52,6 @@ public class GameManager {
 			
 			while (true) {
 				
-				
 				System.out.println();
 				read = scanIn.nextLine();
 				
@@ -67,11 +59,9 @@ public class GameManager {
 					if(p.getLife() == 0){
 						System.out.println("GAME OVER");
 						return;
-					}
-					
-					
+					}					
 					if ((read.toLowerCase().startsWith("l"))){
-						System.out.println("Player has Life="+p.getLife()+" damage="+p.getDamage());
+						System.out.println("Player has Life="+p.getLife());
 					}
 					if ((read.toLowerCase().startsWith("n")
 							| read.toLowerCase().startsWith("s")
@@ -90,10 +80,7 @@ public class GameManager {
 								if(t!=null){
 									t.interrupt();
 									drawer.stop = true;
-									System.out.println(t.getName()+" interrupted");
-									
 								}
-//								running = false;
 								break;
 							}
 						} catch (Exception e) {

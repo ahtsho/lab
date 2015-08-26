@@ -1,6 +1,8 @@
-package core;
+package infrastructure;
 
 import java.util.ArrayList;
+
+import creatures.Player;
 
 public class Cell {
 

@@ -1,15 +1,14 @@
 package unitTest;
 
 import static org.junit.Assert.*;
+import infrastructure.Cell;
+import infrastructure.Labyrinth;
 
 import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import core.Cell;
-import core.Labyrinth;
 
 public class LabyrinthTest {
 	Labyrinth l;

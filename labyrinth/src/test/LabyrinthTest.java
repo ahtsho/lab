@@ -1,9 +1,9 @@
 package test;
 
-import java.util.ArrayList;
+import infrastructure.Cell;
+import infrastructure.Labyrinth;
 
-import core.Cell;
-import core.Labyrinth;
+import java.util.ArrayList;
 
 public class LabyrinthTest {
 

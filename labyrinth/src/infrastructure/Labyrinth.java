@@ -1,6 +1,9 @@
-package core;
+package infrastructure;
 
 import java.util.ArrayList;
+
+import creatures.LifeManager;
+import creatures.Player;
 
 public class Labyrinth {
 
@@ -11,7 +14,8 @@ public class Labyrinth {
 	private Player player;
 	private ArrayList<Cell> labyrinthWall;
 	private ArrayList<Player> guards;
-
+	private LifeManager lifeManager = new LifeManager();
+	
 	public Labyrinth(ArrayList<Cell> cs, Cell c1, Cell c2) {
 		cells = cs;
 		entrance = c1;
@@ -282,7 +286,7 @@ public class Labyrinth {
 		if (destination != null) {
 			player.getPosition().removeHost(player);
 			player.setPosition(destination); 
-			
+			lifeManager.manage(player,destination);
 			if (destination == exit) {
 				return false;
 			}
