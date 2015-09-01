@@ -10,15 +10,14 @@ import view.Console;
 
 public class GameManager {
 	public volatile static boolean running = true;
-	static Thread t = null;
 	public static void main(String[] args) {
 
 		Console.printWelcomeMsg();
 		Console.printGameInstructions();
 		Console.printGameStartInstructions();
 
-		Player p = new Player(1);
-		p.setName("F");
+		Player player = new Player(1);
+		player.setName("F");
 		
 		int level = 1;
 		
@@ -31,17 +30,18 @@ public class GameManager {
 			running = true;
 			Labyrinth lab = null;
 			try {
-				lab = Levels.genLabyrinth(level+2, p);
+				lab = Levels.genLabyrinth(level+2, player);
 				
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			Console console = new Console(lab);
 			
-			AutomaDrawer drawer = new AutomaDrawer(console);
-			Thread t = new Thread(drawer);
-			t.setName("L"+level);
-			t.start();
+			AutomaDrawer drawer = new AutomaDrawer(console,player);
+			Thread creatureDrawer = new Thread(drawer);
+//			creatureDrawer.setName("L"+level);
+			creatureDrawer.start();
+			
 			
 			if(Levels.levelChanged){
 				Levels.levelChanged = false;
@@ -55,20 +55,20 @@ public class GameManager {
 				System.out.println();
 				read = scanIn.nextLine();
 				
-				if (game.isOn()) {
-					if(p.getLife() == 0){
-						System.out.println("GAME OVER");
+				if (game.isOn() && player.getLife() > 0) {
+					if(player.getLife() == 0){
+						Console.printGameOver();
 						return;
 					}					
 					if ((read.toLowerCase().startsWith("l"))){
-						System.out.println("Player has Life="+p.getLife());
+						System.out.println("Player has Life="+player.getLife());
 					}
 					if ((read.toLowerCase().startsWith("n")
 							| read.toLowerCase().startsWith("s")
 							| read.toLowerCase().startsWith("w") | read
 							.toLowerCase().startsWith("e"))) {
 						try {
-							if (lab.move(p,Console.adaptDirection((read.charAt(0))))) {
+							if (lab.move(player,Console.adaptDirection((read.charAt(0))))) {
 								console.draw();
 								console.printMoveMsg();
 							} else {
@@ -77,8 +77,8 @@ public class GameManager {
 								level = Levels.next(level);
 								Levels.levelChanged = true;
 								
-								if(t!=null){
-									t.interrupt();
+								if(creatureDrawer!=null){
+									creatureDrawer.interrupt();
 									drawer.stop = true;
 								}
 								break;

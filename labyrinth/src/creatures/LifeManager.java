@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class LifeManager {
 
 	public void manage(Player player, Cell position) {
-		ArrayList<Player> players = position.getHosts();
+		ArrayList<Creature> players = position.getHosts();
 		if (players.size() > 1) {
 			for (int i = 0; i < players.size(); i++) {
 				if (players.get(i) instanceof Bad) {

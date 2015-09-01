@@ -2,6 +2,7 @@ package infrastructure;
 
 import java.util.ArrayList;
 
+import creatures.Creature;
 import creatures.LifeManager;
 import creatures.Player;
 
@@ -13,7 +14,7 @@ public class Labyrinth {
 	private int dimension;
 	private Player player;
 	private ArrayList<Cell> labyrinthWall;
-	private ArrayList<Player> guards;
+	private ArrayList<Creature> creatures;
 	private LifeManager lifeManager = new LifeManager();
 	
 	public Labyrinth(ArrayList<Cell> cs, Cell c1, Cell c2) {
@@ -65,12 +66,12 @@ public class Labyrinth {
 		return entrance;
 	}
 
-	public ArrayList<Player> getGuards() {
-		return guards;
+	public ArrayList<Creature> getCreatures() {
+		return creatures;
 	}
 
-	public void setGuards(ArrayList<Player> someGuards) {
-		guards = someGuards;
+	public void setCreatures(ArrayList<Creature> someCreatures) {
+		creatures = someCreatures;
 	}
 
 	/**
@@ -295,11 +296,12 @@ public class Labyrinth {
 		return true;
 	}
 
-	public boolean moveTo(Player p,Cell destination) {
+	public boolean moveTo(Creature creature,Cell destination) {
 		if (destination != null) {
-			if(areConnected(p.getPosition(),destination)){
-				p.getPosition().removeHost(p);
-				p.setPosition(destination);
+			if(areConnected(creature.getPosition(),destination)){
+				creature.getPosition().removeHost(creature);
+				creature.setPosition(destination);
+				lifeManager.manage(player,destination);
 				return true;	
 			}
 		}

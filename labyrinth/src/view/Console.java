@@ -5,6 +5,8 @@ import infrastructure.Labyrinth;
 
 import java.util.ArrayList;
 
+import tools.Tool;
+import creatures.Creature;
 import creatures.Player;
 
 public class Console {
@@ -96,21 +98,31 @@ public class Console {
 			c = lab.getCells().get(f);
 			if (c.isWest()) {
 				System.out.print(Console.VERTICAL_WALL +TWO_HORIZONTAL_SPACES);
-				if(c.getHosts().size()==0){
+				if(c.getHosts().size()==0 && c.getTools().size()==0){
 					System.out.print(Console.NO_PLAYER);
 				} else if(c.getHosts().size() > 0){
-					for(Player p:c.getHosts()){
+					for(Creature p:c.getHosts()){
 						System.out.print(p.getName());
+					}
+				} 
+				if(c.getTools().size() > 0){
+					for(Tool t:c.getTools()){
+						System.out.print(t.getName());
 					}
 				}
 				System.out.print(Console.TWO_HORIZONTAL_SPACES);
 			} else {
 				System.out.print(Console.NO_VERTICAL_WALL +TWO_HORIZONTAL_SPACES);
-				if(c.getHosts().size()==0){
+				if(c.getHosts().size()==0 && c.getTools().size()==0){
 					System.out.print(Console.NO_PLAYER);
 				} else if(c.getHosts().size() > 0){
-					for(Player p:c.getHosts()){
+					for(Creature p:c.getHosts()){
 						System.out.print(p.getName());
+					}
+				}
+				if(c.getTools().size() > 0){
+					for(Tool t:c.getTools()){
+						System.out.print(t.getName());
 					}
 				}
 				System.out.print(Console.TWO_HORIZONTAL_SPACES);
@@ -121,22 +133,32 @@ public class Console {
 		c = lab.getCells().get(f);
 		if (c.isWest()) {
 			System.out.print(Console.VERTICAL_WALL +TWO_HORIZONTAL_SPACES);
-			if(c.getHosts().size()==0){
+			if(c.getHosts().size()==0 && c.getTools().size()==0){
 				System.out.print(Console.NO_PLAYER);
 			} else if(c.getHosts().size() > 0){
-				for(Player p:c.getHosts()){
+				for(Creature p:c.getHosts()){
 					System.out.print(p.getName());
+				}
+			}
+			if(c.getTools().size() > 0){
+				for(Tool t:c.getTools()){
+					System.out.print(t.getName());
 				}
 			}
 			System.out.print(Console.TWO_HORIZONTAL_SPACES);
 			
 		} else {
 			System.out.print(Console.NO_VERTICAL_WALL +TWO_HORIZONTAL_SPACES);
-			if(c.getHosts().size()==0){
+			if(c.getHosts().size()==0 && c.getTools().size()==0){
 				System.out.print(Console.NO_PLAYER);
 			} else if(c.getHosts().size() > 0){
-				for(Player p:c.getHosts()){
+				for(Creature p:c.getHosts()){
 					System.out.print(p.getName());
+				}
+			}
+			if(c.getTools().size() > 0){
+				for(Tool t:c.getTools()){
+					System.out.print(t.getName());
 				}
 			}
 			System.out.print(Console.TWO_HORIZONTAL_SPACES);			
@@ -287,10 +309,11 @@ public class Console {
 	}
 
 	public static void printGameInstructions() {
-		System.out.println("    --------------------------------------");
-		System.out.println("    Press N:north, S:south, W:west, E:east");
-		System.out.println("    Press Q to quit the game");
-		System.out.println("    -------------------------");
+		System.out.println("    ------------------           Q quit");
+		System.out.println("                     N");
+		System.out.println("                  W     E");
+		System.out.println("                     S");
+		System.out.println("    ------------------");
 	}
 	public void printLevelFinishedMsg(int level) {
 		System.out.println();
@@ -333,6 +356,10 @@ public class Console {
 		System.out.println("     -------");
 		System.out.println();
 	}
+	
+	public static void printGameOver() {
+		System.out.println("GAME OVER");
+	}
 
 	public void showCoordinates(ArrayList<Cell> labyrinthWall) {
 		for (int i = 0; i < labyrinthWall.size(); i++) {
@@ -347,4 +374,6 @@ public class Console {
 			System.out.println("(" + c.getRow() + "," + c.getCol() + ")");
 		}
 	}
+
+	
 }

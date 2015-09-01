@@ -6,6 +6,8 @@ import infrastructure.Labyrinth;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import tools.Medicine;
+import tools.Plaster;
 import utils.Utils;
 import view.Console;
 import creatures.Animator;
@@ -46,6 +48,9 @@ public class LifeManagerTest {
 	
 
 		Guard guard1 = new Guard("G", a, 1,1.0f);
+		Plaster plaster = new Plaster(0.1f);
+		Medicine medicine = new Medicine(0.5f);
+		
 //		ArrayList<Player> guards = new ArrayList<Player>();
 //		guards.add(guard1);
 //		

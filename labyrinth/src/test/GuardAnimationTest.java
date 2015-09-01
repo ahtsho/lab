@@ -8,17 +8,18 @@ import java.util.ArrayList;
 import utils.Utils;
 import view.Console;
 import creatures.Animator;
+import creatures.Creature;
 import creatures.Guard;
 import creatures.Player;
 
 public class GuardAnimationTest {
 	public static void main(String[] args) {
 		
-		// moveGuardNS();
-//		moveGuardEW();
+//		moveGuardNS();
+		moveGuardEW();
 //		moveGuardEWWithWall();
 //		moveGuardZigZag();
-		twoGuards();
+		//twoGuards();
 	}
 	
 	private static void twoGuards() {
@@ -52,7 +53,7 @@ public class GuardAnimationTest {
 		l.setPlayer(p);
 
 		Guard guard1 = new Guard("G", a, 1,1.0f);
-		ArrayList<Player> guards = new ArrayList<Player>();
+		ArrayList<Creature> guards = new ArrayList<Creature>();
 		guards.add(guard1);
 		
 		ArrayList<Cell> path = new ArrayList<Cell>();
@@ -73,7 +74,7 @@ public class GuardAnimationTest {
 		
 		Guard guard2 = new Guard("R", g, 1, 1.0f);
 		guards.add(guard2);
-		l.setGuards(guards);
+		l.setCreatures(guards);
 		ArrayList<Cell> path2 = new ArrayList<Cell>();
 		/*
 		 * abc
@@ -135,9 +136,9 @@ public class GuardAnimationTest {
 		l.setPlayer(p);
 
 		Guard guard = new Guard("G", a, 1,1.0f);
-		ArrayList<Player> guards = new ArrayList<Player>();
+		ArrayList<Creature> guards = new ArrayList<Creature>();
 		guards.add(guard);
-		l.setGuards(guards);
+		l.setCreatures(guards);
 		ArrayList<Cell> path = new ArrayList<Cell>();
 		/*
 		 * abc
@@ -199,9 +200,9 @@ public class GuardAnimationTest {
 		l.setPlayer(p);
 
 		Guard guard = new Guard("G", d, 1,1.0f);
-		ArrayList<Player> guards = new ArrayList<Player>();
+		ArrayList<Creature> guards = new ArrayList<Creature>();
 		guards.add(guard);
-		l.setGuards(guards);
+		l.setCreatures(guards);
 		ArrayList<Cell> path = new ArrayList<Cell>();
 		path.add(d);
 		path.add(e);
@@ -251,10 +252,10 @@ public class GuardAnimationTest {
 		p.setPosition(c);
 		l.setPlayer(p);
 
-		Guard guard = new Guard("G", d, 1,1.0f);
-		ArrayList<Player> guards = new ArrayList<Player>();
+		Guard guard = new Guard("G", d, 1.0f,1.0f);
+		ArrayList<Creature> guards = new ArrayList<Creature>();
 		guards.add(guard);
-		l.setGuards(guards);
+		l.setCreatures(guards);
 		ArrayList<Cell> path = new ArrayList<Cell>();
 		path.add(d);
 		path.add(e);
@@ -304,9 +305,9 @@ public class GuardAnimationTest {
 		l.setPlayer(p);
 
 		Guard guard = new Guard("G", a, 1,1.0f);
-		ArrayList<Player> guards = new ArrayList<Player>();
+		ArrayList<Creature> guards = new ArrayList<Creature>();
 		guards.add(guard);
-		l.setGuards(guards);
+		l.setCreatures(guards);
 		
 		ArrayList<Cell> path = new ArrayList<Cell>();
 		path.add(a);

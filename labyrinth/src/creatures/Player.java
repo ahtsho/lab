@@ -2,7 +2,7 @@ package creatures;
 
 import infrastructure.Cell;
 
-public class Player {
+public class Player implements Creature {
 	private String name;
 	private Cell position;
 	private float life;
@@ -46,9 +46,7 @@ public class Player {
 //			}
 		}
 	}
-	public float getLife() {
-		return life;
-	}
+	
 	
 //	public float getDamage() {
 //		return damage;
@@ -61,6 +59,10 @@ public class Player {
 				life = maxLife;
 			}
 		}
+	}
+	@Override
+	public float getLife() {
+		return life;
 	}
 
 }

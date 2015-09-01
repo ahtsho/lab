@@ -2,7 +2,8 @@ package infrastructure;
 
 import java.util.ArrayList;
 
-import creatures.Player;
+import tools.Tool;
+import creatures.Creature;
 
 public class Cell {
 
@@ -18,17 +19,25 @@ public class Cell {
 	private boolean east;
 	private int row, col;
 
-	private ArrayList<Player> hosts;
+	private ArrayList<Creature> hosts;
+	private ArrayList<Tool> tools;
 	
-	public void setHost(ArrayList<Player> players){
+	public ArrayList<Tool> getTools() {
+		return tools;
+	}
+	public void setTools(ArrayList<Tool> tools) {
+		this.tools = tools;
+	}
+	public void setHosts(ArrayList<Creature> players){
 		hosts=players;
 	}
-	public ArrayList<Player> getHosts(){
+	public ArrayList<Creature> getHosts(){
 		return hosts;
 	}
 	
 	public Cell(boolean N, boolean S, boolean W, boolean E, String string) {
-		hosts = new ArrayList<Player>();
+		hosts = new ArrayList<Creature>();
+		tools = new ArrayList<Tool>();
 		north = N;
 		south = S;
 		west = W;
@@ -173,15 +182,15 @@ public class Cell {
 		}
 		throw new Exception ("No such direction");
 	}
-	public void addHost(Player player) {
-		if(!hosts.contains(player)){
-			hosts.add(player);
+	public void addHost(Creature creature) {
+		if(!hosts.contains(creature)){
+			hosts.add(creature);
 		}
 	}
 
-	public void removeHost(Player player) {
-		if(hosts.contains(player)){
-			hosts.remove(player);
+	public void removeHost(Creature creature) {
+		if(hosts.contains(creature)){
+			hosts.remove(creature);
 		}
 	}
 }
