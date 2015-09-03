@@ -16,8 +16,8 @@ public class GameManager {
 		Console.printGameInstructions();
 		Console.printGameStartInstructions();
 
-		Player player = new Player(1);
-		player.setName("F");
+		Player player = null;
+//		player.setName("F");
 		
 		int level = 1;
 		
@@ -30,7 +30,9 @@ public class GameManager {
 			running = true;
 			Labyrinth lab = null;
 			try {
-				lab = Levels.genLabyrinth(level+2, player);
+				lab = Levels.genLabyrinth(level+2);
+				player = new Player("F", lab.getEntrance(), 1);
+				lab.setPlayer(player);
 				
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -80,6 +82,7 @@ public class GameManager {
 								if(creatureDrawer!=null){
 									creatureDrawer.interrupt();
 									drawer.stop = true;
+									Levels.animators.clear();
 								}
 								break;
 							}

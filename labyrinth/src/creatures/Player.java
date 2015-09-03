@@ -12,6 +12,7 @@ public class Player implements Creature {
 	public Player(){}
 	public Player(float lives){
 		life = lives;
+		maxLife = lives;
 	}
 	
 	public Player(String aName, Cell aPosition, float lives){

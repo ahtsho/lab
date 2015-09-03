@@ -34,7 +34,9 @@ public class Console {
 		lab = l;
 	}
 
-	public synchronized void draw() {		
+	public synchronized void draw() {	
+		System.out.println(lab.getPlayer().getName()+" life "+lab.getPlayer().getLife());
+		System.out.println();
 		for (int row = 0; row < lab.getLabyrinthDimension() - 1; row++) {
 			drawFirstThird(row);
 			drawSecondThird(row);
@@ -298,9 +300,9 @@ public class Console {
 
 	public void printMoveMsg() {
 		System.out.println();
-		System.out.println();
-		System.out.println(">   move: ");
-		System.out.println();
+		System.out.println("            N");
+		System.out.println(">   move: W   E");
+		System.out.println("            S");
 	}
 	public static void printGameStartInstructions() {
 		System.out.println("    -------------------------");

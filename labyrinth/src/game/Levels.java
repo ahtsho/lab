@@ -17,9 +17,9 @@ public class Levels {
 	public static boolean levelChanged;
 	public static ArrayList<Animator> animators = new ArrayList<Animator>();
 	private static ArrayList<Tool> tools = new ArrayList<Tool>();
-	private static ArrayList<Creature> creatures = new ArrayList<Creature>();
+	//private static ArrayList<Creature> creatures = new ArrayList<Creature>();
 	
-	public static Labyrinth genLabyrinth(int level, Player p) throws Exception {
+	public static Labyrinth genLabyrinth(int level) throws Exception {
 
 		LabyrinthGenerator labyrinthGenerator = new LabyrinthGenerator();
 		Labyrinth lab = labyrinthGenerator.generateLabyrinth(level);
@@ -29,9 +29,9 @@ public class Levels {
 			lab = labyrinthGenerator.generateLabyrinth(level);
 		}
 
-		p.setName("A");
-		lab.setPlayer(p);
-		p.setPosition(lab.getEntrance());
+////		p.setName("A");
+//		lab.setPlayer(p);
+//		p.setPosition(lab.getEntrance());
 
 		Labyrinth l = labyrinthGenerator.generateDeadEndTunnels();
 		ArrayList<ArrayList> subPaths = labyrinthGenerator.getSubPaths();
@@ -49,21 +49,31 @@ public class Levels {
 
 	private static void populate(Labyrinth lab, int level,ArrayList<ArrayList> subPaths) {
 		ArrayList<Cell> subPath = subPaths.get(0);
-		//ArrayList<Guard> guards = new ArrayList<Guard>();
-		if (level == FIRST_LEVEL) {
+		if (level == FIRST_LEVEL+1) {
 			tools.add(new Plaster(.1f));
 		}
-		if (level == FIRST_LEVEL+1) {
-			Guard g = createGuard(lab, subPath);
-			if(g!=null){
-				creatures.add(g);
+		if (level == FIRST_LEVEL+2) {
+			Guard guard = createGuard(lab, subPath);
+			if(guard!=null){
+				ArrayList<Creature> guards = new ArrayList<Creature>();
+				guards.add(guard);
+				subPath.get(0).setHosts(guards);
 			}
 		}
-		if (level == FIRST_LEVEL+2) {
+		if (level == FIRST_LEVEL+3) {
 			tools.add(new Medicine(.5f));
+			Guard guard = createGuard(lab, subPath);
+			if(guard!=null){
+				ArrayList<Creature> guards = new ArrayList<Creature>();
+				guards.add(guard);
+				subPath.get(0).setHosts(guards);
+			}
+		}
+		if (level == FIRST_LEVEL+4) {
+			tools.add(new Plaster(.1f));
 		}
 		subPath.get(0).setTools(tools);
-		subPath.get(0).setHosts(creatures);
+		
 
 	}
 
@@ -73,8 +83,6 @@ public class Levels {
 		Guard guard = null;
 		if(subPath.size()>2){
 			guard = new Guard("G", subPath.get(0), 1, 1.0f);
-			
-			
 			Utils.addInverse(subPath);
 			Animator anima = new Animator(guard, lab, subPath, 5000);
 			animators.add(anima);
