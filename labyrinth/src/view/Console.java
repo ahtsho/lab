@@ -287,22 +287,22 @@ public class Console {
 	
 
 	public static char adaptDirection(char c) {
-		if (c == 'n' | c == 'N')
-			return Cell.NORTH;
-		if (c == 's' | c == 'S')
-			return Cell.SOUTH;
 		if (c == 'w' | c == 'W')
+			return Cell.NORTH;
+		if (c == 'z' | c == 'Z')
+			return Cell.SOUTH;
+		if (c == 'a' | c == 'A')
 			return Cell.WEST;
-		if (c == 'e' | c == 'E')
+		if (c == 's' | c == 'S')
 			return Cell.EAST;
 		return 0;
 	}
 
 	public void printMoveMsg() {
 		System.out.println();
-		System.out.println("            N");
-		System.out.println(">   move: W   E");
-		System.out.println("            S");
+		System.out.println("            W");
+		System.out.println(">   move: A   S");
+		System.out.println("            Z");
 	}
 	public static void printGameStartInstructions() {
 		System.out.println("    -------------------------");
@@ -312,9 +312,9 @@ public class Console {
 
 	public static void printGameInstructions() {
 		System.out.println("    ------------------           Q quit");
-		System.out.println("                     N");
-		System.out.println("                  W     E");
-		System.out.println("                     S");
+		System.out.println("                     W");
+		System.out.println("                  A     S");
+		System.out.println("                     Z");
 		System.out.println("    ------------------");
 	}
 	public void printLevelFinishedMsg(int level) {

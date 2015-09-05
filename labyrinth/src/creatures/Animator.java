@@ -13,7 +13,7 @@ public class Animator implements Runnable {
 	private int sleepTime;
 	private ArrayList<Cell> path = new ArrayList<Cell>();
 	public volatile boolean moved = false;
-	private Game game;
+	
 	
 	public Animator(Creature p, Labyrinth l,ArrayList<Cell> aPath, int sleepMilli) {
 		this.creature = p;
@@ -21,9 +21,7 @@ public class Animator implements Runnable {
 		this.sleepTime = sleepMilli;
 		path=aPath;
 	}
-	public void setGame(Game g){
-		game = g;
-	}
+	
 	@Override
 	public void run() {
 		Cell destination = null;

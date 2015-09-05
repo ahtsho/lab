@@ -57,11 +57,7 @@ public class GuardAnimationTest {
 		guards.add(guard1);
 		
 		ArrayList<Cell> path = new ArrayList<Cell>();
-		/*
-		 * abc
-		 * def
-		 * ghi
-		 */
+		
 		path.add(a);
 		path.add(b);
 		path.add(e);
@@ -76,11 +72,7 @@ public class GuardAnimationTest {
 		guards.add(guard2);
 		l.setCreatures(guards);
 		ArrayList<Cell> path2 = new ArrayList<Cell>();
-		/*
-		 * abc
-		 * def
-		 * ghi
-		 */
+		
 		path2.add(g);
 		path2.add(d);
 		path2.add(a);

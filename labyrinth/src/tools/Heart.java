@@ -2,7 +2,7 @@ package tools;
 
 import interfaces.Good;
 
-public class Heart implements Good {
+public class Heart implements Good,Tool {
 
 	private float healingPower; 
 	
@@ -12,6 +12,10 @@ public class Heart implements Good {
 	@Override
 	public float getHealAmount() {
 		return healingPower;
+	}
+	@Override
+	public String getName() {
+		return "<v>";
 	}
 
 

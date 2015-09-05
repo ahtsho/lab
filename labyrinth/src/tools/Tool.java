@@ -1,7 +1,5 @@
 package tools;
 
 public interface Tool {
-
-	String getName();
-
+	public String getName();
 }

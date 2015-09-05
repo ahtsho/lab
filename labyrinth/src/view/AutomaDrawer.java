@@ -17,18 +17,20 @@ public class AutomaDrawer implements Runnable {
 	public void run() {
 		while (!stop) {
 			if (!Levels.animators.isEmpty()) {
-				if (player.getLife() > 0) {
-					if (Levels.animators.get(0).moved) {
-						console.draw();
-						// System.out.println("thread " + this.hashCode());
+//				for (int i = 0; i < Levels.animators.size()-1; i++) {
+					if (player.getLife() > 0) {
+						if (Levels.animators.get(0)!= null && Levels.animators.get(0).moved) {
+							console.draw();
+							// System.out.println("thread " + this.hashCode());
 
-						Levels.animators.get(0).moved = false;
+							Levels.animators.get(0).moved = false;
+						} 
+					} else {
+						stop = true;
+						Console.printGameOver();
+						return;
 					}
-				} else {
-					stop = true;
-					Console.printGameOver();
-					return;
-				}
+//				}
 			}
 		}
 

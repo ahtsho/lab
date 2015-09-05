@@ -193,4 +193,9 @@ public class Cell {
 			hosts.remove(creature);
 		}
 	}
+	
+	public void removeTools() {
+		tools.clear();
+		
+	}
 }

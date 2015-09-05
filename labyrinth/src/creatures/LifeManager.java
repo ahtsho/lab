@@ -6,6 +6,7 @@ import interfaces.Good;
 
 import java.util.ArrayList;
 
+import tools.Box;
 import tools.Tool;
 
 public class LifeManager {
@@ -32,18 +33,30 @@ public class LifeManager {
 		if (tools.size() > 0) {
 			for (int i = 0; i < tools.size(); i++) {
 				if (player.getPosition().equals(position)) {
-					if (tools.get(i) instanceof Bad) {
-						player.damage(((Bad) tools.get(i)).getCausedDamage());
+					Tool tool = null;
+					try{
+						tool = ((Box)tools.get(i)).extractObject();
+					} catch (Exception e){
+						tool = tools.get(i);
+					}
+					
+					if (tool instanceof Bad) {
+						player.damage(((Bad) tool).getCausedDamage());
 						System.out.println("Player hurt! Life="
 								+ player.getLife());
-					} else if (tools.get(i) instanceof Good) {
-						player.heal(((Good) tools.get(i)).getHealAmount());
+					} else if (tool instanceof Good) {
+						player.heal(((Good) tool).getHealAmount());
 						System.out.println("Player cured! Life="
 								+ player.getLife());
 					}
+					tools.remove(tool);
+					try{
+					((Box)tools.get(i)).removeObject(tool);
+					}catch(Exception e){}
 				}
 			}
 		}
+		
 	}
 
 }

@@ -10,14 +10,14 @@ import view.Console;
 
 public class GameManager {
 	public volatile static boolean running = true;
+	
 	public static void main(String[] args) {
-
+		
 		Console.printWelcomeMsg();
 		Console.printGameInstructions();
 		Console.printGameStartInstructions();
 
 		Player player = null;
-//		player.setName("F");
 		
 		int level = 1;
 		
@@ -31,7 +31,7 @@ public class GameManager {
 			Labyrinth lab = null;
 			try {
 				lab = Levels.genLabyrinth(level+2);
-				player = new Player("F", lab.getEntrance(), 1);
+				player = new Player("F", lab.getEntrance(), 3);
 				lab.setPlayer(player);
 				
 			} catch (Exception e) {
@@ -41,9 +41,7 @@ public class GameManager {
 			
 			AutomaDrawer drawer = new AutomaDrawer(console,player);
 			Thread creatureDrawer = new Thread(drawer);
-//			creatureDrawer.setName("L"+level);
 			creatureDrawer.start();
-			
 			
 			if(Levels.levelChanged){
 				Levels.levelChanged = false;
@@ -65,10 +63,10 @@ public class GameManager {
 					if ((read.toLowerCase().startsWith("l"))){
 						System.out.println("Player has Life="+player.getLife());
 					}
-					if ((read.toLowerCase().startsWith("n")
-							| read.toLowerCase().startsWith("s")
-							| read.toLowerCase().startsWith("w") | read
-							.toLowerCase().startsWith("e"))) {
+					if ((read.toLowerCase().startsWith("w")
+							| read.toLowerCase().startsWith("z")
+							| read.toLowerCase().startsWith("s") | read
+							.toLowerCase().startsWith("a"))) {
 						try {
 							if (lab.move(player,Console.adaptDirection((read.charAt(0))))) {
 								console.draw();

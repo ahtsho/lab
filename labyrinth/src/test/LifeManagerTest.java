@@ -45,42 +45,9 @@ public class LifeManagerTest {
 		cs.add(i);
 		Labyrinth l = new Labyrinth(cs, b, g);
 
-	
-
 		Guard guard1 = new Guard("G", a, 1,1.0f);
 		Plaster plaster = new Plaster(0.1f);
 		Medicine medicine = new Medicine(0.5f);
-		
-//		ArrayList<Player> guards = new ArrayList<Player>();
-//		guards.add(guard1);
-//		
-//		ArrayList<Cell> path = new ArrayList<Cell>();
-//		
-//		path.add(a);
-//		path.add(b);
-//		path.add(e);
-//		path.add(h);
-//		path.add(i);
-//		Utils.addInverse(path);
-//		
-//		Animator anima = new Animator(guard1, l, path, 1000);
-//		new Thread(anima).start();
-		
-//		Guard guard2 = new Guard("R", g, 1, 1.0f);
-//		guards.add(guard2);
-//		l.setGuards(guards);
-//		ArrayList<Cell> path2 = new ArrayList<Cell>();
-//		/*
-//		 * abc
-//		 * def
-//		 * ghi
-//		 */
-//		path2.add(g);
-//		path2.add(d);
-//		path2.add(a);
-//		Utils.addInverse(path2);
-//		
-		
 		
 		String read;
 		Scanner scanIn = new Scanner(System.in);
