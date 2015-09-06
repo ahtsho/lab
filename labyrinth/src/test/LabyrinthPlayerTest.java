@@ -1,7 +1,7 @@
 package test;
 
 import game.Game;
-import game.Levels;
+import game.Level;
 import infrastructure.Cell;
 import infrastructure.Labyrinth;
 

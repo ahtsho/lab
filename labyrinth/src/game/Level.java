@@ -10,7 +10,7 @@ import creatures.*;
 import tools.*;
 import utils.Utils;
 
-public class Levels {
+public class Level {
 
 	public static int MAX_LEVEL = 13;
 	public static int FIRST_LEVEL = 3;
@@ -94,6 +94,7 @@ public class Levels {
 			createGuard(lab, subPath,3000,"G");
 			createGuard(lab, subPath,1500,"g");
 			createGuard(lab, subPath,1000, "K");
+			createGuard(lab, subPath,700, "I");
 		}
 		for (Tool t: tools){
 			ArrayList<Tool> ts = new ArrayList<Tool>();

@@ -1,6 +1,5 @@
 package creatures;
 
-import game.Game;
 import infrastructure.Cell;
 import infrastructure.Labyrinth;
 
@@ -8,7 +7,7 @@ import java.util.ArrayList;
 
 
 public class Animator implements Runnable {
-	private Creature creature;
+	public Creature creature;
 	private Labyrinth l;
 	private int sleepTime;
 	private ArrayList<Cell> path = new ArrayList<Cell>();

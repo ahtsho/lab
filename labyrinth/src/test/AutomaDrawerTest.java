@@ -82,7 +82,7 @@ public class AutomaDrawerTest {
 		
 		Player player = new Player("P",l.getEntrance(),3);
 		
-		AutomaDrawer drawer = new AutomaDrawer(console,player);
+		AutomaDrawer drawer = new AutomaDrawer(console,player, anima2);
 		Thread creatureDrawer = new Thread(drawer);
 		creatureDrawer.start();
 		

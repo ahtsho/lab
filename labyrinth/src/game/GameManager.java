@@ -4,6 +4,7 @@ import infrastructure.Labyrinth;
 
 import java.util.Scanner;
 
+import creatures.Animator;
 import creatures.Player;
 import view.AutomaDrawer;
 import view.Console;
@@ -26,11 +27,11 @@ public class GameManager {
 		Game game = new Game(false, false, false);
 		
 			
-		while (!Levels.isLast(level)) {
+		while (!Level.isLast(level)) {
 			running = true;
 			Labyrinth lab = null;
 			try {
-				lab = Levels.genLabyrinth(level+2);
+				lab = Level.genLabyrinth(level+2);
 				player = new Player("F", lab.getEntrance(), 3);
 				lab.setPlayer(player);
 				
@@ -38,13 +39,14 @@ public class GameManager {
 				e.printStackTrace();
 			}
 			Console console = new Console(lab);
+			for(Animator anima:Level.animators){
+				AutomaDrawer drawer = new AutomaDrawer(console,player, anima);
+				Thread creatureDrawer = new Thread(drawer);
+				creatureDrawer.start();
+			}
 			
-			AutomaDrawer drawer = new AutomaDrawer(console,player);
-			Thread creatureDrawer = new Thread(drawer);
-			creatureDrawer.start();
-			
-			if(Levels.levelChanged){
-				Levels.levelChanged = false;
+			if(Level.levelChanged){
+				Level.levelChanged = false;
 				Console.printLevel(level);
 				console.draw();
 				console.printMoveMsg();
@@ -74,14 +76,15 @@ public class GameManager {
 							} else {
 								console.draw();
 								console.printLevelFinishedMsg(level);
-								level = Levels.next(level);
-								Levels.levelChanged = true;
+								level = Level.next(level);
+								Level.levelChanged = true;
 								
-								if(creatureDrawer!=null){
-									creatureDrawer.interrupt();
-									drawer.stop = true;
-									Levels.animators.clear();
-								}
+//								if(creatureDrawer!=null){
+//									creatureDrawer.interrupt();
+								AutomaDrawer.stop = true;
+								System.out.println("AutomaDrawer.stop = true");
+								Level.animators.clear();
+//								}
 								break;
 							}
 						} catch (Exception e) {
@@ -97,7 +100,7 @@ public class GameManager {
 					}
 				} else if (read.toLowerCase().startsWith("y") && !game.isOn() ) {
 					game.start();
-					Levels.levelChanged = false;
+					Level.levelChanged = false;
 					Console.printLevel(level);
 					console.draw();
 					console.printMoveMsg();

@@ -1,37 +1,37 @@
 package view;
 
+import creatures.Animator;
 import creatures.Player;
-import game.Levels;
+import game.Level;
 
 public class AutomaDrawer implements Runnable {
-	public volatile boolean stop = false;
+	public volatile static boolean stop;
 	private Player player;
 	private Console console;
+	private Animator animator;
 
-	public AutomaDrawer(Console aConsole, Player p) {
+	public AutomaDrawer(Console aConsole, Player p, Animator anima) {
 		console = aConsole;
 		player = p;
+		animator = anima;
+		stop = false;
 	}
 
 	@Override
 	public void run() {
 		while (!stop) {
-			if (!Levels.animators.isEmpty()) {
-//				for (int i = 0; i < Levels.animators.size()-1; i++) {
-					if (player.getLife() > 0) {
-						if (Levels.animators.get(0)!= null && Levels.animators.get(0).moved) {
-							console.draw();
-							// System.out.println("thread " + this.hashCode());
-
-							Levels.animators.get(0).moved = false;
-						} 
-					} else {
-						stop = true;
-						Console.printGameOver();
-						return;
-					}
-//				}
+			if (player.getLife() > 0) {
+				if (animator != null && animator.moved) {
+					console.draw();
+					System.out.println("Th:"+animator.creature.getName());
+					animator.moved = false;
+				}
+			} else {
+				stop = true;
+				Console.printGameOver();
+				return;
 			}
+
 		}
 
 	}
