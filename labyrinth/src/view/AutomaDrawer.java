@@ -1,6 +1,7 @@
 package view;
 
 import creatures.Animator;
+import creatures.Creature;
 import creatures.Player;
 import game.Level;
 
@@ -23,7 +24,7 @@ public class AutomaDrawer implements Runnable {
 			if (player.getLife() > 0) {
 				if (animator != null && animator.moved) {
 					console.draw();
-					System.out.println("Th:"+animator.creature.getName());
+					System.out.println("Th:"+animator.getCreature().getName());
 					animator.moved = false;
 				}
 			} else {

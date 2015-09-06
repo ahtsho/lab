@@ -12,7 +12,7 @@ import utils.Utils;
 
 public class Level {
 
-	public static int MAX_LEVEL = 13;
+	public static int MAX_LEVEL = 12;
 	public static int FIRST_LEVEL = 3;
 	public static boolean levelChanged;
 	public static ArrayList<Animator> animators = new ArrayList<Animator>();
@@ -47,55 +47,50 @@ public class Level {
 		level -= FIRST_LEVEL-1;
 		ArrayList<Cell> subPath = subPaths.get(0); // taking the bigget subpath for tools and creatures
 		
-		if (level == 2) {
+		switch (level){
+		case 2:
 			tools.add(new Plaster(.1f));
-		}
-		if (level == 3) {
-			createGuard(lab, subPath, 4000, "G");
-		}
-		if (level == 4) {
+			break;
+		case 4:
 			tools.add(new Medicine(.5f));
-			createGuard(lab, subPath,4000, "G");
-		}
-		if (level == 5) {
+			break;
+		case 5:
 			tools.add(new Plaster(.1f));
-			createGuard(lab, subPath,4000,"G");
-			createGuard(lab, subPath,3000, "g");
-		}
-		if (level == 6) {
+			break;
+		case 6:
 			tools.add(new Hole(1f));
-			createGuard(lab, subPath,4000,"G");
-			createGuard(lab, subPath,3000, "g");
-		}
-		if (level == 7) {
+			break;
+		case 7:
 			ArrayList<Tool> objs = new ArrayList<Tool>();
 			objs.add(new Heart(1f));
 			objs.add(new Bomb(1f));
 			tools.add(new Box(objs));
-			createGuard(lab, subPath,3000,"G");
-			createGuard(lab, subPath,2000,"g");
-		}
-		if (level == 8) {
+			break;
+		case 8:
 			tools.add(new Plaster(.1f));
 			tools.add(new Medicine(.5f));
-			createGuard(lab, subPath,3000,"G");
-			createGuard(lab, subPath,2000,"g");
-			createGuard(lab, subPath,1500, "K");
-		}
-		if (level == 9) {
+			break;
+		case 9:
 			tools.add(new Heart(1f));
-			createGuard(lab, subPath,3000,"G");
-			createGuard(lab, subPath,1500,"g");
-			createGuard(lab, subPath,1000, "K");
-			createGuard(lab, subPath,700, "I");
-		}
-		if (level == 10) {
+			break;
+		case 10:
 			tools.add(new Hole(1f));
-			createGuard(lab, subPath,3000,"G");
-			createGuard(lab, subPath,1500,"g");
-			createGuard(lab, subPath,1000, "K");
-			createGuard(lab, subPath,700, "I");
+			break;
 		}
+		
+		if (level >= 3) {
+			createGuard(lab, subPath, 4000, "G3");
+		}
+		if (level >= 5) {
+			createGuard(lab, subPath,3000, "G5");
+		}
+		if (level >= 8) {
+			createGuard(lab, subPath,1500, "G8");
+		}
+		if (level >= 9) {
+			createGuard(lab, subPath,700, "G9");
+		}
+		
 		for (Tool t: tools){
 			ArrayList<Tool> ts = new ArrayList<Tool>();
 			ts.add(t);

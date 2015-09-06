@@ -18,7 +18,7 @@ public class GameManager {
 		Console.printGameInstructions();
 		Console.printGameStartInstructions();
 
-		Player player = null;
+		Player player = new Player("F", 3);
 		
 		int level = 1;
 		
@@ -32,7 +32,7 @@ public class GameManager {
 			Labyrinth lab = null;
 			try {
 				lab = Level.genLabyrinth(level+2);
-				player = new Player("F", lab.getEntrance(), 3);
+				player.setPosition(lab.getEntrance());
 				lab.setPlayer(player);
 				
 			} catch (Exception e) {
@@ -88,7 +88,6 @@ public class GameManager {
 								break;
 							}
 						} catch (Exception e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					} else if (read.toLowerCase().startsWith("q")) {

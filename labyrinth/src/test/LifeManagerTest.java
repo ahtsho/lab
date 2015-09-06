@@ -51,7 +51,7 @@ public class LifeManagerTest {
 		
 		String read;
 		Scanner scanIn = new Scanner(System.in);
-		Player p = new Player(3);
+		Player p = new Player("p", 3);
 		p.setName("F");
 		p.setPosition(l.getEntrance());
 		l.setPlayer(p);
