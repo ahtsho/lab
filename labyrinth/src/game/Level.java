@@ -15,17 +15,18 @@ public class Level {
 	public static int MAX_LEVEL = 12;
 	public static int FIRST_LEVEL = 3;
 	public static boolean levelChanged;
+	public static int currentLevel=3;
 	public static ArrayList<Animator> animators = new ArrayList<Animator>();
 	private static ArrayList<Tool> tools = new ArrayList<Tool>();
 
-	public static Labyrinth genLabyrinth(int level) throws Exception {
+	public static Labyrinth genLabyrinth() throws Exception {
 
 		LabyrinthGenerator labyrinthGenerator = new LabyrinthGenerator();
-		Labyrinth lab = labyrinthGenerator.generateLabyrinth(level);
+		Labyrinth lab = labyrinthGenerator.generateLabyrinth(currentLevel);
 
 		while (labyrinthGenerator.getPath().size() < (int) (lab.getDimension() * Math
 				.log(lab.getDimension()))) {
-			lab = labyrinthGenerator.generateLabyrinth(level);
+			lab = labyrinthGenerator.generateLabyrinth(currentLevel);
 		}
 
 		Labyrinth genLabyrinth = labyrinthGenerator.generateDeadEndTunnels();
@@ -36,23 +37,35 @@ public class Level {
 					return a2.size() - a1.size(); // biggest to smallest
 				}
 			});
-			populate(genLabyrinth, level, subPaths);
+			populate(genLabyrinth, subPaths);
 		}
 		
 
 		return genLabyrinth;
 	}
 
-	private static void populate(Labyrinth lab, int level, ArrayList<ArrayList> subPaths) {
-		level -= FIRST_LEVEL-1;
-		ArrayList<Cell> subPath = subPaths.get(0); // taking the bigget subpath for tools and creatures
+	private static void populate(Labyrinth lab, ArrayList<ArrayList> subPaths) {
 		
-		switch (level){
+		ArrayList<Cell> subPath = subPaths.get(0); // taking the bigget subpath for tools and creatures
+		int pos1 =Utils.generateRandomNumber(subPath.size());
+		int pos2 =Utils.generateRandomNumber(subPath.size());
+		int pos3 =Utils.generateRandomNumber(subPath.size());
+		int pos4 =Utils.generateRandomNumber(subPath.size());
+		
+		switch (currentLevel-2){
 		case 2:
-			tools.add(new Plaster(.1f));
+			ArrayList<Tool> ts1 = new ArrayList<Tool>();
+			ts1.add(new Plaster(.1f));
+			subPath.get(pos1).setTools(ts1);
+			
+//			tools.add(new Plaster(.1f));			
 			break;
 		case 4:
-			tools.add(new Medicine(.5f));
+			ArrayList<Tool> ts2 = new ArrayList<Tool>();
+			ts2.add(new Medicine(.5f));
+			subPath.get(pos2).setTools(ts2);
+			
+//			tools.add(new Medicine(.5f));
 			break;
 		case 5:
 			tools.add(new Plaster(.1f));
@@ -78,34 +91,34 @@ public class Level {
 			break;
 		}
 		
-		if (level >= 3) {
-			createGuard(lab, subPath, 4000, "G3");
+		if (currentLevel-2 >= 3) {
+			createGuard(lab, subPath, 3000, "G3",pos1);
 		}
-		if (level >= 5) {
-			createGuard(lab, subPath,3000, "G5");
+		if (currentLevel-2 >= 5) {
+			createGuard(lab, subPath,2000, "G5", pos2);
 		}
-		if (level >= 8) {
-			createGuard(lab, subPath,1500, "G8");
+		if (currentLevel-2 >= 8) {
+			createGuard(lab, subPath,1500, "G8", pos3);
 		}
-		if (level >= 9) {
-			createGuard(lab, subPath,700, "G9");
+		if (currentLevel-2 >= 9) {
+			createGuard(lab, subPath,700, "G9", pos4);
 		}
 		
-		for (Tool t: tools){
-			ArrayList<Tool> ts = new ArrayList<Tool>();
-			ts.add(t);
-			subPath.get(Utils.generateRandomNumber(subPath.size())).setTools(ts);
-		}
+//		for (Tool t: tools){
+//			ArrayList<Tool> ts = new ArrayList<Tool>();
+//			ts.add(t);
+//			subPath.get().setTools(ts);
+//		}
 
 	}
 
-	private static void createGuard(Labyrinth lab, ArrayList<Cell> subPath, int time, String name) {
-		Guard guard = null;
+	private static void createGuard(Labyrinth lab, ArrayList<Cell> subPath, int time, String name, int pos) {
+		Creature guard = null;
 		if (subPath.size() > 2) {
-			int pos = 0;
-			while(!subPath.get(pos).getHosts().isEmpty()){
-				pos = Utils.generateRandomNumber(subPath.size());
-			}
+			
+//			while(!subPath.get(pos).getHosts().isEmpty()){
+//				pos = Utils.generateRandomNumber(subPath.size());
+//			}
 			guard = new Guard(name, subPath.get(pos), 1, 1.0f);
 			if (guard != null) {
 				ArrayList<Creature> guards = new ArrayList<Creature>();
@@ -119,14 +132,23 @@ public class Level {
 		}
 	}
 
-	public static boolean isLast(int level) {
-		if (level > MAX_LEVEL)
+	public static boolean isLast() {
+		if (currentLevel > MAX_LEVEL)
 			return true;
 		return false;
 	}
 
-	public static int next(int currentLevel) {
-		return (currentLevel + 1);
+	public static int next() {
+		return (currentLevel++);
 	}
 
+	public static int previous() {
+		return (currentLevel++);
+	}
+	
+	public static int goTo(int offset){
+		currentLevel +=offset;
+		return currentLevel;
+	}
 }
+

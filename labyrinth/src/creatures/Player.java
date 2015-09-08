@@ -8,7 +8,7 @@ import infrastructure.Cell;
 public class Player implements Creature {
 	private String name;
 	private Cell position;
-	private float life;
+	private static float life;
 	private float maxLife;
 	public static boolean hurt; 
 	public static boolean healed;
@@ -46,9 +46,12 @@ public class Player implements Creature {
 		position.addHost(this);
 	}
 	
-	public void damage(float amount){
+	public synchronized void damage(float amount){
 		if(life > 0){
-			life -=amount;
+			System.out.print("damage caused = "+life+" - ");
+			life = life - amount;
+			System.out.println("amount = "+amount+" = "+life);
+			if(life < 0) life = 0;
 		}
 	}
 	
@@ -62,7 +65,7 @@ public class Player implements Creature {
 		}
 	}
 	@Override
-	public float getLife() {
+	public synchronized float getLife() {
 		BigDecimal bd = new BigDecimal(life);
 		bd = bd.setScale(2, RoundingMode.HALF_UP);
 		life = bd.floatValue();

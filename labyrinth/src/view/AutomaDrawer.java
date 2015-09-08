@@ -24,7 +24,7 @@ public class AutomaDrawer implements Runnable {
 			if (player.getLife() > 0) {
 				if (animator != null && animator.moved) {
 					console.draw();
-					System.out.println("Th:"+animator.getCreature().getName());
+//					System.out.println("Th:"+animator.getCreature().getName());
 					animator.moved = false;
 				}
 			} else {
@@ -32,9 +32,8 @@ public class AutomaDrawer implements Runnable {
 				Console.printGameOver();
 				return;
 			}
-
 		}
-
+		animator.stop = true;
 	}
 
 }

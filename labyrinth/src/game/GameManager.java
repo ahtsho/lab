@@ -2,6 +2,7 @@ package game;
 
 import infrastructure.Labyrinth;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import creatures.Animator;
@@ -10,7 +11,7 @@ import view.AutomaDrawer;
 import view.Console;
 
 public class GameManager {
-	public volatile static boolean running = true;
+//	public volatile static boolean running = true;
 	
 	public static void main(String[] args) {
 		
@@ -20,18 +21,16 @@ public class GameManager {
 
 		Player player = new Player("F", 3);
 		
-		int level = 1;
-		
 		String read;
 		Scanner scanIn = new Scanner(System.in);
 		Game game = new Game(false, false, false);
 		
 			
-		while (!Level.isLast(level)) {
-			running = true;
+		while (!Level.isLast()) {
+//			running = true;
 			Labyrinth lab = null;
 			try {
-				lab = Level.genLabyrinth(level+2);
+				lab = Level.genLabyrinth();
 				player.setPosition(lab.getEntrance());
 				lab.setPlayer(player);
 				
@@ -39,15 +38,17 @@ public class GameManager {
 				e.printStackTrace();
 			}
 			Console console = new Console(lab);
+			ArrayList<Thread> startedDrawers = new ArrayList<Thread>(); 
 			for(Animator anima:Level.animators){
 				AutomaDrawer drawer = new AutomaDrawer(console,player, anima);
 				Thread creatureDrawer = new Thread(drawer);
 				creatureDrawer.start();
+				startedDrawers.add(creatureDrawer);
 			}
 			
 			if(Level.levelChanged){
 				Level.levelChanged = false;
-				Console.printLevel(level);
+				Console.printLevel(Level.currentLevel-2);
 				console.draw();
 				console.printMoveMsg();
 			}
@@ -75,23 +76,25 @@ public class GameManager {
 								console.printMoveMsg();
 							} else {
 								console.draw();
-								console.printLevelFinishedMsg(level);
-								level = Level.next(level);
+								console.printLevelFinishedMsg(Level.currentLevel-2);
+								Level.next();
 								Level.levelChanged = true;
 								
-//								if(creatureDrawer!=null){
-//									creatureDrawer.interrupt();
 								AutomaDrawer.stop = true;
-								System.out.println("AutomaDrawer.stop = true");
+								if(!startedDrawers.isEmpty()){
+									for(Thread t: startedDrawers){
+										t.interrupt();
+									}
+								}
 								Level.animators.clear();
-//								}
+								
 								break;
 							}
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
 					} else if (read.toLowerCase().startsWith("q")) {
-						game.end();
+//						game.end();
 						console.printGameTerminatedByUserMsg();
 						break;
 					} else {
@@ -100,7 +103,7 @@ public class GameManager {
 				} else if (read.toLowerCase().startsWith("y") && !game.isOn() ) {
 					game.start();
 					Level.levelChanged = false;
-					Console.printLevel(level);
+					Console.printLevel(Level.currentLevel-2);
 					console.draw();
 					console.printMoveMsg();
 				} else {

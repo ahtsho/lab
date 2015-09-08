@@ -13,6 +13,7 @@ import java.util.ArrayList;
  * @author at
  */
 public class Animator implements Runnable {
+	public boolean stop = false;
 	private Creature creature;
 	private Labyrinth l;
 	private int sleepTime;
@@ -34,11 +35,11 @@ public class Animator implements Runnable {
 	@Override
 	public void run() {
 		Cell destination = null;
-		while (creature.getLife() > 0) {
+		while (creature.getLife() > 0 && !stop) {
 			for (int i = 0; i < path.size(); i++) {
 				destination = path.get(i);
 				moved = l.moveTo(creature, destination);
-
+//				System.out.println("Th:"+this.hashCode());
 				try {
 					Thread.sleep(sleepTime);
 				} catch (InterruptedException e) {

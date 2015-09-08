@@ -23,16 +23,19 @@ import tools.Tool;
  */
 public class LifeManager {
 
-	public void manage(Player player, Cell position) {
+	public synchronized void manage(Player player, Cell position) {
 		ArrayList<Creature> creatures = position.getHosts();
 		ArrayList<Tool> tools = position.getTools();
 
 		if (creatures.size() > 1) {// assuming the first creature is the player
 			for (int i = 0; i < creatures.size(); i++) {
-				if (player.getPosition().equals(position)) {
-					if (creatures.get(i) instanceof Bad) {
+				if (player.getPosition().equals(position) && !(creatures.get(i) instanceof Player)) {
+					if (creatures.get(i) instanceof Bad ) {
+//						System.out.println(creatures.get(i).getName()+" hurting player");
 						player.damage(((Bad) creatures.get(i))
 								.getCausedDamage());
+//						System.out.println("by "+((Bad) creatures.get(i))
+//								.getCausedDamage());
 						Player.hurt = true;
 					} else if (creatures.get(i) instanceof Good) {
 						player.heal(((Good) creatures.get(i)).getHealAmount());

@@ -283,7 +283,7 @@ public class Labyrinth {
 	/*
 	 * Given a cell to go to,
 	 */
-	public boolean moveTo(Cell destination) {
+	public synchronized boolean moveTo(Cell destination) {
 		if (destination != null) {
 			player.getPosition().removeHost(player);
 			player.setPosition(destination); 
@@ -296,7 +296,7 @@ public class Labyrinth {
 		return true;
 	}
 
-	public boolean moveTo(Creature creature,Cell destination) {
+	public synchronized boolean moveTo(Creature creature,Cell destination) {
 		if (destination != null) {
 			if(areConnected(creature.getPosition(),destination)){
 				creature.getPosition().removeHost(creature);

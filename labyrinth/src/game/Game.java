@@ -2,9 +2,9 @@ package game;
 
 public class Game {
 
-	boolean started;
-	boolean paused;
-	boolean levelEnded;
+	static boolean started;
+	static boolean paused;
+	static boolean levelEnded;
 
 	public Game(boolean start, boolean pause, boolean level) {
 		started = start;
@@ -23,9 +23,9 @@ public class Game {
 		paused = true;
 	}
 
-	public void end() {
+	public void endGame() {
 		started = false;
-		paused = false;
+		paused = false;	
 	}
 
 	public boolean isOn() {
@@ -34,7 +34,10 @@ public class Game {
 		return false;
 	}
 
-	public void nextLevel(){
+	public static void levelStarted(){
+		levelEnded = false;
+	}
+	public static void nextLevel(){
 		levelEnded = true;
 	}
 }
