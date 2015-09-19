@@ -22,16 +22,16 @@ public class Cell {
 	private ArrayList<Creature> hosts;
 	private ArrayList<Tool> tools;
 	
-	public ArrayList<Tool> getTools() {
+	public synchronized ArrayList<Tool> getTools() {
 		return tools;
 	}
-	public void setTools(ArrayList<Tool> tools) {
+	public synchronized void setTools(ArrayList<Tool> tools) {
 		this.tools = tools;
 	}
-	public void setHosts(ArrayList<Creature> players){
+	public synchronized void setHosts(ArrayList<Creature> players){
 		hosts=players;
 	}
-	public ArrayList<Creature> getHosts(){
+	public synchronized ArrayList<Creature> getHosts(){
 		return hosts;
 	}
 	
@@ -182,19 +182,19 @@ public class Cell {
 		}
 		throw new Exception ("No such direction");
 	}
-	public void addHost(Creature creature) {
+	public synchronized void addHost(Creature creature) {
 		if(!hosts.contains(creature)){
 			hosts.add(creature);
 		}
 	}
 
-	public void removeHost(Creature creature) {
+	public synchronized void removeHost(Creature creature) {
 		if(hosts.contains(creature)){
 			hosts.remove(creature);
 		}
 	}
 	
-	public void removeTools() {
+	public synchronized void removeTools() {
 		tools.clear();
 		
 	}

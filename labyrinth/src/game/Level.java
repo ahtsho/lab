@@ -11,7 +11,7 @@ import tools.*;
 import utils.Utils;
 
 public class Level {
-
+	private static Player player = null;
 	public static int MAX_LEVEL = 12;
 	public static int FIRST_LEVEL = 3;
 	public static boolean levelChanged;
@@ -51,43 +51,62 @@ public class Level {
 		int pos2 =Utils.generateRandomNumber(subPath.size());
 		int pos3 =Utils.generateRandomNumber(subPath.size());
 		int pos4 =Utils.generateRandomNumber(subPath.size());
+		int pos5 =Utils.generateRandomNumber(subPath.size());
+		int pos6 =Utils.generateRandomNumber(subPath.size());
+		int pos7 =Utils.generateRandomNumber(subPath.size());
+		int pos8 =Utils.generateRandomNumber(subPath.size());
+		int pos9 =Utils.generateRandomNumber(subPath.size());
+		int pos10 =Utils.generateRandomNumber(subPath.size());
 		
 		switch (currentLevel-2){
 		case 2:
 			ArrayList<Tool> ts1 = new ArrayList<Tool>();
 			ts1.add(new Plaster(.1f));
 			subPath.get(pos1).setTools(ts1);
-			
-//			tools.add(new Plaster(.1f));			
 			break;
 		case 4:
 			ArrayList<Tool> ts2 = new ArrayList<Tool>();
 			ts2.add(new Medicine(.5f));
 			subPath.get(pos2).setTools(ts2);
-			
-//			tools.add(new Medicine(.5f));
 			break;
 		case 5:
-			tools.add(new Plaster(.1f));
+			ArrayList<Tool> ts3 = new ArrayList<Tool>();
+			ts3.add(new Plaster(.1f));
+			subPath.get(pos3).setTools(ts3);
 			break;
 		case 6:
-			tools.add(new Hole(1f));
+			ArrayList<Tool> ts4 = new ArrayList<Tool>();
+			ts4.add(new Hole(1f));
+			subPath.get(pos4).setTools(ts4);
 			break;
 		case 7:
 			ArrayList<Tool> objs = new ArrayList<Tool>();
 			objs.add(new Heart(1f));
 			objs.add(new Bomb(1f));
-			tools.add(new Box(objs));
+			ArrayList<Tool> ts5 = new ArrayList<Tool>();
+			ts5.add(new Box(objs));
+			subPath.get(pos5).setTools(ts5);
 			break;
 		case 8:
-			tools.add(new Plaster(.1f));
-			tools.add(new Medicine(.5f));
+			ArrayList<Tool> ts6 = new ArrayList<Tool>();
+			ts6.add(new Hole(1f));
+			subPath.get(pos6).setTools(ts6);
+			ArrayList<Tool> ts7 = new ArrayList<Tool>();
+			ts7.add(new Plaster(.1f));
+			subPath.get(pos7).setTools(ts7);
+			ArrayList<Tool> ts8 = new ArrayList<Tool>();
+			ts8.add(new Medicine(.5f));
+			subPath.get(pos8).setTools(ts8);
 			break;
 		case 9:
-			tools.add(new Heart(1f));
+			ArrayList<Tool> ts9 = new ArrayList<Tool>();
+			ts9.add(new Heart(1f));
+			subPath.get(pos9).setTools(ts9);
 			break;
 		case 10:
-			tools.add(new Hole(1f));
+			ArrayList<Tool> ts10 = new ArrayList<Tool>();
+			ts10.add(new Hole(1f));
+			subPath.get(pos10).setTools(ts10);
 			break;
 		}
 		
@@ -103,12 +122,6 @@ public class Level {
 		if (currentLevel-2 >= 9) {
 			createGuard(lab, subPath,700, "G9", pos4);
 		}
-		
-//		for (Tool t: tools){
-//			ArrayList<Tool> ts = new ArrayList<Tool>();
-//			ts.add(t);
-//			subPath.get().setTools(ts);
-//		}
 
 	}
 

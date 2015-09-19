@@ -5,11 +5,15 @@ import infrastructure.Labyrinth;
 
 import java.util.ArrayList;
 
+import creatures.Player;
+import view.Console;
+
 public class LabyrinthTest {
 
+	static Labyrinth l;
 	public static void main(String[] args) {
 		ArrayList<Cell> cs = new ArrayList<Cell>();
-		Cell a = new Cell(true, true, true, true, "a");
+		Cell a = new Cell(false, false, false, false, "a");
 		Cell b = new Cell(true, true, true, true, "b");
 		Cell c = new Cell(true, true, true, true, "c");
 		Cell d = new Cell(true, true, true, true, "d");
@@ -27,17 +31,26 @@ public class LabyrinthTest {
 		cs.add(g);
 		cs.add(h);
 		cs.add(i);
-		Labyrinth l = new Labyrinth(cs, b, g);
-
-		testGetLabyrinthWall(l);
+		Player p = new Player("A", 1);
+		l = new Labyrinth(cs, b, g);
+		l.setExit(a);
+		l.setPlayer(p);
+		testExitCellWall();
+//		testGetLabyrinthWall(l);
+	}
+	
+	public static void testExitCellWall(){
+		Console c = new Console(l);
+		c.draw();
+		
+		System.out.println(l.getExitCellWall());
 	}
 
 	public static void testGetLabyrinthWall(Labyrinth l) {
 		System.out.println("-BEGIN------------getLabyrinthWall Test-------------");
 		ArrayList<Cell> walls = l.getLabyrinthWall();
 		if (walls.size() == l.getDimension() * 4 - 4) {
-			System.out.println("Correct number of cells = "
-					+ (l.getDimension() * 4 - 4));
+			System.out.println("Correct number of cells = " + (l.getDimension() * 4 - 4));
 		} else {
 			System.out.println("Wrong number of cells");
 		}

@@ -366,5 +366,45 @@ public class Labyrinth {
 		}
 		return false;
 	}
+	
+	public char getExitCellWall(){
+		// given exit cell
+		// if cell-wall is external and is open then it is the exit cellwall
+		if(exit.getCol()==0 && exit.getRow()==0){// N-W
+			if(!exit.isNorth()){
+				return Cell.NORTH;
+			}else if(!exit.isWest()){
+				return Cell.WEST;
+			}
+		}
+		
+		if(exit.getCol()==dimension && exit.getRow()==0){// N-E
+			if(!exit.isNorth()){
+				return Cell.NORTH;
+			}else if(!exit.isEast()){
+				return Cell.EAST;
+			}
+		}
+		if(exit.getCol()==0 && exit.getRow()==dimension){// S-W
+			if(!exit.isSouth()){
+				return Cell.SOUTH;
+			}else if(!exit.isWest()){
+				return Cell.WEST;
+			}
+		}
+		
+		if(exit.getCol()==dimension && exit.getRow()==dimension){// S-E
+			if(!exit.isSouth()){
+				return Cell.SOUTH;
+			}else if(!exit.isEast()){
+				return Cell.EAST;
+			}
+		}
+		if(exit.getCol()==0 && !exit.isWest()) return Cell.WEST;
+		if(exit.getCol()==dimension && !exit.isEast()) return Cell.EAST;
+		if(exit.getRow()==0 && !exit.isNorth()) return Cell.NORTH;
+		if(exit.getRow()==dimension && !exit.isSouth()) return Cell.SOUTH;
+		return ' ';
+	}
 
 }
