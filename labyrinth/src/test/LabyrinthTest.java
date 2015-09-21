@@ -2,6 +2,7 @@ package test;
 
 import infrastructure.Cell;
 import infrastructure.Labyrinth;
+import infrastructure.LabyrinthGenerator;
 
 import java.util.ArrayList;
 
@@ -10,40 +11,46 @@ import view.Console;
 
 public class LabyrinthTest {
 
-	static Labyrinth l;
+	static Labyrinth lab = null;
 	public static void main(String[] args) {
-		ArrayList<Cell> cs = new ArrayList<Cell>();
-		Cell a = new Cell(false, false, false, false, "a");
-		Cell b = new Cell(true, true, true, true, "b");
-		Cell c = new Cell(true, true, true, true, "c");
-		Cell d = new Cell(true, true, true, true, "d");
-		Cell e = new Cell(true, true, true, true, "e");
-		Cell f = new Cell(true, true, true, true, "f");
-		Cell g = new Cell(true, true, true, true, "g");
-		Cell h = new Cell(true, true, true, true, "h");
-		Cell i = new Cell(true, true, true, true, "i");
-		cs.add(a);
-		cs.add(b);
-		cs.add(c);
-		cs.add(d);
-		cs.add(e);
-		cs.add(f);
-		cs.add(g);
-		cs.add(h);
-		cs.add(i);
-		Player p = new Player("A", 1);
-		l = new Labyrinth(cs, b, g);
-		l.setExit(a);
-		l.setPlayer(p);
+		int size = 3;
+		LabyrinthGenerator labyrinthGenerator = new LabyrinthGenerator();
+		
+		try {
+			lab = labyrinthGenerator.generateLabyrinth(size);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		 while(labyrinthGenerator.getPath().size() < (int)(lab.getDimension()*Math.log(lab.getDimension()))){
+			 lab = null;
+			 try {
+				lab = labyrinthGenerator.generateLabyrinth(size);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		 }
+		 
+		 try {
+			lab = labyrinthGenerator.generateDeadEndTunnels();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		 
+		 Console console = new Console(lab);
+		 Player p = new Player();
+		 p.setName("A");
+		 lab.setPlayer(p);
+		 p.setPosition(lab.getEntrance());
+		 console.draw();
+		 
+		
+		
 		testExitCellWall();
 //		testGetLabyrinthWall(l);
 	}
 	
 	public static void testExitCellWall(){
-		Console c = new Console(l);
-		c.draw();
-		
-		System.out.println(l.getExitCellWall());
+		System.out.println("exit = "+lab.getExitCellWall());
 	}
 
 	public static void testGetLabyrinthWall(Labyrinth l) {
