@@ -11,24 +11,28 @@ import tools.*;
 import utils.Utils;
 
 public class Level {
-	private static Player player = null;
+
 	public static int MAX_LEVEL = 12;
 	public static int FIRST_LEVEL = 3;
 	public static boolean levelChanged;
-	public static int currentLevel=3;
+	public static int currentLevel = 3;
 	public static ArrayList<Animator> animators = new ArrayList<Animator>();
-	private static ArrayList<Tool> tools = new ArrayList<Tool>();
+	private static Player player = new Player("F", 3);
 
 	public static Labyrinth genLabyrinth() throws Exception {
-
 		LabyrinthGenerator labyrinthGenerator = new LabyrinthGenerator();
 		Labyrinth lab = labyrinthGenerator.generateLabyrinth(currentLevel);
 
-		while (labyrinthGenerator.getPath().size() < (int) (lab.getDimension() * Math
-				.log(lab.getDimension()))) {
+		while (labyrinthGenerator.getPath().size() < (int) (lab.getDimension() * Math.log(lab.getDimension()))) {
 			lab = labyrinthGenerator.generateLabyrinth(currentLevel);
 		}
 
+		player.setId(1);
+		player.setPosition(lab.getEntrance());
+		lab.setPlayer(player);
+		
+		System.out.println("THE PLAYER "+player.getName()+" POS="+player.getPosition()+" LEVEL="+currentLevel);
+		
 		Labyrinth genLabyrinth = labyrinthGenerator.generateDeadEndTunnels();
 		ArrayList<ArrayList> subPaths = labyrinthGenerator.getSubPaths();
 		if (subPaths.size() > 1) {
@@ -39,26 +43,26 @@ public class Level {
 			});
 			populate(genLabyrinth, subPaths);
 		}
-		
 
 		return genLabyrinth;
 	}
 
 	private static void populate(Labyrinth lab, ArrayList<ArrayList> subPaths) {
-		
-		ArrayList<Cell> subPath = subPaths.get(0); // taking the bigget subpath for tools and creatures
-		int pos1 =Utils.generateRandomNumber(subPath.size());
-		int pos2 =Utils.generateRandomNumber(subPath.size());
-		int pos3 =Utils.generateRandomNumber(subPath.size());
-		int pos4 =Utils.generateRandomNumber(subPath.size());
-		int pos5 =Utils.generateRandomNumber(subPath.size());
-		int pos6 =Utils.generateRandomNumber(subPath.size());
-		int pos7 =Utils.generateRandomNumber(subPath.size());
-		int pos8 =Utils.generateRandomNumber(subPath.size());
-		int pos9 =Utils.generateRandomNumber(subPath.size());
-		int pos10 =Utils.generateRandomNumber(subPath.size());
-		
-		switch (currentLevel-2){
+
+		ArrayList<Cell> subPath = subPaths.get(0); // taking the bigget subpath
+													// for tools and creatures
+		int pos1 = Utils.generateRandomNumber(subPath.size());
+		int pos2 = Utils.generateRandomNumber(subPath.size());
+		int pos3 = Utils.generateRandomNumber(subPath.size());
+		int pos4 = Utils.generateRandomNumber(subPath.size());
+		int pos5 = Utils.generateRandomNumber(subPath.size());
+		int pos6 = Utils.generateRandomNumber(subPath.size());
+		int pos7 = Utils.generateRandomNumber(subPath.size());
+		int pos8 = Utils.generateRandomNumber(subPath.size());
+		int pos9 = Utils.generateRandomNumber(subPath.size());
+		int pos10 = Utils.generateRandomNumber(subPath.size());
+
+		switch (currentLevel - 2) {
 		case 2:
 			ArrayList<Tool> ts1 = new ArrayList<Tool>();
 			ts1.add(new Plaster(.1f));
@@ -109,18 +113,18 @@ public class Level {
 			subPath.get(pos10).setTools(ts10);
 			break;
 		}
-		
-		if (currentLevel-2 >= 3) {
-			createGuard(lab, subPath, 3000, "G3",pos1);
+
+		if (currentLevel - 2 >= 3) {
+			createGuard(lab, subPath, 3000, "G3", pos1);
 		}
-		if (currentLevel-2 >= 5) {
-			createGuard(lab, subPath,2000, "G5", pos2);
+		if (currentLevel - 2 >= 5) {
+			createGuard(lab, subPath, 2000, "G5", pos2);
 		}
-		if (currentLevel-2 >= 8) {
-			createGuard(lab, subPath,1500, "G8", pos3);
+		if (currentLevel - 2 >= 8) {
+			createGuard(lab, subPath, 1500, "G8", pos3);
 		}
-		if (currentLevel-2 >= 9) {
-			createGuard(lab, subPath,700, "G9", pos4);
+		if (currentLevel - 2 >= 9) {
+			createGuard(lab, subPath, 700, "G9", pos4);
 		}
 
 	}
@@ -128,10 +132,10 @@ public class Level {
 	private static void createGuard(Labyrinth lab, ArrayList<Cell> subPath, int time, String name, int pos) {
 		Creature guard = null;
 		if (subPath.size() > 2) {
-			
-//			while(!subPath.get(pos).getHosts().isEmpty()){
-//				pos = Utils.generateRandomNumber(subPath.size());
-//			}
+
+			// while(!subPath.get(pos).getHosts().isEmpty()){
+			// pos = Utils.generateRandomNumber(subPath.size());
+			// }
 			guard = new Guard(name, subPath.get(pos), 1, 1.0f);
 			if (guard != null) {
 				ArrayList<Creature> guards = new ArrayList<Creature>();
@@ -158,10 +162,9 @@ public class Level {
 	public static int previous() {
 		return (currentLevel++);
 	}
-	
-	public static int goTo(int offset){
-		currentLevel +=offset;
+
+	public static int goTo(int offset) {
+		currentLevel += offset;
 		return currentLevel;
 	}
 }
-

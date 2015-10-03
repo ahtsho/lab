@@ -10,7 +10,7 @@ public class Guard implements Bad, Creature {
 	private String name;
 	private Cell position;
 	private float life;
-	
+	private int id; 
 	public Guard() {
 		super();
 	}
@@ -47,6 +47,16 @@ public class Guard implements Bad, Creature {
 	public void setPosition(Cell destination) {
 		position = destination;
 		destination.addHost(this);
+	}
+
+	@Override
+	public int getId() {
+		return id;
+	}
+
+	@Override
+	public void setId(int id) {
+		this.id=id;
 	}
 
 }

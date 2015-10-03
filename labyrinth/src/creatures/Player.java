@@ -12,6 +12,7 @@ public class Player implements Creature {
 	private float maxLife;
 	public static boolean hurt; 
 	public static boolean healed;
+	private int id;
 	
 	public Player(){}
 	public Player(String aName, float lives){
@@ -70,6 +71,17 @@ public class Player implements Creature {
 		bd = bd.setScale(2, RoundingMode.HALF_UP);
 		life = bd.floatValue();
 		return life;
+	}
+	
+	
+	@Override
+	public void setId(int id) {
+		this.id = id;
+	}
+	
+	@Override
+	public int getId() {
+		return id;
 	}
 
 }

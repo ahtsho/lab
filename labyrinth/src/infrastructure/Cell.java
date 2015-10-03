@@ -185,7 +185,7 @@ public class Cell {
 	public synchronized void addHost(Creature creature) {
 		if(!hosts.contains(creature)){
 			hosts.add(creature);
-		}
+		} 
 	}
 
 	public synchronized void removeHost(Creature creature) {
