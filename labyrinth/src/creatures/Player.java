@@ -51,8 +51,8 @@ public class Player implements Creature {
 		if(life > 0){
 			System.out.print("damage caused = "+life+" - ");
 			life = life - amount;
-			System.out.println("amount = "+amount+" = "+life);
 			if(life < 0) life = 0;
+			System.out.println("amount = "+amount+" = "+life);
 		}
 	}
 	
