@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 import infrastructure.Cell;
+import interfaces.Performer;
 
 public class Player implements Creature {
 	private String name;
@@ -13,6 +14,11 @@ public class Player implements Creature {
 	public static boolean hurt; 
 	public static boolean healed;
 	private int id;
+	private Performer performer;
+	
+	public void setAction(Performer aPerformer){
+		performer = aPerformer;
+	}
 	
 	public Player(){}
 	public Player(String aName, float lives){
@@ -47,24 +53,33 @@ public class Player implements Creature {
 		position.addHost(this);
 	}
 	
-	public synchronized void damage(float amount){
+	public synchronized boolean damage(float amount){
 		if(life > 0){
-			System.out.print("damage caused = "+life+" - ");
 			life = life - amount;
+			if(performer!=null){
+				performer.perform(Performer.DAMAGE);
+			}
 			if(life < 0) life = 0;
-			System.out.println("amount = "+amount+" = "+life);
+			return true;
 		}
+		return false;
 	}
 	
-	public void heal(float healAmount) {
+	public boolean heal(float healAmount) {
 		if(life < maxLife){
 			if(life + healAmount <= maxLife){
 				life += healAmount;
 			} else {
 				life = maxLife;
 			}
+			if(performer!=null){
+				performer.perform(Performer.HEAL);
+			}
+			return true;
 		}
+		return false;
 	}
+	
 	@Override
 	public synchronized float getLife() {
 		BigDecimal bd = new BigDecimal(life);

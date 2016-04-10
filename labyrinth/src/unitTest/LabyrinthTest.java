@@ -5,6 +5,7 @@ import infrastructure.Cell;
 import infrastructure.Labyrinth;
 
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.junit.After;
 import org.junit.Before;
@@ -14,7 +15,7 @@ public class LabyrinthTest {
 	Labyrinth l;
 	@Before
 	public void setUp() throws Exception {
-		ArrayList<Cell> cs = new ArrayList<Cell>();
+		CopyOnWriteArrayList<Cell> cs = new CopyOnWriteArrayList<Cell>();
 		Cell a = new Cell(true, true, true, true, "a");
 		Cell b = new Cell(true, true, true, true, "b");
 		Cell c = new Cell(true, true, true, true, "c");

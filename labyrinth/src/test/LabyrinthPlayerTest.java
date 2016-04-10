@@ -7,13 +7,14 @@ import infrastructure.Labyrinth;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import view.Console;
 import creatures.Player;
 
 public class LabyrinthPlayerTest {
 	public static void main(String[] args) {
-		ArrayList<Cell> cs = new ArrayList<Cell>();
+		CopyOnWriteArrayList<Cell> cs = new CopyOnWriteArrayList<Cell>();
 		Cell a = new Cell(true, true, true, true, "a");
 		Cell b = new Cell(true, false, true, true, "b");
 		Cell c = new Cell(true, true, true, true, "c");

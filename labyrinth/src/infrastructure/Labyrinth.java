@@ -1,6 +1,7 @@
 package infrastructure;
 
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import creatures.Creature;
 import creatures.LifeManager;
@@ -8,8 +9,9 @@ import creatures.Player;
 
 public class Labyrinth {
 
-	private ArrayList<Cell> cells;
-	private Cell entrance;
+	private CopyOnWriteArrayList<Cell> cells;
+	private Cell entranceCell;
+	private char entranceWall;
 	private Cell exit;
 	private int dimension;
 	private Player player;
@@ -17,17 +19,17 @@ public class Labyrinth {
 	private ArrayList<Creature> creatures;
 	private LifeManager lifeManager = new LifeManager();
 	
-	public Labyrinth(ArrayList<Cell> cs, Cell c1, Cell c2) {
+	public Labyrinth(CopyOnWriteArrayList<Cell> cs, Cell c1, Cell c2) {
 		cells = cs;
-		entrance = c1;
+		entranceCell = c1;
 		exit = c2;
 		dimension = (int) Math.sqrt(cells.size());
 		disposeCells();
 	}
 
-	public Labyrinth(ArrayList<Cell> cs, Cell c1, Cell c2, Player p) {
+	public Labyrinth(CopyOnWriteArrayList<Cell> cs, Cell c1, Cell c2, Player p) {
 		cells = cs;
-		entrance = c1;
+		entranceCell = c1;
 		exit = c2;
 		dimension = (int) Math.sqrt(cells.size());
 		player = p;
@@ -42,16 +44,16 @@ public class Labyrinth {
 		this.dimension = dimension;
 	}
 
-	public ArrayList<Cell> getCells() {
+	public CopyOnWriteArrayList<Cell> getCells() {
 		return cells;
 	}
 
-	public void setCells(ArrayList<Cell> cells) {
+	public void setCells(CopyOnWriteArrayList<Cell> cells) {
 		this.cells = cells;
 	}
 
 	public boolean isEntrance(Cell c) {
-		if (c == entrance)
+		if (c == entranceCell)
 			return true;
 		return false;
 	}
@@ -63,7 +65,7 @@ public class Labyrinth {
 	}
 
 	public Cell getEntrance() {
-		return entrance;
+		return entranceCell;
 	}
 
 	public ArrayList<Creature> getCreatures() {
@@ -81,7 +83,7 @@ public class Labyrinth {
 	 * @param entrance
 	 */
 	public void setEntrance(Cell entrance) {
-		this.entrance = entrance;
+		this.entranceCell = entrance;
 		breakEntranceExternalWall();
 	}
 
@@ -203,15 +205,19 @@ public class Labyrinth {
 	 * Breaks the external wall of the entrance
 	 */
 	private void breakEntranceExternalWall() {
-		if (entrance != null) {
-			if (entrance.getRow() == 0) {
-				entrance.setNorth(false);
-			} else if (entrance.getCol() == 0) {
-				entrance.setWest(false);
-			} else if (entrance.getRow() == dimension - 1) {
-				entrance.setSouth(false);
-			} else if (entrance.getCol() == dimension - 1) {
-				entrance.setEast(false);
+		if (entranceCell != null) {
+			if (entranceCell.getRow() == 0) {
+				entranceCell.setNorth(false);
+				setEntranceWall(Cell.NORTH);
+			} else if (entranceCell.getCol() == 0) {
+				entranceCell.setWest(false);
+				setEntranceWall(Cell.WEST);
+			} else if (entranceCell.getRow() == dimension - 1) {
+				entranceCell.setSouth(false);
+				setEntranceWall(Cell.SOUTH);
+			} else if (entranceCell.getCol() == dimension - 1) {
+				entranceCell.setEast(false);
+				setEntranceWall(Cell.EAST);
 			}
 		}
 	}
@@ -280,6 +286,7 @@ public class Labyrinth {
 		throw new Exception("Non Existing direction");
 	}
 
+	
 	/*
 	 * Given a cell to go to,
 	 */
@@ -405,6 +412,21 @@ public class Labyrinth {
 		if(exit.getRow()==0 && !exit.isNorth()) return Cell.NORTH;
 		if(exit.getRow()==dimension-1 && !exit.isSouth()) return Cell.SOUTH;
 		return ' ';
+	}
+
+	public char getEntranceWall() {
+		return entranceWall;
+	}
+
+	public void setEntranceWall(char entranceWall) {
+		this.entranceWall = entranceWall;
+	}
+
+	public void restoreEntranceWall() {
+		if(entranceWall==Cell.NORTH) entranceCell.setNorth(true);
+		else if(entranceWall==Cell.SOUTH) entranceCell.setSouth(true);
+		else if(entranceWall==Cell.WEST) entranceCell.setWest(true);
+		else if(entranceWall==Cell.EAST) entranceCell.setEast(true);
 	}
 
 }

@@ -5,6 +5,7 @@ import infrastructure.Labyrinth;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import tools.Bomb;
 import tools.Box;
@@ -30,7 +31,7 @@ public class ToolsTest {
 		p.setPosition(l.getEntrance());
 		l.setPlayer(p);
 
-		ArrayList<Cell> path = new ArrayList<Cell>();
+		CopyOnWriteArrayList<Cell> path = new CopyOnWriteArrayList<Cell>();
 		path.add(test.a);
 		path.add(test.b);
 		path.add(test.c);
@@ -41,7 +42,7 @@ public class ToolsTest {
 
 		while (true) {
 			int pos = Utils.generateRandomNumber(path.size());
-			ArrayList<Tool> tools = new ArrayList<Tool>();
+			CopyOnWriteArrayList<Tool> tools = new CopyOnWriteArrayList<Tool>();
 			tools.add(new Plaster(.1f));
 			path.get(pos).setTools(tools);
 			console.draw();

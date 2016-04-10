@@ -1,14 +1,14 @@
 package tools;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import utils.Utils;
 
 public class Box implements Tool {
 
-	private ArrayList<Tool> objects;
+	private CopyOnWriteArrayList<Tool> objects;
 
-	public Box(ArrayList<Tool> objs) {
+	public Box(CopyOnWriteArrayList<Tool> objs) {
 		if (!objs.isEmpty()) {
 			objects = objs;
 		}

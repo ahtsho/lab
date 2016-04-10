@@ -5,6 +5,7 @@ import interfaces.Bad;
 import interfaces.Good;
 
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import tools.Box;
 import tools.Tool;
@@ -23,23 +24,20 @@ import tools.Tool;
  */
 public class LifeManager {
 
-	public synchronized void manage(Player player, Cell position) {
-		ArrayList<Creature> creatures = position.getHosts();
-		ArrayList<Tool> tools = position.getTools();
+	public void manage(Player player, Cell position) {
+		CopyOnWriteArrayList<Creature> creatures = position.getHosts();
+		CopyOnWriteArrayList<Tool> tools = position.getTools();
 
 		if (creatures.size() > 1) {// assuming the first creature is the player
 			for (int i = 0; i < creatures.size(); i++) {
 				if (player.getPosition().equals(position) && !(creatures.get(i) instanceof Player)) {
 					if (creatures.get(i) instanceof Bad ) {
-//						System.out.println(creatures.get(i).getName()+" hurting player");
-						player.damage(((Bad) creatures.get(i))
+						Player.hurt = player.damage(((Bad) creatures.get(i))
 								.getCausedDamage());
-//						System.out.println("by "+((Bad) creatures.get(i))
-//								.getCausedDamage());
-						Player.hurt = true;
+						
 					} else if (creatures.get(i) instanceof Good) {
-						player.heal(((Good) creatures.get(i)).getHealAmount());
-						Player.healed = true;
+						Player.healed = player.heal(((Good) creatures.get(i)).getHealAmount());
+						
 					}
 				}
 			}
@@ -56,13 +54,12 @@ public class LifeManager {
 					}
 
 					if (tool instanceof Bad) {
-						player.damage(((Bad) tool).getCausedDamage());
-						Player.hurt = true;
+						Player.hurt = player.damage(((Bad) tool).getCausedDamage());
+						if(Player.hurt) tools.remove(tool);
 					} else if (tool instanceof Good) {
-						player.heal(((Good) tool).getHealAmount());
-						Player.healed = true;
+						Player.healed = player.heal(((Good) tool).getHealAmount());
+						if(Player.healed) tools.remove(tool);
 					}
-					tools.remove(tool); // tool is removed once used
 					
 					try {
 						((Box) tools.get(i)).removeObject(tool);
@@ -70,7 +67,6 @@ public class LifeManager {
 				}
 			}
 		}
-
 	}
 
 }

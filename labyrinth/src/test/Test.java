@@ -1,6 +1,8 @@
 package test;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import infrastructure.Cell;
 import infrastructure.Labyrinth;
@@ -19,7 +21,7 @@ public class Test {
 	public Cell h ;
 	public Cell i ;
 	public Test(){
-		ArrayList<Cell> cs = new ArrayList<Cell>();
+		CopyOnWriteArrayList<Cell> cs = new CopyOnWriteArrayList<Cell>();
 		// n s w e
 		a = new Cell(true, false, true, false, "a");
 		b = new Cell(true, false, false, false, "b");

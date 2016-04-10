@@ -5,6 +5,7 @@ import infrastructure.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import creatures.*;
 import tools.*;
@@ -64,51 +65,51 @@ public class Level {
 
 		switch (currentLevel - 2) {
 		case 2:
-			ArrayList<Tool> ts1 = new ArrayList<Tool>();
+			CopyOnWriteArrayList<Tool> ts1 = new CopyOnWriteArrayList<Tool>();
 			ts1.add(new Plaster(.1f));
 			subPath.get(pos1).setTools(ts1);
 			break;
 		case 4:
-			ArrayList<Tool> ts2 = new ArrayList<Tool>();
+			CopyOnWriteArrayList<Tool> ts2 = new CopyOnWriteArrayList<Tool>();
 			ts2.add(new Medicine(.5f));
 			subPath.get(pos2).setTools(ts2);
 			break;
 		case 5:
-			ArrayList<Tool> ts3 = new ArrayList<Tool>();
+			CopyOnWriteArrayList<Tool> ts3 = new CopyOnWriteArrayList<Tool>();
 			ts3.add(new Plaster(.1f));
 			subPath.get(pos3).setTools(ts3);
 			break;
 		case 6:
-			ArrayList<Tool> ts4 = new ArrayList<Tool>();
+			CopyOnWriteArrayList<Tool> ts4 = new CopyOnWriteArrayList<Tool>();
 			ts4.add(new Hole(1f));
 			subPath.get(pos4).setTools(ts4);
 			break;
 		case 7:
-			ArrayList<Tool> objs = new ArrayList<Tool>();
+			CopyOnWriteArrayList<Tool> objs = new CopyOnWriteArrayList<Tool>();
 			objs.add(new Heart(1f));
 			objs.add(new Bomb(1f));
-			ArrayList<Tool> ts5 = new ArrayList<Tool>();
+			CopyOnWriteArrayList<Tool> ts5 = new CopyOnWriteArrayList<Tool>();
 			ts5.add(new Box(objs));
 			subPath.get(pos5).setTools(ts5);
 			break;
 		case 8:
-			ArrayList<Tool> ts6 = new ArrayList<Tool>();
+			CopyOnWriteArrayList<Tool> ts6 = new CopyOnWriteArrayList<Tool>();
 			ts6.add(new Hole(1f));
 			subPath.get(pos6).setTools(ts6);
-			ArrayList<Tool> ts7 = new ArrayList<Tool>();
+			CopyOnWriteArrayList<Tool> ts7 = new CopyOnWriteArrayList<Tool>();
 			ts7.add(new Plaster(.1f));
 			subPath.get(pos7).setTools(ts7);
-			ArrayList<Tool> ts8 = new ArrayList<Tool>();
+			CopyOnWriteArrayList<Tool> ts8 = new CopyOnWriteArrayList<Tool>();
 			ts8.add(new Medicine(.5f));
 			subPath.get(pos8).setTools(ts8);
 			break;
 		case 9:
-			ArrayList<Tool> ts9 = new ArrayList<Tool>();
+			CopyOnWriteArrayList<Tool> ts9 = new CopyOnWriteArrayList<Tool>();
 			ts9.add(new Heart(1f));
 			subPath.get(pos9).setTools(ts9);
 			break;
 		case 10:
-			ArrayList<Tool> ts10 = new ArrayList<Tool>();
+			CopyOnWriteArrayList<Tool> ts10 = new CopyOnWriteArrayList<Tool>();
 			ts10.add(new Hole(1f));
 			subPath.get(pos10).setTools(ts10);
 			break;
@@ -138,7 +139,7 @@ public class Level {
 			// }
 			guard = new Guard(name, subPath.get(pos), 1, 1.0f);
 			if (guard != null) {
-				ArrayList<Creature> guards = new ArrayList<Creature>();
+				CopyOnWriteArrayList<Creature> guards = new CopyOnWriteArrayList<Creature>();
 				guards.add(guard);
 				subPath.get(pos).setHosts(guards);
 			}

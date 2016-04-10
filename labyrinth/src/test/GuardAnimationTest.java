@@ -4,6 +4,7 @@ import infrastructure.Cell;
 import infrastructure.Labyrinth;
 
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import utils.Utils;
 import view.Console;
@@ -23,7 +24,7 @@ public class GuardAnimationTest {
 	}
 	
 	private static void twoGuards() {
-		ArrayList<Cell> cs = new ArrayList<Cell>();
+		CopyOnWriteArrayList<Cell> cs = new CopyOnWriteArrayList<Cell>();
 		// n s w e
 		Cell a = new Cell(true, false, true, false, "a");
 		Cell b = new Cell(true, false, false, false, "b");
@@ -98,7 +99,7 @@ public class GuardAnimationTest {
 
 	
 	private static void moveGuardZigZag() {
-		ArrayList<Cell> cs = new ArrayList<Cell>();
+		CopyOnWriteArrayList<Cell> cs = new CopyOnWriteArrayList<Cell>();
 		// n s w e
 		Cell a = new Cell(true, false, true, false, "a");
 		Cell b = new Cell(true, false, false, false, "b");
@@ -162,7 +163,7 @@ public class GuardAnimationTest {
 
 
 	private static void moveGuardEWWithWall() {
-		ArrayList<Cell> cs = new ArrayList<Cell>();
+		CopyOnWriteArrayList<Cell> cs = new CopyOnWriteArrayList<Cell>();
 		// n s w e
 		Cell a = new Cell(true, false, true, false, "a");
 		Cell b = new Cell(true, false, false, false, "b");
@@ -215,7 +216,7 @@ public class GuardAnimationTest {
 
 	
 	private static void moveGuardEW() {
-		ArrayList<Cell> cs = new ArrayList<Cell>();
+		CopyOnWriteArrayList<Cell> cs = new CopyOnWriteArrayList<Cell>();
 		// n s w e
 		Cell a = new Cell(true, false, true, false, "a");
 		Cell b = new Cell(true, false, false, false, "b");
@@ -267,7 +268,7 @@ public class GuardAnimationTest {
 	}
 
 	private static void moveGuardNS() {
-		ArrayList<Cell> cs = new ArrayList<Cell>();
+		CopyOnWriteArrayList<Cell> cs = new CopyOnWriteArrayList<Cell>();
 		// n s w e
 		Cell a = new Cell(true, false, true, false, "a");
 		Cell b = new Cell(true, false, false, false, "b");

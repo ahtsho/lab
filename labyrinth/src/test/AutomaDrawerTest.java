@@ -4,6 +4,7 @@ import infrastructure.Cell;
 import infrastructure.Labyrinth;
 
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import utils.Utils;
 import view.AutomaDrawer;
@@ -19,7 +20,7 @@ public class AutomaDrawerTest {
 	}
 	
 	private static void twoGuards() {
-		ArrayList<Cell> cs = new ArrayList<Cell>();
+		CopyOnWriteArrayList<Cell> cs = new CopyOnWriteArrayList<Cell>();
 		// n s w e
 		Cell a = new Cell(true, false, true, false, "a");
 		Cell b = new Cell(true, false, false, false, "b");

@@ -1,6 +1,7 @@
 package infrastructure;
 
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import utils.Utils;
 
@@ -39,7 +40,7 @@ public class LabyrinthGenerator {
 	 * @param n
 	 */
 	public void generateFull(int n) {
-		ArrayList<Cell> labs = new ArrayList<Cell>();
+		CopyOnWriteArrayList<Cell> labs = new CopyOnWriteArrayList<Cell>();
 		path = new ArrayList<Cell>();
 		for (int i = 0; i < n * n; i++) {
 			labs.add(new Cell(true, true, true, true, i % 10 + ""));
@@ -57,11 +58,14 @@ public class LabyrinthGenerator {
 	 */
 	public void createTunnel() throws Exception {
 		Cell entrance = chooseEntrance();
+		genLabyrinth.setEntrance(entrance);
 		path.add(entrance);
 
 		Cell cell = dig(entrance,Labyrinth.getOppositeDirection(entrance.getFirstOpenWallNSWE()),path);
 		path.add(cell);
-
+		
+		// close the entrance wall
+		genLabyrinth.restoreEntranceWall();
 		while (cell != null) {
 			char d = chooseDirection();
 			cell = dig(cell, d,path);
@@ -156,9 +160,7 @@ public class LabyrinthGenerator {
 	 */
 	public Cell chooseEntrance() {
 		ArrayList<Cell> borderCells = genLabyrinth.getLabyrinthWall();
-		Cell entrance = borderCells.get(Utils.generateRandomNumber(genLabyrinth.getLabyrinthWall().size() - 1));
-		genLabyrinth.setEntrance(entrance);
-		return entrance;
+		return borderCells.get(Utils.generateRandomNumber(genLabyrinth.getLabyrinthWall().size() - 1));
 	}
 
 	public Labyrinth generateDeadEndTunnels() throws Exception {	

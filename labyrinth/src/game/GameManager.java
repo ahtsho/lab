@@ -73,6 +73,7 @@ public class GameManager {
 						try {
 							if (lab.move(player,Console.adaptDirection((read.charAt(0))))) {
 								console.draw();
+								System.out.println(lab.getPlayer().getPosition().getTools().size());
 								console.printMoveMsg();
 							} else {
 								console.draw();

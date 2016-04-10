@@ -1,6 +1,6 @@
 package infrastructure;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import tools.Tool;
 import creatures.Creature;
@@ -19,25 +19,25 @@ public class Cell {
 	private boolean east;
 	private int row, col;
 
-	private ArrayList<Creature> hosts;
-	private ArrayList<Tool> tools;
+	private CopyOnWriteArrayList<Creature> hosts;
+	private CopyOnWriteArrayList<Tool> tools;
 	
-	public synchronized ArrayList<Tool> getTools() {
+	public synchronized CopyOnWriteArrayList<Tool> getTools() {
 		return tools;
 	}
-	public synchronized void setTools(ArrayList<Tool> tools) {
+	public synchronized void setTools(CopyOnWriteArrayList<Tool> tools) {
 		this.tools = tools;
 	}
-	public synchronized void setHosts(ArrayList<Creature> players){
+	public synchronized void setHosts(CopyOnWriteArrayList<Creature> players){
 		hosts=players;
 	}
-	public synchronized ArrayList<Creature> getHosts(){
+	public synchronized CopyOnWriteArrayList<Creature> getHosts(){
 		return hosts;
 	}
 	
 	public Cell(boolean N, boolean S, boolean W, boolean E, String string) {
-		hosts = new ArrayList<Creature>();
-		tools = new ArrayList<Tool>();
+		hosts = new CopyOnWriteArrayList<Creature>();
+		tools = new CopyOnWriteArrayList<Tool>();
 		north = N;
 		south = S;
 		west = W;
@@ -141,6 +141,18 @@ public class Cell {
 		throw new Exception("No open walls");
 	}
 
+	public char getOpenWallNSWEExcept(char wall) throws Exception {
+		if (!this.north && wall!=Cell.NORTH)
+			return Cell.NORTH;
+		if (!this.south && wall!=Cell.SOUTH)
+			return Cell.SOUTH;
+		if (!this.west && wall!=Cell.WEST)
+			return Cell.WEST;
+		if (!this.east && wall!=Cell.EAST)
+			return Cell.EAST;
+		throw new Exception("No open walls");
+	}
+	
 	/**
 	 * Compares the given cell with current cell's coordinates and name
 	 * @param cell
@@ -187,7 +199,7 @@ public class Cell {
 			hosts.add(creature);
 		} 
 	}
-
+	
 	public synchronized void removeHost(Creature creature) {
 		if(hosts.contains(creature)){
 			hosts.remove(creature);

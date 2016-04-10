@@ -5,6 +5,7 @@ import infrastructure.Labyrinth;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import tools.Medicine;
 import tools.Plaster;
@@ -21,7 +22,7 @@ public class LifeManagerTest {
 	}
 	
 	public static void guardVSplayer(){
-		ArrayList<Cell> cs = new ArrayList<Cell>();
+		CopyOnWriteArrayList<Cell> cs = new CopyOnWriteArrayList<Cell>();
 		// n s w e
 		Cell a = new Cell(true, false, true, false, "a");
 		Cell b = new Cell(true, false, false, false, "b");
