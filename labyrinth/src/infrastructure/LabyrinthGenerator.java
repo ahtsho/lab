@@ -50,11 +50,11 @@ public class LabyrinthGenerator {
 
 	/***
 	 * Chooses an entrance, moves one step in the opposite direction of the
-	 * entrance, then untill it comes out of the labyrinth it keeps on moving
+	 * entrance, then until it comes out of the labyrinth it keeps on moving
 	 * random directions.
 	 * 
 	 * @throws Exception
-	 *             Non exixting direction
+	 *             Non existing direction
 	 */
 	public void createTunnel() throws Exception {
 		Cell entrance = chooseEntrance();

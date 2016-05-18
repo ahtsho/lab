@@ -19,9 +19,14 @@ public class Level {
 	public static int currentLevel = 3;
 	public static ArrayList<Animator> animators = new ArrayList<Animator>();
 	private static Player player = new Player("F", 3);
-
+	private static LabyrinthGenerator labyrinthGenerator = null;
+	
+	public static ArrayList<Cell> getPath(){
+		return labyrinthGenerator.getPath();
+	}
+	
 	public static Labyrinth genLabyrinth() throws Exception {
-		LabyrinthGenerator labyrinthGenerator = new LabyrinthGenerator();
+		labyrinthGenerator = new LabyrinthGenerator();
 		Labyrinth lab = labyrinthGenerator.generateLabyrinth(currentLevel);
 
 		while (labyrinthGenerator.getPath().size() < (int) (lab.getDimension() * Math.log(lab.getDimension()))) {
