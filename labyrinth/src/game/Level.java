@@ -67,12 +67,16 @@ public class Level {
 		int pos8 = Utils.generateRandomNumber(subPath.size());
 		int pos9 = Utils.generateRandomNumber(subPath.size());
 		int pos10 = Utils.generateRandomNumber(subPath.size());
+		int pos11 = Utils.generateRandomNumber(subPath.size());
 
 		switch (currentLevel - 2) {
 		case 2:
 			CopyOnWriteArrayList<Tool> ts1 = new CopyOnWriteArrayList<Tool>();
 			ts1.add(new Plaster(.1f));
 			subPath.get(pos1).setTools(ts1);
+			CopyOnWriteArrayList<Tool> ts11 = new CopyOnWriteArrayList<Tool>();
+			ts11.add(new Hole(1f));
+			subPath.get(pos11).setTools(ts11);
 			break;
 		case 4:
 			CopyOnWriteArrayList<Tool> ts2 = new CopyOnWriteArrayList<Tool>();
@@ -121,16 +125,16 @@ public class Level {
 		}
 
 		if (currentLevel - 2 >= 3) {
-			createGuard(lab, subPath, 3000, "G3", pos1);
+			createGuard(lab, subPath, 2000, "G3", pos1);
 		}
 		if (currentLevel - 2 >= 5) {
-			createGuard(lab, subPath, 2000, "G5", pos2);
+			createGuard(lab, subPath, 1000, "G5", pos2);
 		}
 		if (currentLevel - 2 >= 8) {
-			createGuard(lab, subPath, 1500, "G8", pos3);
+			createGuard(lab, subPath, 800, "G8", pos3);
 		}
 		if (currentLevel - 2 >= 9) {
-			createGuard(lab, subPath, 700, "G9", pos4);
+			createGuard(lab, subPath, 500, "G9", pos4);
 		}
 
 	}

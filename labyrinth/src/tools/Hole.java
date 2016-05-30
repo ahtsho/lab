@@ -1,6 +1,6 @@
 package tools;
 
-import game.Game;
+import creatures.Player;
 import game.Level;
 import interfaces.Bad;
 
@@ -15,6 +15,7 @@ public class Hole implements Bad,Tool {
 	public float getCausedDamage() {
 		Level.goTo(-2);
 		Level.levelChanged=true;
+		Player.fell=true;
 		return damageCaused;
 	}
 	@Override

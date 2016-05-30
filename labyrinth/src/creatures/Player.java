@@ -13,6 +13,7 @@ public class Player implements Creature {
 	private float maxLife;
 	public static boolean hurt; 
 	public static boolean healed;
+	public static boolean fell;
 	private int id;
 	private Performer performer;
 	
