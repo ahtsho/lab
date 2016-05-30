@@ -13,7 +13,7 @@ public class Hole implements Bad,Tool {
 	}
 	@Override
 	public float getCausedDamage() {
-		Level.goTo(-2);
+//		Level.goTo(-2);
 		Level.levelChanged=true;
 		Player.fell=true;
 		return damageCaused;

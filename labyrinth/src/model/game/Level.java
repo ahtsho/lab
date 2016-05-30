@@ -13,7 +13,7 @@ import utils.Utils;
 
 public class Level {
 
-	public static int MAX_LEVEL = 12;
+	public static int MAX_LEVEL = 10;
 	public static int FIRST_LEVEL = 3;
 	public static boolean levelChanged;
 	public static int currentLevel = 3;
@@ -166,15 +166,23 @@ public class Level {
 	}
 
 	public static int next() {
-		return (currentLevel++);
+		if(currentLevel<=MAX_LEVEL){
+			currentLevel++;
+		}
+		return currentLevel;
 	}
 
 	public static int previous() {
-		return (currentLevel++);
+		if(currentLevel>0){
+			currentLevel--;
+		}
+		return currentLevel;
 	}
 
 	public static int goTo(int offset) {
-		currentLevel += offset;
+		if(currentLevel+offset>=0 && currentLevel+offset<=MAX_LEVEL){
+			currentLevel += offset;
+		}
 		return currentLevel;
 	}
 }

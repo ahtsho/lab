@@ -1,6 +1,5 @@
 package controllers;
 
-import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import model.creatures.Creature;
@@ -12,13 +11,13 @@ import model.tools.Box;
 import model.tools.Tool;
 
 /**
- * <p>Given a player and a cell, the life manager cheks if the cell has tools or
- * creatures, and either hurs or heals the player depengin on the found objects.</p>
+ * <p>Given a player and a cell, the life manager checks if the cell has tools or
+ * creatures, and either hurts or heals the player depending on the found objects.</p>
  * 
  * <p>Other thing the life manager does are: 
  * <ul>
  * <li>sets Player.hurt and Player.healed </li>
- * <li>remove used toools</li>
+ * <li>remove used tools</li>
  * </ul>
  * </p>
  * @author at
