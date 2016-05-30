@@ -1,9 +1,9 @@
-package infrastructure;
+package model.infrastructure;
 
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import tools.Tool;
-import creatures.Creature;
+import model.creatures.Creature;
+import model.tools.Tool;
 
 public class Cell {
 

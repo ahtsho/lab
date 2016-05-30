@@ -1,8 +1,8 @@
-package tools;
+package model.tools;
 
-import creatures.Player;
-import game.Level;
-import interfaces.Bad;
+import model.creatures.Player;
+import model.game.Level;
+import model.interfaces.Bad;
 
 public class Hole implements Bad,Tool {
 

@@ -1,14 +1,15 @@
-package creatures;
-
-import infrastructure.Cell;
-import interfaces.Bad;
-import interfaces.Good;
+package controllers;
 
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import tools.Box;
-import tools.Tool;
+import model.creatures.Creature;
+import model.creatures.Player;
+import model.infrastructure.Cell;
+import model.interfaces.Bad;
+import model.interfaces.Good;
+import model.tools.Box;
+import model.tools.Tool;
 
 /**
  * <p>Given a player and a cell, the life manager cheks if the cell has tools or

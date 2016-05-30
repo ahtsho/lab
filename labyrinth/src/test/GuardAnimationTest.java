@@ -1,17 +1,16 @@
 package test;
 
-import infrastructure.Cell;
-import infrastructure.Labyrinth;
-
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import model.creatures.Animator;
+import model.creatures.Creature;
+import model.creatures.Guard;
+import model.creatures.Player;
+import model.infrastructure.Cell;
+import model.infrastructure.Labyrinth;
 import utils.Utils;
 import view.Console;
-import creatures.Animator;
-import creatures.Creature;
-import creatures.Guard;
-import creatures.Player;
 
 public class GuardAnimationTest {
 	public static void main(String[] args) {

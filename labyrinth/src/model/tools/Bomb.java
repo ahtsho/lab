@@ -1,6 +1,6 @@
-package tools;
+package model.tools;
 
-import interfaces.Bad;
+import model.interfaces.Bad;
 
 public class Bomb implements Tool, Bad {
 	private float damageCaused;

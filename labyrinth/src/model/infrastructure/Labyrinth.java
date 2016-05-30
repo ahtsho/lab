@@ -1,11 +1,11 @@
-package infrastructure;
+package model.infrastructure;
 
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import creatures.Creature;
-import creatures.LifeManager;
-import creatures.Player;
+import model.creatures.Creature;
+import model.creatures.Player;
+import controllers.LifeManager;
 
 public class Labyrinth {
 

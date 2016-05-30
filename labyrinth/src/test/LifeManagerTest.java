@@ -1,19 +1,18 @@
 package test;
 
-import infrastructure.Cell;
-import infrastructure.Labyrinth;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import tools.Medicine;
-import tools.Plaster;
+import model.creatures.Animator;
+import model.creatures.Guard;
+import model.creatures.Player;
+import model.infrastructure.Cell;
+import model.infrastructure.Labyrinth;
+import model.tools.Medicine;
+import model.tools.Plaster;
 import utils.Utils;
 import view.Console;
-import creatures.Animator;
-import creatures.Guard;
-import creatures.Player;
 
 public class LifeManagerTest {
 

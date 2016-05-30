@@ -1,11 +1,11 @@
 package test;
 
-import infrastructure.Cell;
-import infrastructure.Labyrinth;
-import infrastructure.LabyrinthGenerator;
+import model.creatures.Guard;
+import model.creatures.Player;
+import model.infrastructure.Cell;
+import model.infrastructure.Labyrinth;
+import controllers.LabyrinthGenerator;
 import view.Console;
-import creatures.Guard;
-import creatures.Player;
 
 public class LabyrinthGeneratorTest {
 

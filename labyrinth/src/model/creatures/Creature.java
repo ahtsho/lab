@@ -1,6 +1,6 @@
-package creatures;
+package model.creatures;
 
-import infrastructure.Cell;
+import model.infrastructure.Cell;
 
 /**
  * A creature should have

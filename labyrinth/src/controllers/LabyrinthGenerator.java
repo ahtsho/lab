@@ -1,8 +1,10 @@
-package infrastructure;
+package controllers;
 
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import model.infrastructure.Cell;
+import model.infrastructure.Labyrinth;
 import utils.Utils;
 
 public class LabyrinthGenerator {

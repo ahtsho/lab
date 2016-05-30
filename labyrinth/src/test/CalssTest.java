@@ -1,12 +1,11 @@
 package test;
 
-import interfaces.Bad;
-
 import java.util.ArrayList;
 
-import creatures.Creature;
-import creatures.Guard;
-import creatures.Player;
+import model.creatures.Creature;
+import model.creatures.Guard;
+import model.creatures.Player;
+import model.interfaces.Bad;
 
 public class CalssTest {
 

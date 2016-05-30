@@ -1,10 +1,10 @@
 package test;
 
-import infrastructure.Cell;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.concurrent.CopyOnWriteArrayList;
+
+import model.infrastructure.Cell;
 
 public class IteratorsTest extends Test{
 

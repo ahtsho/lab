@@ -1,11 +1,12 @@
 package unitTest;
 
 import static org.junit.Assert.*;
-import infrastructure.Cell;
-import infrastructure.Labyrinth;
 
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
+
+import model.infrastructure.Cell;
+import model.infrastructure.Labyrinth;
 
 import org.junit.After;
 import org.junit.Before;

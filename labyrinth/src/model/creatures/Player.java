@@ -1,10 +1,10 @@
-package creatures;
+package model.creatures;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-import infrastructure.Cell;
-import interfaces.Performer;
+import model.infrastructure.Cell;
+import model.interfaces.Performer;
 
 public class Player implements Creature {
 	private String name;

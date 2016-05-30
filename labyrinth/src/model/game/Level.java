@@ -1,14 +1,14 @@
-package game;
-
-import infrastructure.*;
+package model.game;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import creatures.*;
-import tools.*;
+import model.creatures.*;
+import model.infrastructure.*;
+import model.tools.*;
+import controllers.LabyrinthGenerator;
 import utils.Utils;
 
 public class Level {

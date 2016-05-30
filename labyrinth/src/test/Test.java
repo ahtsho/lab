@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import infrastructure.Cell;
-import infrastructure.Labyrinth;
+import model.infrastructure.Cell;
+import model.infrastructure.Labyrinth;
 
 public class Test {
 	public Labyrinth lab;

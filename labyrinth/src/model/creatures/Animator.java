@@ -1,9 +1,9 @@
-package creatures;
-
-import infrastructure.Cell;
-import infrastructure.Labyrinth;
+package model.creatures;
 
 import java.util.ArrayList;
+
+import model.infrastructure.Cell;
+import model.infrastructure.Labyrinth;
 
 /**
  * Given a creature, a labyrinth a path and a sleep time in millseconds, the

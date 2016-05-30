@@ -1,6 +1,6 @@
-package tools;
+package model.tools;
 
-import interfaces.Good;
+import model.interfaces.Good;
 
 public class Heart implements Good,Tool {
 

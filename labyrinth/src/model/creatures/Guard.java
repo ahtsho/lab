@@ -1,7 +1,7 @@
-package creatures;
+package model.creatures;
 
-import infrastructure.Cell;
-import interfaces.Bad;
+import model.infrastructure.Cell;
+import model.interfaces.Bad;
 
 
 public class Guard implements Bad, Creature {

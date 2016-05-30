@@ -1,21 +1,20 @@
 package test;
 
-import infrastructure.Cell;
-import infrastructure.Labyrinth;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import tools.Bomb;
-import tools.Box;
-import tools.Heart;
-import tools.Medicine;
-import tools.Plaster;
-import tools.Tool;
+import model.creatures.Player;
+import model.infrastructure.Cell;
+import model.infrastructure.Labyrinth;
+import model.tools.Bomb;
+import model.tools.Box;
+import model.tools.Heart;
+import model.tools.Medicine;
+import model.tools.Plaster;
+import model.tools.Tool;
 import utils.Utils;
 import view.Console;
-import creatures.Player;
 
 public class ToolsTest {
 	public static void main(String[] args) {

@@ -1,9 +1,9 @@
 package view;
 
-import creatures.Animator;
-import creatures.Creature;
-import creatures.Player;
-import game.Level;
+import model.creatures.Animator;
+import model.creatures.Creature;
+import model.creatures.Player;
+import model.game.Level;
 
 public class AutomaDrawer implements Runnable {
 	public volatile static boolean stop;

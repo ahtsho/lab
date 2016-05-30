@@ -1,16 +1,15 @@
 package test;
 
-import game.Game;
-import game.Level;
-import infrastructure.Cell;
-import infrastructure.Labyrinth;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import model.creatures.Player;
+import model.game.Game;
+import model.game.Level;
+import model.infrastructure.Cell;
+import model.infrastructure.Labyrinth;
 import view.Console;
-import creatures.Player;
 
 public class LabyrinthPlayerTest {
 	public static void main(String[] args) {

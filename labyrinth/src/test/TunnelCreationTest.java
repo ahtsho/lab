@@ -1,8 +1,8 @@
 package test;
 
-import infrastructure.LabyrinthGenerator;
+import model.creatures.Player;
+import controllers.LabyrinthGenerator;
 import view.Console;
-import creatures.Player;
 
 public class TunnelCreationTest {
 

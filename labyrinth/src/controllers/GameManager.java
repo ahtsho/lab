@@ -1,12 +1,13 @@
-package game;
-
-import infrastructure.Labyrinth;
+package controllers;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import creatures.Animator;
-import creatures.Player;
+import model.creatures.Animator;
+import model.creatures.Player;
+import model.game.Game;
+import model.game.Level;
+import model.infrastructure.Labyrinth;
 import view.AutomaDrawer;
 import view.Console;
 
@@ -55,7 +56,7 @@ public class GameManager {
 			
 			while (true) {
 				
-				System.out.println();
+//				System.out.println();
 				read = scanIn.nextLine();
 				
 				if (game.isOn() && player.getLife() > 0) {
@@ -64,7 +65,7 @@ public class GameManager {
 						return;
 					}					
 					if ((read.toLowerCase().startsWith("l"))){
-						System.out.println("Player has Life="+player.getLife());
+//						System.out.println("Player has Life="+player.getLife());
 					}
 					if ((read.toLowerCase().startsWith("w")
 							| read.toLowerCase().startsWith("z")
@@ -73,7 +74,7 @@ public class GameManager {
 						try {
 							if (lab.move(player,Console.adaptDirection((read.charAt(0))))) {
 								console.draw();
-								System.out.println(lab.getPlayer().getPosition().getTools().size());
+//								System.out.println(lab.getPlayer().getPosition().getTools().size());
 								console.printMoveMsg();
 							} else {
 								console.draw();

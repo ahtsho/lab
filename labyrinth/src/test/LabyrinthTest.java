@@ -1,12 +1,11 @@
 package test;
 
-import infrastructure.Cell;
-import infrastructure.Labyrinth;
-import infrastructure.LabyrinthGenerator;
-
 import java.util.ArrayList;
 
-import creatures.Player;
+import model.creatures.Player;
+import model.infrastructure.Cell;
+import model.infrastructure.Labyrinth;
+import controllers.LabyrinthGenerator;
 import view.Console;
 
 public class LabyrinthTest {

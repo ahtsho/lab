@@ -1,6 +1,6 @@
-package tools;
+package model.tools;
 
-import interfaces.Good;
+import model.interfaces.Good;
 
 public class Plaster implements Tool,Good {
 	private float healingPower; 

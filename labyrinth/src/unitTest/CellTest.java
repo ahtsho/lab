@@ -1,7 +1,7 @@
 package unitTest;
 
 import static org.junit.Assert.*;
-import infrastructure.Cell;
+import model.infrastructure.Cell;
 
 import org.junit.After;
 import org.junit.Before;
