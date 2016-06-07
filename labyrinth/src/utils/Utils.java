@@ -1,16 +1,22 @@
 package utils;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Utils {
 
+	private static Random randomGenerator=null;
 	/**
 	 * Generates a random number between 0 and max-1
 	 * @param max
 	 * @return rand
 	 */
+	
 	public static int generateRandomNumber(int max) {
-		return (int) (Math.random() * (max));
+		if(randomGenerator==null){
+			randomGenerator = new Random();
+		}
+		return randomGenerator.nextInt(max);
 	}
 	
 

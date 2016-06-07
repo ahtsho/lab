@@ -7,8 +7,8 @@ import utils.Utils;
 public class UtilsTest {
 
 	public static void main(String[] args) {
-		//rndNTest();
-		addInverseTest();
+		rndNTest();
+//		addInverseTest();
 		
 	}
 	private static void addInverseTest(){
@@ -24,7 +24,7 @@ public class UtilsTest {
 	}
 	private static void rndNTest() {
 		for (int i = 0; i < 100; i++){
-			System.out.println(Utils.generateRandomNumber(4));
+			System.out.print(Utils.generateRandomNumber(6)+", ");
 		}
 	}
 

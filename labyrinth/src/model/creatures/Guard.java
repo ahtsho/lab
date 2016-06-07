@@ -16,11 +16,14 @@ public class Guard implements Bad, Creature {
 	}
 
 	public Guard(String aname, Cell aposition, float lives, float damage) {
-		position = aposition;
-		aposition.getHosts().add(this);
 		name = aname;
 		damageCaused = damage;
 		life = lives;
+		
+		if(aposition!=null){
+			position = aposition;
+			aposition.getHosts().add(this);
+		}
 	}
 
 	@Override

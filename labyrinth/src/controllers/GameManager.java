@@ -40,7 +40,7 @@ public class GameManager {
 			}
 			Console console = new Console(lab);
 			ArrayList<Thread> startedDrawers = new ArrayList<Thread>(); 
-			for(Animator anima:Level.animators){
+			for(Animator anima:PopulationManager.animators){
 				AutomaDrawer drawer = new AutomaDrawer(console,player, anima);
 				Thread creatureDrawer = new Thread(drawer);
 				creatureDrawer.start();
@@ -88,7 +88,7 @@ public class GameManager {
 										t.interrupt();
 									}
 								}
-								Level.animators.clear();
+								PopulationManager.animators.clear();
 								
 								break;
 							}

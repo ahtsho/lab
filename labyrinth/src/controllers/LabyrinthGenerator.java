@@ -162,7 +162,7 @@ public class LabyrinthGenerator {
 	 */
 	public Cell chooseEntrance() {
 		ArrayList<Cell> borderCells = genLabyrinth.getLabyrinthWall();
-		return borderCells.get(Utils.generateRandomNumber(genLabyrinth.getLabyrinthWall().size() - 1));
+		return borderCells.get(Utils.generateRandomNumber(genLabyrinth.getLabyrinthWall().size()));
 	}
 
 	public Labyrinth generateDeadEndTunnels() throws Exception {	
